@@ -1,5 +1,18 @@
+import { BrowserRouter } from 'react-router-dom';
+import GlobalStyles from './styles/GlobalStyles';
+import { ThemeProvider } from 'styled-components';
+import Router from './router/Router';
+import { theme } from './styles/theme';
+
 function App() {
-  return <>Study-Room</>;
+  return (
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Router />
+      </ThemeProvider>
+    </BrowserRouter>
+  );
 }
 
 export default App;
