@@ -9,6 +9,7 @@ export interface Colors {
   bgGray: string;
   bgLightGray: string;
   bgYellowNote: string;
+  labelGray: string;
 }
 
 export const theme: DefaultTheme = {
@@ -21,5 +22,6 @@ export const theme: DefaultTheme = {
     bgGray: '#E5E5E5',
     bgLightGray: '#F9F9F9',
     bgYellowNote: '#FFF9EE',
+    labelGray: `#9A9A9A`,
   },
 };
