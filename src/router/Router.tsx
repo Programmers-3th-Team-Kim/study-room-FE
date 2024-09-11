@@ -1,6 +1,8 @@
+import { Route, Routes } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Sidebar from '../components/sidebar/Sidebar';
 import { MainContentArea, RouterStyle } from './Router.style';
+import Planner from '../pages/planner/Planner';
 
 export default function Router() {
   return (
@@ -8,7 +10,9 @@ export default function Router() {
       <Sidebar />
       <MainContentArea>
         <Header />
-        <div>컨텐츠 영역</div>
+        <Routes>
+          <Route path="/planner" element={<Planner />}></Route>
+        </Routes>
       </MainContentArea>
     </RouterStyle>
   );
