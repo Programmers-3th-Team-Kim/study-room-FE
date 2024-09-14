@@ -30,7 +30,7 @@ export const InputContainer = styled.div`
 `;
 
 export const ErrorMessage = styled.span`
-  color: #ff7777;
+  color: ${({ theme }) => theme.color.btnWarn};
   font-size: 12px;
   margin-top: 10px;
 `;
@@ -39,25 +39,25 @@ export const LinkContainer = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
-  color: #434343;
+  color: ${({ theme }) => theme.color.lineGray};
   text-decoration: none;
   margin-top: 20px;
 `;
 
 export const StyledLink = styled(Link)`
-  color: #599bfc;
+  color: ${({ theme }) => theme.color.mainStrong};
   font-weight: 600;
   text-decoration: none;
 `;
 
 export const Span = styled.span`
   font-size: 16px;
-  color: #666;
+  color: ${({ theme }) => theme.color.bgDarkGray};
 `;
 
 export const Label = styled.label`
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 8px;
-  color: #666;
+  color: ${({ theme }) => theme.color.bgDarkGray};
 `;

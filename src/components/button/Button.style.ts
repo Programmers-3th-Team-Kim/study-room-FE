@@ -18,7 +18,7 @@ const sizeStyles = {
 export const StyledButton = styled.button<{
   size: 'small' | 'medium' | 'large';
 }>`
-  background-color: #599bfc;
+  background-color: ${({ theme }) => theme.color.mainStrong};
   color: white;
   border: none;
   border-radius: 8px;
@@ -28,6 +28,6 @@ export const StyledButton = styled.button<{
   font-size: ${({ size }) => sizeStyles[size].fontSize};
 
   &:hover {
-    background-color: #8bbaff;
+    background-color: ${({ theme }) => theme.color.btnOk};
   }
 `;

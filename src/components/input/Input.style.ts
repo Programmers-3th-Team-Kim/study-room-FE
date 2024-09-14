@@ -7,12 +7,16 @@ export const StyledInput = styled.input.withConfig({
   height: 60px;
   padding: 16px;
   border-radius: 8px;
-  border: 1px solid ${({ hasError }) => (hasError ? '#ff7777' : '#ddd')};
+  border: 1px solid
+    ${({ hasError, theme }) =>
+      hasError ? theme.color.btnWarn : theme.color.bgGray};
+
   font-size: 16px;
   box-sizing: border-box;
 
   &:focus {
     outline: none;
-    border-color: ${({ hasError }) => (hasError ? '#ff7777' : '#599bfc')};
+    border-color: ${({ hasError, theme }) =>
+      hasError ? theme.color.btnWarn : theme.color.mainStrong};
   }
 `;
