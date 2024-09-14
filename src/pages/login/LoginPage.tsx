@@ -26,9 +26,8 @@ export default function LoginPage() {
   } = useForm<LoginFormInputs>();
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<LoginFormInputs> = (data) => {
+  const onSubmit: SubmitHandler<LoginFormInputs> = () => {
     navigate('/');
-    console.log(data);
   };
 
   return (

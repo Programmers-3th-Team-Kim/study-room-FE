@@ -31,9 +31,8 @@ export default function RegisterPage() {
   const navigate = useNavigate();
   const password = watch('password');
 
-  const onSubmit: SubmitHandler<LoginFormInputs> = (data) => {
+  const onSubmit: SubmitHandler<LoginFormInputs> = () => {
     navigate('/login');
-    console.log(data);
   };
 
   return (
