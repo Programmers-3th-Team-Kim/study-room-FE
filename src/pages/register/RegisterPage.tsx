@@ -32,7 +32,7 @@ export default function RegisterPage() {
   const password = watch('password');
 
   const onSubmit: SubmitHandler<LoginFormInputs> = (data) => {
-    navigate('/');
+    navigate('/login');
     console.log(data);
   };
 
@@ -111,7 +111,6 @@ export default function RegisterPage() {
             <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
           )}
         </InputContainer>
-
         <Button type="submit" size="large">
           회원가입
         </Button>
