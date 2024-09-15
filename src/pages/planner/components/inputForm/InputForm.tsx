@@ -43,7 +43,7 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       control,
       formState: { errors },
     } = useForm<TodoFormDatas>({
-      mode: 'onChange',
+      mode: 'onSubmit',
       defaultValues: {
         repeatDays: [],
         ...existingData,
