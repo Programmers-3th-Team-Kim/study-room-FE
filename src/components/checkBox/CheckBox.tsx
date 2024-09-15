@@ -9,16 +9,19 @@ export default function CheckBox() {
   };
 
   return (
-    <CheckBoxStyle position="right" isChecked={isChecked}>
+    <CheckBoxStyle
+      position="right"
+      isChecked={isChecked}
+      onClick={(event) => {
+        event?.stopPropagation();
+      }}
+    >
       <label className="custom-checkbox">
         <input
           type="checkbox"
           className="checkBox"
           checked={isChecked}
           onChange={handleChange}
-          onClick={(event) => {
-            event?.stopPropagation();
-          }}
         />
         <span className="custom-checkbox-content"></span>
       </label>
