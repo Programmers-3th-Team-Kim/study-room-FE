@@ -53,7 +53,7 @@ export default function Planner() {
 
   return (
     <S.PlannerWrapper>
-      <S.LeftPannel>
+      <S.LeftPanel>
         <div className="label">오늘의 계획표</div>
         <S.LeftHeader>
           <CustomDatePicker className="date" />
@@ -114,10 +114,10 @@ export default function Planner() {
             ) : null}
           </S.TodosWrapper>
         </S.LeftContentWrapper>
-      </S.LeftPannel>
-      <S.RightPannel>
+      </S.LeftPanel>
+      <S.RightPanel>
         <div className="label">오늘의 스터디 시간</div>
-      </S.RightPannel>
+      </S.RightPanel>
     </S.PlannerWrapper>
   );
 }

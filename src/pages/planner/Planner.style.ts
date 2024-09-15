@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const pannelPadding = '50px 30px';
+const panelPadding = '50px 30px';
 
 export const PlannerWrapper = styled.div`
   display: flex;
@@ -14,16 +14,10 @@ export const PlannerWrapper = styled.div`
   }
 `;
 
-export const LeftPannel = styled.div`
-  padding: ${pannelPadding};
+export const LeftPanel = styled.div`
+  padding: ${panelPadding};
   display: flex;
   flex-direction: column;
-`;
-
-export const RightPannel = styled.div`
-  width: 500px;
-  height: 100%;
-  padding: ${pannelPadding};
 `;
 
 export const LeftHeader = styled.div`
@@ -121,4 +115,10 @@ export const NoData = styled.div`
   text-align: center;
   font-weight: 600;
   line-height: 70px;
+`;
+
+export const RightPanel = styled.div`
+  width: 500px;
+  height: 100%;
+  padding: ${panelPadding};
 `;
