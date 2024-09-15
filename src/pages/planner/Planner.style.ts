@@ -4,9 +4,8 @@ const pannelPadding = '50px 30px';
 
 export const PlannerWrapper = styled.div`
   display: flex;
-  flex: 1;
   justify-content: space-evenly;
-  height: 100vh;
+  height: calc(100vh - 100px);
 
   .label {
     color: ${({ theme }) => theme.color.labelGray};
@@ -16,12 +15,9 @@ export const PlannerWrapper = styled.div`
 `;
 
 export const LeftPannel = styled.div`
-  width: 700px;
-  height: 100%;
   padding: ${pannelPadding};
   display: flex;
   flex-direction: column;
-  overflow: auto;
 `;
 
 export const RightPannel = styled.div`
@@ -38,16 +34,12 @@ export const LeftHeader = styled.div`
   align-items: center;
 
   .date {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    margin: auto;
     font-size: 32px;
     font-weight: 600;
   }
 
   .addButton {
-    margin-left: auto;
     font-size: 44px;
     font-weight: 600;
     &:hover {
@@ -57,8 +49,76 @@ export const LeftHeader = styled.div`
 `;
 
 export const LeftContentWrapper = styled.div`
-  background-color: yellow;
+  display: flex;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  height: 100%;
+  width: 800px;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #ccc;
+  }
+`;
+
+export const TodosWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+`;
+
+export const EachContentWrapper = styled.div`
+  display: flex;
+  position: relative;
+`;
+
+export const TimeLineFull = styled.div<{ height: number }>`
+  background-color: ${({ theme }) => theme.color.plannerGray};
+  width: 3px;
+  position: relative;
+  height: ${(props) => `${props.height - 5}px`};
+  min-height: 100%;
+
+  margin: 0 15px 0 100px;
+
+  &::before,
+  &::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    background-color: ${({ theme }) => theme.color.plannerGray};
+    border-radius: 50%;
+  }
+
+  &::before {
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &::after {
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+`;
+
+export const NoData = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
-  overflow: auto;
+  color: ${({ theme }) => theme.color.plannerGray};
+  font-size: 48px;
+  text-align: center;
+  font-weight: 600;
+  line-height: 70px;
 `;

@@ -10,6 +10,12 @@ export interface Colors {
   bgLightGray: string;
   bgYellowNote: string;
   labelGray: string;
+  plannerTimeGray: string;
+  plannerGray: string;
+}
+
+export interface Shadows {
+  boxShadow: string;
 }
 
 export const theme: DefaultTheme = {
@@ -23,5 +29,11 @@ export const theme: DefaultTheme = {
     bgLightGray: '#F9F9F9',
     bgYellowNote: '#FFF9EE',
     labelGray: `#9A9A9A`,
+    plannerTimeGray: `#7C7C7C`,
+    plannerGray: `#C7C7C7`,
+  },
+
+  shadow: {
+    boxShadow: '0px 2px 4px 0px rgb(0 0 0 / 12%)',
   },
 };
