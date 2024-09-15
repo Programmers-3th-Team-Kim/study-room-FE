@@ -14,7 +14,7 @@ import {
   Title,
 } from '@/styles/AuthFormStyles';
 
-interface LoginFormInputs {
+interface RegisterFormInputs {
   userId: string;
   nickname: string;
   password: string;
@@ -27,11 +27,11 @@ export default function RegisterPage() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<LoginFormInputs>();
+  } = useForm<RegisterFormInputs>();
   const navigate = useNavigate();
   const password = watch('password');
 
-  const onSubmit: SubmitHandler<LoginFormInputs> = () => {
+  const onSubmit: SubmitHandler<RegisterFormInputs> = () => {
     navigate('/login');
   };
 
