@@ -5,6 +5,9 @@ export const TimeTableContainer = styled.div`
 
   width: 368px;
   height: 746px;
+  width: 70%;
+  height: 100%;
+
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(24, 1fr);
 
@@ -20,7 +23,7 @@ export const TimeTableContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
+    font-size: 0.8vw;
     font-weight: 600;
     color: #595959;
   }
