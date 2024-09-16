@@ -1,6 +1,6 @@
 import { FaLock, FaLockOpen } from "react-icons/fa";
 import { MdPerson } from "react-icons/md";
-import styled from "styled-components";
+import { Hashtag, Hashtags, ItemContainer, ItemContent, ItemFooter, ItemTitle, ParticipantCount, Privacy, StudyItemStyle, Title } from "./StudyItem.style";
 
 interface StudyItemProps {
   title: string;
@@ -35,73 +35,5 @@ function StudyItem({ title, imageUrl, hashtags = [], isPublic, maxParticipants, 
     </StudyItemStyle>
   );
 };
-
-const StudyItemStyle = styled.div`
-  width: 328px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ItemContainer = styled.div<{ imageUrl?: string }>`
-  position: relative;
-  width: 100%;
-  height: 207px;
-  background: ${(props) => (props.imageUrl ? `url(${props.imageUrl})` : '#E5E5E5')};
-  background-size: cover;
-  background-position: center;
-  border-radius: ${({ theme }) => theme.borderRadius.medium};
-  overflow: hidden;
-`;
-
-const ItemContent = styled.div`
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Title = styled.h3`
-  margin: 0;
-  padding-top: 70px;
-  font-size: 25px;
-`;
-
-const ParticipantCount = styled.p`
-  margin: 10px 0;
-  font-size: 25px;
-`;
-
-const Privacy = styled.p`
-  margin: 0;
-  padding-top: 10px;
-  font-size: 25px;
-`;
-
-const ItemFooter = styled.div`
-  padding: 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-`;
-
-const ItemTitle = styled.h4`
-  margin: 0;
-  font-size: 18px;
-`;
-
-const Hashtags = styled.div`
-  margin-top: 5px;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const Hashtag = styled.span`
-  margin-right: 5px;
-  font-size: 18px;
-  color: #7c7c7c;
-  font-style: italic;
-`;
 
 export default StudyItem;
