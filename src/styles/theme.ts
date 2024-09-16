@@ -1,5 +1,3 @@
-// import { DefaultTheme } from 'styled-components';
-
 export type ColorKey = "main" | "mainStrong" | "lineGray" | "btnOk" | "btnWarn" | "bgGray" | "bgLightGray" | "bgYellowNote";
 export type ButtonSize = "large" | "medium" | "small";
 export type BorderRadius = "large" | "medium" | "small";

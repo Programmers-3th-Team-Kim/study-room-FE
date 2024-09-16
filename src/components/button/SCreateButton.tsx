@@ -8,11 +8,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
   Icon?: IconType;
   size?: ButtonSize;
   borderRadius? :string;
-  fontSize: string;
-  iconSize?: number;
+  fontSize?: string;
+  iconSize?: string;
 }
 
-function SCreateButton({ label, size = "small", Icon, borderRadius, fontSize, iconSize = 16, ...props}: ButtonProps) {
+function SCreateButton({ label, size = "small", Icon, borderRadius, fontSize = "24px", iconSize = "16", ...props}: ButtonProps) {
   return (
     <SCreateButtonStyle size={size} borderRadius={borderRadius} fontSize={fontSize} {...props}>
       <div className="icon">{Icon && <Icon size={iconSize} />}</div>
@@ -39,7 +39,6 @@ const SCreateButtonStyle = styled.button<{ size: ButtonSize; borderRadius?: stri
     display: flex;
     align-items: center;
     justify-content: center;
-    /* padding-right: 20px; */
   }
 
   .label {
