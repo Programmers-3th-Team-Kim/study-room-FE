@@ -25,6 +25,6 @@ function Search() {
       </div>
     </SearchStyle>
   );
-}
+};
 
 export default Search;

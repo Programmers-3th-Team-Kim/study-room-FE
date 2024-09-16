@@ -37,26 +37,4 @@ export const SearchStyle = styled.div`
       color: ${({ theme }) => theme.color.mainStrong};
     }
   }
-
-  .filter {
-    display: flex;
-
-    button {
-      position: relative;
-      border: none;
-      outline: none;
-      background-color: transparent;
-    }
-
-    .triangle {
-      position: relative;
-      color: #c7c7c7;
-    }
-  }
-`;
-
-export const MainContentArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
 `;

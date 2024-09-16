@@ -10,7 +10,7 @@ export const SelectBoxStyle = styled.div`
     justify-content: space-between;
     width: 160px;
     height: 64px;
-    margin-left: 31px;
+    margin-left: 15px;
 
     select {
       border: none;
@@ -20,7 +20,6 @@ export const SelectBoxStyle = styled.div`
       background: transparent; // 배경색 투명
       width: 100%;
       height: 100%;
-      // margin-left: 20px;
       font-size: 20px;
       text-align: center;
     }

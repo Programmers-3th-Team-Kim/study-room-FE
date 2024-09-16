@@ -188,24 +188,32 @@ function StudyGrid() {
   );
 };
 
+const StudyGridStyle = styled.div`
+  display: grid;
+  margin-top: 77px;
+  grid-template-columns: repeat(4, 328px);
+  gap: 50px;
+  grid-auto-rows: 330px;
+  overflow-y: auto;
+  max-height: 660px;
+  padding-right: 20px;
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    width: 9px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #D9D9D9;
+    border-radius: ${({ theme }) => theme.borderRadius.large};
+  }
+`;
+
 const ScrollContainer = styled.div`
-  // height: 80vh; /* 페이지 고정을 위해 부모 요소에 고정 높이 설정 */
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  // overflow: hidden;
-`;
-
-const StudyGridStyle = styled.div`
-  display: grid;
-  margin: 77px 77px;
-  grid-template-columns: repeat(4, 328px);
-  gap: 55px;
-  grid-auto-rows: 330px;
-  overflow-y: scroll;
-  /* height: 100%;
-  padding: 20px; */
 `;
 
 const LoadingIndicator = styled.div`

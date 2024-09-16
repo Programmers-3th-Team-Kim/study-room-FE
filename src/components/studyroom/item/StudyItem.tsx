@@ -25,19 +25,22 @@ function StudyItem({ title, imageUrl, hashtags = [], isPublic, maxParticipants, 
         </ItemContent>
       </ItemContainer>
       <ItemFooter>
-          <ItemTitle>{title}</ItemTitle>
-          <Hashtags>
-            {hashtags.map((hashtag, index) => (
-              <Hashtag key={index}>#{hashtag}</Hashtag>
-            ))}
-          </Hashtags>
-        </ItemFooter>
+        <ItemTitle>{title}</ItemTitle>
+        <Hashtags>
+          {hashtags.map((hashtag, index) => (
+            <Hashtag key={index}>#{hashtag}</Hashtag>
+          ))}
+        </Hashtags>
+      </ItemFooter>
     </StudyItemStyle>
   );
 };
 
 const StudyItemStyle = styled.div`
   width: 328px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ItemContainer = styled.div<{ imageUrl?: string }>`
@@ -78,9 +81,9 @@ const Privacy = styled.p`
 `;
 
 const ItemFooter = styled.div`
-  position: absolute;
   padding: 5px;
-  margin-top: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const ItemTitle = styled.h4`
@@ -90,6 +93,8 @@ const ItemTitle = styled.h4`
 
 const Hashtags = styled.div`
   margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const Hashtag = styled.span`

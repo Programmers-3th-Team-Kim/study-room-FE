@@ -13,8 +13,8 @@ export const CheckBoxStyle = styled.div`
 		input {
       position: relative;
 			appearance: none;
-			width: 20px; /* 체크박스 크기 */
-      height: 20px; /* 체크박스 크기 */
+			width: 20px;
+      height: 20px;
       margin-right: 10px;
       border-radius: 4px;
       cursor: pointer;

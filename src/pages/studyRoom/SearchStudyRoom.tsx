@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Search from "../../components/studyroom/search/Search";
+import Search from "@/components/studyroom/search/Search";
 import StudyGrid from "@/components/studyroom/item/StudyGrid";
 import SelectBox from "@/components/studyroom/filter/SelectBox";
 import CreateButton from "@/components/studyroom/button/CreateButton";
@@ -26,7 +26,10 @@ const SearchStudyRoomStyle = styled.div`
 
   .header {
     display: flex;
-    margin: 77px 77px 0px 77px;
+    align-items: center;
+    justify-content: center;
+    padding-right: 29px;
+    margin-top: 77px;
   }
 `;
 
