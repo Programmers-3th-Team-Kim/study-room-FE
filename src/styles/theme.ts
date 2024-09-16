@@ -42,7 +42,7 @@ export const theme: DefaultTheme = {
     },
   },
   borderRadius: {
-    large: "15px",
+    large: "20px",
     medium: "10px",
     small: "5px",
   },
