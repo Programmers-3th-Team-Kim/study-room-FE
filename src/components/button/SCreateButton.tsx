@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { IconType } from "react-icons";
 import React from "react";
-import { ButtonSize } from "../../styles/theme";
+import { ButtonSize } from "@/styles/theme";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
   label: string;
