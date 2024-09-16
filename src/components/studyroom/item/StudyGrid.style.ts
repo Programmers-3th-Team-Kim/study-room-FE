@@ -7,6 +7,7 @@ export const StudyGridStyle = styled.div`
   gap: 50px;
   grid-auto-rows: 330px;
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: 660px;
   padding-right: 20px;
   box-sizing: border-box;
