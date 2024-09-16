@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { IconType } from "react-icons";
 import React from "react";
-import { ButtonSize } from "../../styles/theme";
+import { ButtonSize } from "@/styles/theme";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
   label: string;
@@ -15,7 +15,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
 function SCreateButton({ label, size = "small", Icon, borderRadius, fontSize = "24px", iconSize = "16", ...props}: ButtonProps) {
   return (
     <SCreateButtonStyle size={size} borderRadius={borderRadius} fontSize={fontSize} {...props}>
-      <div className="icon">{Icon && <Icon size={iconSize} />}</div>
+{Icon && (
+    <div className="icon">
+      <Icon size={iconSize} />
+    </div>
+  )}
       <span className="label">{label}</span>
     </SCreateButtonStyle>
   );
