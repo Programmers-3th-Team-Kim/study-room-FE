@@ -1,4 +1,4 @@
-export type ColorKey = "main" | "mainStrong" | "lineGray" | "btnOk" | "btnWarn" | "bgGray" | "bgLightGray" | "bgYellowNote";
+export type ColorKey = "main" | "mainStrong" | "lineGray" | "btnOk" | "btnWarn" | "bgDarkGray" | "bgGray" | "bgLightGray" | "bgYellowNote";
 export type ButtonSize = "large" | "medium" | "small";
 export type BorderRadius = "large" | "medium" | "small";
 
@@ -20,8 +20,9 @@ export const theme: DefaultTheme = {
     main: '#DDEBFD',
     mainStrong: '#599BFC',
     lineGray: '#A1A1A1',
-    btnOk: '#509CFF',
+    btnOk: '#6FA9FF',
     btnWarn: '#FF7777',
+    bgDarkGray: '#616161',
     bgGray: '#E5E5E5',
     bgLightGray: '#F9F9F9',
     bgYellowNote: '#FFF9EE',
