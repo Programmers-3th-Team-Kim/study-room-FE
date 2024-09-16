@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import Search from "../components/studyroom/search/Search";
+import Search from "../../components/studyroom/search/Search";
 import StudyGrid from "@/components/studyroom/item/StudyGrid";
-import Sidebar from "@/components/sidebar/Sidebar";
-import Header from "@/components/header/Header";
 import SelectBox from "@/components/studyroom/filter/SelectBox";
 import CreateButton from "@/components/studyroom/button/CreateButton";
 import CheckBox from "@/components/studyroom/filter/CheckBox";
@@ -10,9 +8,7 @@ import CheckBox from "@/components/studyroom/filter/CheckBox";
 function SearchStudyRoom() {
   return (
     <SearchStudyRoomStyle>
-      <Sidebar />
       <MainContentArea>
-        <Header />
         <div className="header">
           <Search />
           <SelectBox />
