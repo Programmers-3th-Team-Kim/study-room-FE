@@ -58,10 +58,9 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
         return '나머지 시간도 입력해주세요.';
       }
 
-      if (endTime && startTime && endTime < startTime) {
-        return '올바른 시간을 입력해주세요.';
+      if (endTime && startTime) {
+        return compareTime(startTime, endTime);
       }
-
       return true;
     };
 
@@ -83,7 +82,14 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       console.log(data);
 
       if (formType === 'add') {
-        setTodos((prev) => [...prev, { ...data, id: Date.now().toString() }]);
+        setTodos((prev) => {
+          const updatedTodos = [
+            ...prev,
+            { ...data, id: Date.now().toString() },
+          ];
+          updatedTodos.sort(sortTodos);
+          return updatedTodos;
+        });
         if (setIsAddFormOpened) {
           setIsAddFormOpened(false);
         }
@@ -92,6 +98,8 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
         setTodos((prev) => {
           const updatedTodos = [...prev];
           updatedTodos[index] = { ...updatedTodos[index], ...data };
+          updatedTodos.sort(sortTodos);
+
           return updatedTodos;
         });
         if (setIsEditFormOpened) {
@@ -106,6 +114,7 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
 
     const handleTimeClick = (id: string) => {
       const inputElement = document.getElementById(id) as HTMLInputElement;
+      inputElement.value = '00:00';
       if (inputElement) {
         inputElement.showPicker();
       }
@@ -239,3 +248,32 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
     );
   }
 );
+
+function subtractMinutes(time: string, minutes: number) {
+  const [hours, mins] = time.split(':').map(Number);
+  const totalMinutes = hours * 60 + mins - minutes;
+
+  const newHours = Math.floor(totalMinutes / 60) % 24;
+  const newMinutes = totalMinutes % 60;
+
+  return `${String(newHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')}`;
+}
+
+function compareTime(startTime: string, endTime: string) {
+  const endTimeMinus10 = subtractMinutes(endTime, 10);
+
+  if (endTime < startTime) {
+    return '올바른 시간을 입력해주세요.';
+  }
+  if (endTimeMinus10 < startTime) {
+    return '10분 이상 설정해주세요.';
+  }
+
+  return true;
+}
+
+const sortTodos = (a: TodoFormDatas, b: TodoFormDatas) => {
+  const startA = a.startTime ? a.startTime.split(':').map(Number) : [24, 0];
+  const startB = b.startTime ? b.startTime.split(':').map(Number) : [24, 0];
+  return startA[0] - startB[0] || startA[1] - startB[1];
+};
