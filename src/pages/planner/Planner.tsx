@@ -92,9 +92,10 @@ export default function Planner() {
                           setIsEditFormOpened={setIsEditFormOpened}
                           setTodos={setTodos}
                           formType="edit"
-                          existingData={todo}
+                          currentData={todo}
                           setEditIndex={setEditIndex}
-                          index={index}
+                          currentIndex={index}
+                          todos={todos}
                         />
                       )}
                     </div>
@@ -114,6 +115,7 @@ export default function Planner() {
                 setTodos={setTodos}
                 formType="add"
                 setEditIndex={setEditIndex}
+                todos={todos}
               />
             ) : null}
           </S.TodosWrapper>
