@@ -42,7 +42,7 @@ export default function TodoBox({
         <S.TitleStyle>{title}</S.TitleStyle>
         <S.DetailStyle>{detail}</S.DetailStyle>
       </S.InfoArea>
-      <CheckBox></CheckBox>
+      <CheckBox />
     </S.TodoBoxStyle>
   );
 }

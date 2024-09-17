@@ -48,20 +48,18 @@ export default function CustomDatePicker({ className }: CustomDatePickerProps) {
   const [startDate, setStartDate] = useState(new Date());
 
   return (
-    <>
-      <DatePicker
-        wrapperClassName={className}
-        locale={ko}
-        selected={startDate}
-        dateFormatCalendar="YYYY년 MMMM"
-        dateFormat="yyyy.MM.dd (EE)"
-        onChange={(date) => {
-          if (date) {
-            setStartDate(date);
-          }
-        }}
-        customInput={<CustomInput setStartDate={setStartDate} />}
-      />
-    </>
+    <DatePicker
+      wrapperClassName={className}
+      locale={ko}
+      selected={startDate}
+      dateFormatCalendar="YYYY년 MMMM"
+      dateFormat="yyyy.MM.dd (EE)"
+      onChange={(date) => {
+        if (date) {
+          setStartDate(date);
+        }
+      }}
+      customInput={<CustomInput setStartDate={setStartDate} />}
+    />
   );
 }

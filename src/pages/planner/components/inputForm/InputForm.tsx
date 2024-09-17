@@ -1,8 +1,9 @@
 import { forwardRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as S from './InputForm.style';
+import RepeatDaysSelector from './RepeatDaySelector';
 
-interface TodoFormDatas {
+export interface TodoFormDatas {
   id: string;
   title?: string;
   detail: string;
@@ -128,7 +129,7 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
         <S.Form onSubmit={handleSubmit(onSubmit)} ref={ref}>
           <S.Title>
             <div className="label-error">
-              <label htmlFor="title">과목 </label>
+              <label htmlFor="title">과목</label>
               {errors.title && (
                 <span className="errorText">{errors.title.message}</span>
               )}
@@ -196,48 +197,7 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
             <S.Repeat>
               <label>반복</label>
               <S.DaysWrapper>
-                {['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map(
-                  (day) => (
-                    <div key={day}>
-                      <Controller
-                        control={control}
-                        name="repeatDays"
-                        render={({ field }) => (
-                          <S.DaySelectInput
-                            id={day}
-                            type="checkbox"
-                            value={day}
-                            checked={field.value?.includes(day) ?? false}
-                            onChange={(e) => {
-                              const value = e.target.value;
-                              const newValue = e.target.checked
-                                ? [...(field.value ?? []), value]
-                                : (field.value ?? []).filter(
-                                    (d) => d !== value
-                                  );
-                              field.onChange(newValue);
-                            }}
-                          />
-                        )}
-                      />
-                      <label htmlFor={day}>
-                        {day === 'mon'
-                          ? '월'
-                          : day === 'tue'
-                            ? '화'
-                            : day === 'wed'
-                              ? '수'
-                              : day === 'thu'
-                                ? '목'
-                                : day === 'fri'
-                                  ? '금'
-                                  : day === 'sat'
-                                    ? '토'
-                                    : '일'}
-                      </label>
-                    </div>
-                  )
-                )}
+                <RepeatDaysSelector control={control} />
 
                 <S.WeekInput
                   id="repeatWeeks"
