@@ -29,7 +29,6 @@ export const TimeTableContainer = styled.div`
   }
 `;
 
-// shouldforwardprop
 export const SelectedTime = styled.div.withConfig({
   shouldForwardProp: (prop) =>
     !['isStart', 'isEnd', 'color', 'startWidth', 'endWidth'].includes(prop),

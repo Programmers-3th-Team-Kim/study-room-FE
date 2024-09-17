@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import * as S from './TimeTable.style';
 import { ITodoBox } from '@/models/todoBox.model';
 import { hex2rgba } from '@/data/colorMap';
+import * as S from './TimeTable.style';
 
 interface TimeTableProps {
   todos: ITodoBox[];

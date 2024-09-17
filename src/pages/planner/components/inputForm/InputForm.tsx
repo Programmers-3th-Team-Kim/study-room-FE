@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import * as S from './InputForm.style';
+import { useForm } from 'react-hook-form';
 import RepeatDaysSelector from './RepeatDaySelector';
+import * as S from './InputForm.style';
 
 export interface TodoFormDatas {
   id: string;
