@@ -26,8 +26,8 @@ export default function TodoBox({
     <S.TodoBoxStyle onClick={onClick}>
       <S.ColorBarStyle barColor={barColor} />
       <S.InfoArea>
-        <S.TitleStyle>{title}</S.TitleStyle>
         <S.DetailStyle>{detail}</S.DetailStyle>
+        <S.TitleStyle>{title}</S.TitleStyle>
       </S.InfoArea>
       <CheckBox />
     </S.TodoBoxStyle>

@@ -148,20 +148,6 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
     return (
       <S.InputFormStyle>
         <S.Form onSubmit={handleSubmit(onSubmit)} ref={ref}>
-          <S.Title>
-            <div className="label-error">
-              <label htmlFor="title">과목</label>
-              {errors.title && (
-                <span className="errorText">{errors.title.message}</span>
-              )}
-            </div>
-            <input
-              className="textInputBox"
-              id="title"
-              {...register('title', { validate: validateTextLength })}
-            />
-          </S.Title>
-
           <S.Detail>
             <div className="label-error">
               <label htmlFor="detail">할 일</label>
@@ -182,6 +168,20 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
               })}
             />
           </S.Detail>
+
+          <S.Title>
+            <div className="label-error">
+              <label htmlFor="title">과목</label>
+              {errors.title && (
+                <span className="errorText">{errors.title.message}</span>
+              )}
+            </div>
+            <input
+              className="textInputBox"
+              id="title"
+              {...register('title', { validate: validateTextLength })}
+            />
+          </S.Title>
 
           <label>시간</label>
           <S.Time>
