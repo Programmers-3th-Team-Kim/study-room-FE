@@ -14,4 +14,4 @@ export default function Router() {
       <Route path="/study-rooms" element={<StudyRooms />}></Route>
     </Routes>
   );
-}
+};
