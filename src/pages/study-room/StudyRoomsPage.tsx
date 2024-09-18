@@ -1,13 +1,13 @@
-import CheckBox from "@/components/checkBox/CheckBox";
+import { MainContentArea, StudyRoomsPageStyle } from "./StudyRoomsPage.style";
 import SelectBox from "./components/filter/SelectBox";
 import Search from "./components/search/Search";
-import { MainContentArea, StudyRoomsStyle } from "./StudyRooms.style";
 import CreateButton from "./components/button/CreateButton";
 import StudyGrid from "./components/item/StudyGrid";
+import CheckBox from "./components/filter/CheckBox";
 
-function StudyRooms() {
+function StudyRoomsPage() {
   return (
-    <StudyRoomsStyle>
+    <StudyRoomsPageStyle>
       <MainContentArea>
         <div className="wrapper">
           <div className="header">
@@ -19,8 +19,8 @@ function StudyRooms() {
           <StudyGrid />
         </div>
       </MainContentArea>
-    </StudyRoomsStyle>
+    </StudyRoomsPageStyle>
   );
 };
 
-export default StudyRooms;
+export default StudyRoomsPage;

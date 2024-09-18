@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StudyRoomsStyle = styled.div`
+export const StudyRoomsPageStyle = styled.div`
   display: flex;
   
   .wrapper {
