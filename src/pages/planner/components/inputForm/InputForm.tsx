@@ -124,8 +124,10 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
 
     const handleTimeClick = (id: string) => {
       const inputElement = document.getElementById(id) as HTMLInputElement;
-      inputElement.value = '00:00';
       if (inputElement) {
+        if (!inputElement.value) {
+          inputElement.value = '00:00';
+        }
         inputElement.showPicker();
       }
     };
