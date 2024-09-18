@@ -1,7 +1,9 @@
 import { ButtonSize } from "@/styles/theme";
 import styled from "styled-components";
 
-export const SCreateButtonStyle = styled.button<{ size: ButtonSize; borderRadius?: string; fontSize?: string; }>`
+export const SCreateButtonStyle = styled.button.withConfig({
+  shouldForwardProp: (prop) => !['borderRadius'].includes(prop)
+  })<{ size: ButtonSize; borderRadius?: string; fontSize?: string; }>`
   color: white;
   border: none;
   background-color: ${({ theme }) => theme.color.mainStrong};
@@ -12,7 +14,7 @@ export const SCreateButtonStyle = styled.button<{ size: ButtonSize; borderRadius
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 20px; // 아이콘과 왼쪽 여백
+  padding-left: 20px;
   position: relative;
 
   .icon {
@@ -22,8 +24,8 @@ export const SCreateButtonStyle = styled.button<{ size: ButtonSize; borderRadius
   }
 
   .label {
-    flex: 1; // 버튼 너비에 맞춰서 중앙 배치
+    flex: 1; 
     text-align: center;
-    padding-right: 20px; // 글씨기준 오른쪽 여백
+    padding-right: 20px;
   }
 `;

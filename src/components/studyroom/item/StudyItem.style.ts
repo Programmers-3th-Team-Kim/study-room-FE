@@ -7,7 +7,9 @@ export const StudyItemStyle = styled.div`
   flex-direction: column;
 `;
 
-export const ItemContainer = styled.div<{ imageUrl?: string }>`
+export const ItemContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['imageUrl'].includes(prop)
+})<{ imageUrl?: string }>`
   position: relative;
   width: 100%;
   height: 207px;
