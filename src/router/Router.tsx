@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 
-import LoginPage from '../pages/login/LoginPage';
-import RegisterPage from '../pages/register/RegisterPage';
-import Planner from '../pages/planner/Planner';
-import SearchStudyRoom from '@/pages/study-room/SearchStudyRoom';
+import StudyRooms from '@/pages/study-room/StudyRooms';
+import LoginPage from '@/pages/login/LoginPage';
+import RegisterPage from '@/pages/register/RegisterPage';
+import Planner from '@/pages/planner/Planner';
 
 export default function Router() {
   return (
@@ -11,7 +11,7 @@ export default function Router() {
       <Route path="/login" element={<LoginPage />}></Route>
       <Route path="/register" element={<RegisterPage />}></Route>
       <Route path="/planner" element={<Planner />}></Route>
-      <Route path="/study-rooms" element={<SearchStudyRoom />}></Route>
+      <Route path="/study-rooms" element={<StudyRooms />}></Route>
     </Routes>
   );
 }
