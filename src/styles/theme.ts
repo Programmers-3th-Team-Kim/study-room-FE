@@ -1,6 +1,7 @@
-export type ColorKey = "main" | "mainStrong" | "lineGray" | "btnOk" | "btnWarn" | "bgDarkGray" | "bgGray" | "bgLightGray" | "bgYellowNote";
+export type ColorKey = "main" | "mainStrong" | "lineGray" | "btnOk" | "btnWarn" | "bgDarkGray" | "bgGray" | "bgLightGray" | "bgYellowNote" | "labelGray" | "plannerTimeGray" | "plannerGray";
 export type ButtonSize = "large" | "medium" | "small";
 export type BorderRadius = "large" | "medium" | "small";
+export type Shadows = string;
 
 interface DefaultTheme {
   color: Record<ColorKey, string>;
@@ -12,6 +13,9 @@ interface DefaultTheme {
   };
   borderRadius: {
     [key in BorderRadius]: string;
+  };
+  shadow: {
+    boxShadow: string;
   };
 };
 
@@ -26,7 +30,11 @@ export const theme: DefaultTheme = {
     bgGray: '#E5E5E5',
     bgLightGray: '#F9F9F9',
     bgYellowNote: '#FFF9EE',
+    labelGray: '#9A9A9A',
+    plannerTimeGray: '#7C7C7C',
+    plannerGray: '#C7C7C7',
   },
+
   studyRoomButton: {
     large: {
       width: "439px",
@@ -41,9 +49,14 @@ export const theme: DefaultTheme = {
       height: "92px",
     },
   },
+
   borderRadius: {
     large: "20px",
     medium: "10px",
     small: "5px",
+  },
+
+  shadow: {
+    boxShadow: '0px 2px 4px 0px rgb(0 0 0 / 12%)',
   },
 };
