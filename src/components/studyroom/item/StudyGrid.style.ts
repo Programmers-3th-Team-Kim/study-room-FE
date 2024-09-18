@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 export const StudyGridStyle = styled.div`
   display: grid;
-  margin-top: 77px;
   grid-template-columns: repeat(4, 328px);
-  gap: 50px;
+  gap: 47px;
   grid-auto-rows: 330px;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
   max-height: 660px;
   padding-right: 20px;

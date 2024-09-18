@@ -64,6 +64,6 @@ export const Hashtags = styled.div`
 export const Hashtag = styled.span`
   margin-right: 5px;
   font-size: 18px;
-  color: #7c7c7c;
+  color: ${({ theme }) => theme.color.plannerTimeGray};
   font-style: italic;
 `;

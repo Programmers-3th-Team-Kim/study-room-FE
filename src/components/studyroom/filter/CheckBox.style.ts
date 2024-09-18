@@ -19,7 +19,7 @@ export const CheckBoxStyle = styled.div`
       border-radius: 4px;
       cursor: pointer;
 			background-color: ${({ theme }) => theme.color.bgGray};
-			border: 1px solid #C7C7C7;
+			border: 1px solid ${({ theme }) => theme.color.plannerGray};
 
       &:checked {
 				background-color: ${({ theme }) => theme.color.mainStrong};

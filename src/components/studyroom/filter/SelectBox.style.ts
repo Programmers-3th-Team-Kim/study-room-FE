@@ -17,7 +17,7 @@ export const SelectBoxStyle = styled.div`
       appearance: none;
       box-sizing: border-box;
 			outline: none;
-      background: transparent; // 배경색 투명
+      background: transparent;
       width: 100%;
       height: 100%;
       font-size: 20px;
@@ -27,14 +27,13 @@ export const SelectBoxStyle = styled.div`
     .triangle {
       position: relative;
       font-size: 18px;
-      color: #C7C7C7;
+      color: ${({ theme }) => theme.color.plannerGray};
     }
   }
 
   select option {
     background: ${({ theme }) => theme.color.bgLightGray}; 
     font-size: 18px;
-    padding: 10px;
     border-radius: 4px;
     border-color: #E4E4E4;
   }

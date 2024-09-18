@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import LoginPage from '../pages/login/LoginPage';
 import RegisterPage from '../pages/register/RegisterPage';
 import Planner from '../pages/planner/Planner';
-import SearchStudyRoom from '@/pages/studyRoom/SearchStudyRoom';
+import SearchStudyRoom from '@/pages/study-room/SearchStudyRoom';
 
 export default function Router() {
   return (

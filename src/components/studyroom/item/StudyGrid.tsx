@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import StudyItem from "./StudyItem";
-import { LoadingIndicator, ScrollContainer, StudyGridStyle } from "./StudyGrid.style";
+import { ScrollContainer, StudyGridStyle } from "./StudyGrid.style";
 
 const dummyData = [
   {
@@ -58,8 +58,7 @@ const dummyData = [
     isPublic: true,
     maxParticipants: 15,
     currentParticipants: 15,
-  },
-  {
+  }, {
     title: '스터디방 8',
     imageUrl: undefined,
     hashtags: undefined,
@@ -131,6 +130,7 @@ const dummyData = [
     maxParticipants: 2,
     currentParticipants: 1,
   },
+ 
 ];
 
 
@@ -182,7 +182,6 @@ function StudyGrid() {
             currentParticipants={study.currentParticipants}
           />
         ))}
-        {isLoading && <LoadingIndicator>로딩 중...</LoadingIndicator>}
       </StudyGridStyle>
     </ScrollContainer>
   );

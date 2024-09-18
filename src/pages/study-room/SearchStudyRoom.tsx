@@ -9,13 +9,15 @@ function SearchStudyRoom() {
   return (
     <SearchStudyRoomStyle>
       <MainContentArea>
-        <div className="header">
-          <Search />
-          <SelectBox />
-          <CheckBox />
-          <CreateButton />
+        <div className="wrapper">
+          <div className="header">
+            <Search />
+            <SelectBox />
+            <CheckBox />
+            <CreateButton />
+          </div>
+          <StudyGrid />
         </div>
-        <StudyGrid />
       </MainContentArea>
     </SearchStudyRoomStyle>
   );
@@ -23,20 +25,29 @@ function SearchStudyRoom() {
 
 const SearchStudyRoomStyle = styled.div`
   display: flex;
+  
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
   .header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding-right: 29px;
-    margin-top: 77px;
+    width: 100%;
+    justify-content: space-between;
+    margin: 77px 0;
   }
 `;
 
 export const MainContentArea = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   flex: 1;
+  height: calc(100vh - 100px);
+  overflow: auto;
 `;
 
 export default SearchStudyRoom;
