@@ -1,30 +1,45 @@
-// StudyProfileBox.tsx
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
-const StudyProfileBox: React.FC = () => {
+interface StudyProfileBoxProps {
+  isGroup?: boolean;
+  userId?: string;
+  initialCurrentTaskTime?: string;
+  initialTotalStudyTime?: string;
+  profileImage?: string;
+};
+
+const StudyProfileBox: React.FC<StudyProfileBoxProps> = ({ 
+  isGroup = false,
+  userId,
+  initialCurrentTaskTime = "00:00:00",
+  initialTotalStudyTime = "00:00:00",
+  profileImage = "https://via.placeholder.com/622", 
+}) => {
+  const [currentTaskTime, setCurrentTaskTime] = useState(initialCurrentTaskTime);
+  const [totalStudyTime, setTotalStudyTime] = useState(initialTotalStudyTime);
+
+  useEffect(() => {
+    setCurrentTaskTime(initialCurrentTaskTime);
+    setTotalStudyTime(initialTotalStudyTime);
+  }, [initialCurrentTaskTime, initialTotalStudyTime]);
+
   return (
     <StudyProfileBoxStyle>
       <TimeDisplay>
-        <div className='time'>{dummyData.currentTaskTime}</div>
-        <div className='time'>{dummyData.totalStudyTime}</div>
+        <div className='time'>{currentTaskTime}</div>
+        <div className='time'>{totalStudyTime}</div>
       </TimeDisplay>
       <ProfileImageContainer>
-        <ProfileImage src={dummyData.profileImage} alt="Profile" />
+        <ProfileImage src={profileImage} alt="Profile" />
       </ProfileImageContainer>
+      {isGroup && userId && (<UserIdDisplay>{userId}</UserIdDisplay>)}
     </StudyProfileBoxStyle>
   );
 };
 
-// 더미 데이터
-const dummyData = {
-  currentTaskTime: "02:15:49",
-  totalStudyTime: "09:59:29",
-  profileImage: "https://via.placeholder.com/622", // 더미 이미지 URL
-};
-
-// 스타일 정의
 const StudyProfileBoxStyle = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +48,6 @@ const StudyProfileBoxStyle = styled.div`
   width: 1088px;
   height: 686px;
   background-color: ${({ theme }) => theme.color.bgGray};
-  position: relative;
 `;
 
 const TimeDisplay = styled.div`
@@ -50,13 +64,13 @@ const TimeDisplay = styled.div`
 `;
 
 const ProfileImageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 622px; // 흰 원의 크기
   height: 622px;
   border-radius: 50%;
   background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const ProfileImage = styled.img`
@@ -64,5 +78,13 @@ const ProfileImage = styled.img`
   width: 80%; // 이미지 크기 조정
   height: 80%;
 `;
+
+const UserIdDisplay = styled.div`
+  position: absolute;
+  font-size: 50px;
+  left: 40px;
+  bottom: 40px;
+`;
+
 
 export default StudyProfileBox;
