@@ -1,7 +1,9 @@
 import StudyProfileBox from "@/components/studyProfileBox/StudyProfileBox";
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import StartPauseButton from "./components/button/StartPauseButton";
+import { useNavigate } from "react-router-dom";
+import LeaveButton from "./components/button/LeaveButton";
+import { ButtonContainer, InstructionText, PrivateStudyRoomStyle } from "./PrivateStudyRoomStyle";
 
 interface PrivateStudyRoomProps {
   userId?: string; // 사용자 ID
@@ -12,6 +14,7 @@ const PrivateStudyRoom: React.FC<PrivateStudyRoomProps> = ({ userId = "sunjji" }
   const initialTotalStudyTime = "00:05:00"; // 초기 총 공부 시간
   const profileImage = "https://via.placeholder.com/622"; // 프로필 이미지 URL
 
+  const navigate = useNavigate();
   const [isActive, setIsActive] = useState(false);
   const [currentTaskTime, setCurrentTaskTime] = useState(initialCurrentTaskTime);
   const [totalStudyTime, setTotalStudyTime] = useState(initialTotalStudyTime);
@@ -68,6 +71,19 @@ const PrivateStudyRoom: React.FC<PrivateStudyRoomProps> = ({ userId = "sunjji" }
     }
   };
 
+  const handleLeaveRoom = () => {
+    const data = {
+      userId,
+      totalStudyTime,
+      currentTaskTime,
+      exitTime: new Date().toLocaleString(),
+    };
+
+    console.log("나가기 버튼 클릭: ", JSON.stringify(data));
+
+    navigate('/study-rooms');
+  }
+
   return (
     <PrivateStudyRoomStyle>
       <StudyProfileBox
@@ -77,20 +93,16 @@ const PrivateStudyRoom: React.FC<PrivateStudyRoomProps> = ({ userId = "sunjji" }
         initialTotalStudyTime={totalStudyTime}
         profileImage={profileImage}
       />
+      <InstructionText>우측 사이드바의 할 일을 선택하면 타이머가 시작됩니다.</InstructionText>
       <ButtonContainer>
         <StartPauseButton
           isActive={isActive}
           onClick={handleStartPause}
         />
+        <LeaveButton onClick={handleLeaveRoom} />
       </ButtonContainer>
     </PrivateStudyRoomStyle>
   );
 };
-
-const PrivateStudyRoomStyle = styled.div``;
-
-const ButtonContainer = styled.div`
-  margin-top: 20px;
-`;
 
 export default PrivateStudyRoom;
