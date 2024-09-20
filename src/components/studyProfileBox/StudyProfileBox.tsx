@@ -25,50 +25,50 @@ const StudyProfileBox: React.FC<StudyProfileBoxProps> = ({
   }, [initialCurrentTaskTime, initialTotalStudyTime]);
 
   return (
-    <StudyProfileBoxStyle>
-      <TimeDisplay>
+    <StudyProfileBoxStyle isGroup={isGroup}>
+      <TimeDisplay isGroup={isGroup}>
         <div className='time'>{currentTaskTime}</div>
         <div className='time'>{totalStudyTime}</div>
       </TimeDisplay>
-      <ProfileImageContainer>
+      <ProfileImageContainer isGroup={isGroup}>
         <ProfileImage src={profileImage} alt="Profile" />
       </ProfileImageContainer>
-      {isGroup && userId && (<UserIdDisplay>{userId}</UserIdDisplay>)}
+      {isGroup && userId && (<UserIdDisplay isGroup={isGroup}>{userId}</UserIdDisplay>)}
     </StudyProfileBoxStyle>
   );
 };
 
-const StudyProfileBoxStyle = styled.div`
+const StudyProfileBoxStyle = styled.div<{ isGroup: boolean }>`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  width: 1088px;
-  height: 686px;
+  width: ${({ isGroup }) => (isGroup ? '384px' : '1088px')};
+  height: ${({ isGroup }) => (isGroup ? '242px' : '686px')};
   background-color: ${({ theme }) => theme.color.bgGray};
 `;
 
-const TimeDisplay = styled.div`
+const TimeDisplay = styled.div<{ isGroup: boolean }>`
   position: absolute;
   display: flex;
   justify-content: space-between;
   width: 100%;
-  font-size: 70px;
+  font-size: ${({ isGroup }) => (isGroup ? '30px' : '70px')};
   top: 20px;
 
   .time {
-    margin: 0px 40px;
+    margin: ${({ isGroup }) => (isGroup ? '0 20px' : '0px 40px')};
   }
 `;
 
-const ProfileImageContainer = styled.div`
+const ProfileImageContainer = styled.div<{ isGroup: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 622px; // 흰 원의 크기
-  height: 622px;
+  width: ${({ isGroup }) => (isGroup ? '182px' : '622px')};
+  height: ${({ isGroup }) => (isGroup ? '182px' : '622px')};
   border-radius: 50%;
   background-color: white;
 `;
@@ -79,11 +79,11 @@ const ProfileImage = styled.img`
   height: 80%;
 `;
 
-const UserIdDisplay = styled.div`
+const UserIdDisplay = styled.div<{ isGroup: boolean }>`
   position: absolute;
-  font-size: 50px;
-  left: 40px;
-  bottom: 40px;
+  font-size: ${({ isGroup }) => (isGroup ? '22px' : '50px')};
+  left: ${({ isGroup }) => (isGroup ? '20px' : '40px')};
+  bottom: ${({ isGroup }) => (isGroup ? '20px' : '40px')};
 `;
 
 
