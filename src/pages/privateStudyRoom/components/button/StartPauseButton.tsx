@@ -1,5 +1,5 @@
+import SCreateButton from "@/components/button/SCreateButton";
 import React from "react";
-import SCreateButton from "../button/SCreateButton";
 import { FaPause, FaPlay } from "react-icons/fa";
 
 interface StartPauseButtonProps {

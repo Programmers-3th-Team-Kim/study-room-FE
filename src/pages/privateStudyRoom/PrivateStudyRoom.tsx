@@ -1,7 +1,7 @@
-import StartPauseButton from "@/components/studyProfileBox/StartPauseButton";
 import StudyProfileBox from "@/components/studyProfileBox/StudyProfileBox";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import StartPauseButton from "./components/button/StartPauseButton";
 
 interface PrivateStudyRoomProps {
   userId?: string; // 사용자 ID
@@ -71,7 +71,7 @@ const PrivateStudyRoom: React.FC<PrivateStudyRoomProps> = ({ userId = "sunjji" }
   return (
     <PrivateStudyRoomStyle>
       <StudyProfileBox
-        isGroup={true}
+        isGroup={false}
         userId={userId}
         initialCurrentTaskTime={currentTaskTime}
         initialTotalStudyTime={totalStudyTime}
