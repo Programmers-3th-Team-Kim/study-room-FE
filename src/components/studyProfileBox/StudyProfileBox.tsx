@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+//import React, { useEffect, useState } from "react";
 import { ProfileImage, ProfileImageContainer, StudyProfileBoxStyle, TimeDisplay, UserIdDisplay } from "./StudyProfileBox.style";
 
 interface StudyProfileBoxProps {
@@ -16,19 +16,12 @@ const StudyProfileBox: React.FC<StudyProfileBoxProps> = ({
   initialTotalStudyTime = "00:00:00",
   profileImage = "https://via.placeholder.com/622", 
 }) => {
-  const [currentTaskTime, setCurrentTaskTime] = useState(initialCurrentTaskTime);
-  const [totalStudyTime, setTotalStudyTime] = useState(initialTotalStudyTime);
-
-  useEffect(() => {
-    setCurrentTaskTime(initialCurrentTaskTime);
-    setTotalStudyTime(initialTotalStudyTime);
-  }, [initialCurrentTaskTime, initialTotalStudyTime]);
 
   return (
     <StudyProfileBoxStyle $isGroup={isGroup}>
       <TimeDisplay $isGroup={isGroup}>
-        <div className='time'>{currentTaskTime}</div>
-        <div className='time'>{totalStudyTime}</div>
+        <div className='time'>{initialCurrentTaskTime}</div>
+        <div className='time'>{initialTotalStudyTime}</div>
       </TimeDisplay>
       <ProfileImageContainer $isGroup={isGroup}>
         <ProfileImage src={profileImage} alt="Profile" />

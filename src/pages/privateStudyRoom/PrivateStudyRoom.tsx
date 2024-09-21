@@ -20,30 +20,31 @@ const PrivateStudyRoom: React.FC<PrivateStudyRoomProps> = ({ userId = "sunjji" }
   const [totalStudyTime, setTotalStudyTime] = useState(initialTotalStudyTime);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  const updateTimers = () => {
+    setCurrentTaskTime(prevTime => {
+      const [hours, minutes, seconds] = prevTime.split(':').map(Number);
+      const newSeconds = seconds + 1;
+      const newMinutes = minutes + Math.floor(newSeconds / 60);
+      const newHours = hours + Math.floor(newMinutes / 60);
+      return `${String(newHours).padStart(2, '0')}:${String(newMinutes % 60).padStart(2, '0')}:${String(newSeconds % 60).padStart(2, '0')}`;
+    });
+
+    setTotalStudyTime(prevTotalTime => {
+      const [totalHours, totalMinutes, totalSeconds] = prevTotalTime.split(':').map(Number);
+      const totalElapsedSeconds = totalHours * 3600 + totalMinutes * 60 + totalSeconds; // 기존 총 시간(초로 변환)
+      const newTotalSeconds = totalElapsedSeconds + 1; // 1초 추가
+
+      const newHours = Math.floor(newTotalSeconds / 3600);
+      const newMinutes = Math.floor((newTotalSeconds % 3600) / 60);
+      const newSecs = newTotalSeconds % 60;
+
+      return `${String(newHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')}:${String(newSecs).padStart(2, '0')}`;
+    });
+  }
+
   useEffect(() => {
     if (isActive) {
-      intervalRef.current = setInterval(() => {
-        setCurrentTaskTime(prevTime => {
-          const [hours, minutes, seconds] = prevTime.split(':').map(Number);
-          const newSeconds = seconds + 1;
-          const newMinutes = minutes + Math.floor(newSeconds / 60);
-          const newHours = hours + Math.floor(newMinutes / 60);
-          return `${String(newHours).padStart(2, '0')}:${String(newMinutes % 60).padStart(2, '0')}:${String(newSeconds % 60).padStart(2, '0')}`;
-        });
-
-        // totalStudyTime 업데이트
-        setTotalStudyTime(prevTotalTime => {
-          const [totalHours, totalMinutes, totalSeconds] = prevTotalTime.split(':').map(Number);
-          const totalElapsedSeconds = totalHours * 3600 + totalMinutes * 60 + totalSeconds; // 기존 총 시간(초로 변환)
-          const newTotalSeconds = totalElapsedSeconds + 1; // 1초 추가
-
-          const newHours = Math.floor(newTotalSeconds / 3600);
-          const newMinutes = Math.floor((newTotalSeconds % 3600) / 60);
-          const newSecs = newTotalSeconds % 60;
-
-          return `${String(newHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')}:${String(newSecs).padStart(2, '0')}`;
-        });
-      }, 1000);
+      intervalRef.current = setInterval(updateTimers, 1000);
     }
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
