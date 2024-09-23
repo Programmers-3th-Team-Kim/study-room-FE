@@ -47,14 +47,12 @@ export const Tab = styled.div.withConfig({
   width: 120px;
   border-radius: 8px;
   padding: 10px;
-  background-color: white;
-  /* border: 1px solid #7c7c7c; */
 
   &:hover {
     cursor: pointer;
-    background-color: #e6e6e6;
   }
 
   ${(props) =>
-    props.isSelected && `background-color : ${props.theme.color.bgGray}`}
+    props.isSelected &&
+    `font-weight:600; color : ${props.theme.color.mainStrong} ;`}
 `;
