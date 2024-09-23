@@ -1,4 +1,3 @@
-//import React, { useEffect, useState } from "react";
 import { ProfileImage, ProfileImageContainer, StudyProfileBoxStyle, TimeDisplay, UserIdDisplay } from "./StudyProfileBox.style";
 
 interface StudyProfileBoxProps {
