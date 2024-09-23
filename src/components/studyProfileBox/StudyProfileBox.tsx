@@ -1,4 +1,4 @@
-import { ProfileImage, ProfileImageContainer, StudyProfileBoxStyle, TimeDisplay, UserIdDisplay } from "./StudyProfileBox.style";
+import * as S from './StudyProfileBox.style';
 
 interface StudyProfileBoxProps {
   isGroup?: boolean;
@@ -8,25 +8,26 @@ interface StudyProfileBoxProps {
   profileImage?: string;
 }
 
-const StudyProfileBox: React.FC<StudyProfileBoxProps> = ({ 
+const StudyProfileBox: React.FC<StudyProfileBoxProps> = ({
   isGroup = false,
   userId,
-  initialCurrentTaskTime = "00:00:00",
-  initialTotalStudyTime = "00:00:00",
-  profileImage = "https://via.placeholder.com/622", 
+  initialCurrentTaskTime = '00:00:00',
+  initialTotalStudyTime = '00:00:00',
+  profileImage = 'https://via.placeholder.com/622',
 }) => {
-
   return (
-    <StudyProfileBoxStyle $isGroup={isGroup}>
-      <TimeDisplay $isGroup={isGroup}>
-        <div className='time'>{initialCurrentTaskTime}</div>
-        <div className='time'>{initialTotalStudyTime}</div>
-      </TimeDisplay>
-      <ProfileImageContainer $isGroup={isGroup}>
-        <ProfileImage src={profileImage} alt="Profile" />
-      </ProfileImageContainer>
-      {isGroup && userId && (<UserIdDisplay $isGroup={isGroup}>{userId}</UserIdDisplay>)}
-    </StudyProfileBoxStyle>
+    <S.StudyProfileBoxStyle $isGroup={isGroup}>
+      <S.TimeDisplay $isGroup={isGroup}>
+        <div className="time">{initialCurrentTaskTime}</div>
+        <div className="time">{initialTotalStudyTime}</div>
+      </S.TimeDisplay>
+      <S.ProfileImageContainer $isGroup={isGroup}>
+        <S.ProfileImage src={profileImage} alt="Profile" />
+      </S.ProfileImageContainer>
+      {isGroup && userId && (
+        <S.UserIdDisplay $isGroup={isGroup}>{userId}</S.UserIdDisplay>
+      )}
+    </S.StudyProfileBoxStyle>
   );
 };
 

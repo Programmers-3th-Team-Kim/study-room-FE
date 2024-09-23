@@ -1,4 +1,4 @@
-import { RSidebarStyle } from "./RSidebar.style";
+import { RSidebarStyle } from './RSidebar.style';
 
 function RSidebar() {
   return (
@@ -6,6 +6,6 @@ function RSidebar() {
       <h1>RSidebar</h1>
     </RSidebarStyle>
   );
-};
+}
 
 export default RSidebar;

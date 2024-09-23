@@ -1,12 +1,24 @@
-export type ColorKey = "main" | "mainStrong" | "lineGray" | "btnOk" | "btnWarn" | "bgDarkGray" | "bgGray" | "bgLightGray" | "bgYellowNote" | "labelGray" | "plannerTimeGray" | "plannerGray";
-export type ButtonSize = "large" | "medium" | "small";
-export type BorderRadius = "large" | "medium" | "small";
+export type ColorKey =
+  | 'main'
+  | 'mainStrong'
+  | 'lineGray'
+  | 'btnOk'
+  | 'btnWarn'
+  | 'bgDarkGray'
+  | 'bgGray'
+  | 'bgLightGray'
+  | 'bgYellowNote'
+  | 'labelGray'
+  | 'plannerTimeGray'
+  | 'plannerGray';
+export type ButtonSize = 'large' | 'medium' | 'small';
+export type BorderRadius = 'large' | 'medium' | 'small';
 export type Shadows = string;
 
 interface DefaultTheme {
   color: Record<ColorKey, string>;
   studyRoomButton: {
-    [key in ButtonSize] : {
+    [key in ButtonSize]: {
       width: string;
       height: string;
     };
@@ -17,7 +29,7 @@ interface DefaultTheme {
   shadow: {
     boxShadow: string;
   };
-};
+}
 
 export const theme: DefaultTheme = {
   color: {
@@ -37,23 +49,23 @@ export const theme: DefaultTheme = {
 
   studyRoomButton: {
     large: {
-      width: "439px",
-      height: "77px",
+      width: '439px',
+      height: '77px',
     },
     medium: {
-      width: "328px",
-      height: "68px",
+      width: '328px',
+      height: '68px',
     },
     small: {
-      width: "262px",
-      height: "92px",
+      width: '262px',
+      height: '92px',
     },
   },
 
   borderRadius: {
-    large: "20px",
-    medium: "10px",
-    small: "5px",
+    large: '20px',
+    medium: '10px',
+    small: '5px',
   },
 
   shadow: {

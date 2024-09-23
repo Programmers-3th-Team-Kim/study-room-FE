@@ -27,4 +27,4 @@ export default function Layout({ children }: LayoutProps) {
       {isStudyRoomPage && <RSidebar />}
     </LayoutStyle>
   );
-};
+}

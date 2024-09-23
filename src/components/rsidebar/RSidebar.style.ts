@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const RSidebarStyle = styled.div`
   min-width: 600px;
