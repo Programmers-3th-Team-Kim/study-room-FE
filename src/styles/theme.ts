@@ -1,6 +1,7 @@
 export type ColorKey =
   | 'main'
   | 'mainStrong'
+  | 'mainStrongHover'
   | 'lineGray'
   | 'btnOk'
   | 'btnWarn'
@@ -35,6 +36,7 @@ export const theme: DefaultTheme = {
   color: {
     main: '#DDEBFD',
     mainStrong: '#599BFC',
+    mainStrongHover: '#9cc2fc',
     lineGray: '#A1A1A1',
     btnOk: '#6FA9FF',
     btnWarn: '#FF7777',
