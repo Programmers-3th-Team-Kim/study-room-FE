@@ -16,6 +16,7 @@ export const SCreateButtonStyle = styled.button.withConfig({
   justify-content: flex-start;
   padding-left: 20px;
   position: relative;
+  font-weight: 500;
 
   .icon {
     display: flex;
@@ -24,8 +25,7 @@ export const SCreateButtonStyle = styled.button.withConfig({
   }
 
   .label {
-    flex: 1; 
+    flex: 1;
     text-align: center;
-    padding-right: 20px;
   }
 `;
