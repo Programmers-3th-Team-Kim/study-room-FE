@@ -15,6 +15,6 @@ export const ProfileImageContainer = styled.div<{
 
 export const ProfileImage = styled.img`
   border-radius: 50%;
-  width: 80%; /* 기본값으로 설정 */
-  height: 80%; /* 기본값으로 설정 */
+  width: 80%;
+  height: 80%;
 `;
