@@ -13,9 +13,13 @@ export const ProfileImageContainer = styled.div<{
   background-color: white;
 `;
 
-export const ProfileImage = styled.img`
+interface ProfileImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  isDefault: boolean;
+}
+
+export const ProfileImage = styled.img<ProfileImageProps>`
   border-radius: 50%;
-  width: 80%;
-  height: 80%;
+  width: ${({ isDefault }) => (isDefault ? '80%' : '100%')};
+  height: ${({ isDefault }) => (isDefault ? '80%' : '100%')};
   object-fit: cover;
 `;
