@@ -6,19 +6,24 @@ interface ChattingProps {
   time?: string;
 }
 
-export default function Chatting({ chatInfo }: { chatInfo: ChattingProps }) {
+export default function Chatting({
+  chatInfo,
+  isMine,
+}: {
+  chatInfo: ChattingProps;
+  isMine: boolean;
+}) {
   const { nickname, message, time } = chatInfo;
 
   return (
-    <S.ChatWrapper>
+    <S.ChatWrapper isMine={isMine}>
       <S.UserInfoArea>
-        <S.UserProfile></S.UserProfile>
+        <S.UserProfile isMine={isMine} />
         <S.Nickname>{nickname}</S.Nickname>
       </S.UserInfoArea>
       <S.ChatInfoArea>
-        <S.ChatBox>{message}</S.ChatBox>
-
-        <S.CreatedTime>{time}</S.CreatedTime>
+        <S.ChatBox isMine={isMine}>{message}</S.ChatBox>
+        <S.CreatedTime isMine={isMine}>{time}</S.CreatedTime>
       </S.ChatInfoArea>
     </S.ChatWrapper>
   );

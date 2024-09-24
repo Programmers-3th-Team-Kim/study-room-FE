@@ -32,6 +32,7 @@ export const InputForm = styled.form`
   padding: 20px;
   align-items: center;
   background-color: white;
+  border-radius: 0 0 15px 15px;
 `;
 
 export const ChatErrorWrapper = styled.div`

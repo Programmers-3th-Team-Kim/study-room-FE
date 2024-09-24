@@ -40,7 +40,13 @@ export default function ChatRoom() {
       <S.ChatArea>
         {/* {추후 채팅들 배열로 가져와서 사용} */}
         {chatArray.map((chatInfo, index) => {
-          return <Chatting key={index} chatInfo={chatInfo} />;
+          return (
+            <Chatting
+              key={index}
+              chatInfo={chatInfo}
+              isMine={chatInfo.nickname === myNickname}
+            />
+          );
         })}
         <div ref={scrollBottomRef} />
       </S.ChatArea>
