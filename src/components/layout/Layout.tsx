@@ -30,7 +30,7 @@ export default function Layout({ children }: LayoutProps) {
     <LayoutStyle>
       {!authPagePath && !studyRoomPagePath && <Sidebar />}
       <MainContentArea>
-        {!authPagePath && <Header />}
+        {!authPagePath && <Header title={pageTitle} />}
         {children}
       </MainContentArea>
       {studyRoomPagePath && <RSidebar />}
