@@ -10,7 +10,7 @@ export const SidebarContainer = styled.nav`
   padding: 40px 20px;
 `;
 
-export const SidebarItem = styled(Link)<{ focused?: boolean }>`
+export const SidebarItem = styled(Link)<{ $focused?: boolean }>`
   font-size: 18px;
   padding: 16px 12px;
   display: flex;
@@ -19,10 +19,10 @@ export const SidebarItem = styled(Link)<{ focused?: boolean }>`
   border-radius: 4px;
   cursor: pointer;
 
-  color: ${({ focused, theme }) =>
-    focused ? theme.color.mainStrong : 'black'};
-  background-color: ${({ focused, theme }) =>
-    focused ? theme.color.main : 'white'};
+  color: ${({ $focused, theme }) =>
+    $focused ? theme.color.mainStrong : 'black'};
+  background-color: ${({ $focused, theme }) =>
+    $focused ? theme.color.main : 'white'};
 
   &:hover {
     filter: brightness(0.97);
@@ -44,8 +44,8 @@ export const DropdownToggle = styled.div`
   }
 `;
 
-export const DropdownItems = styled.div<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+export const DropdownItems = styled.div<{ $isOpen: boolean }>`
+  display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   padding-left: 20px;
   border-radius: 4px;
   color: ${({ theme }) => theme.color.bgLightGray};
