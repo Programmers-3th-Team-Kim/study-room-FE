@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useAuthStore } from '@/stores/auth.store';
 
 const axiosInstance = axios.create({
   baseURL: `${import.meta.env.VITE_REACT_APP_API_URL}`,
@@ -20,6 +21,8 @@ axiosInstance.interceptors.response.use(
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         console.error('토큰 갱신 실패:', refreshError);
+        const { clearAuthData } = useAuthStore.getState();
+        clearAuthData();
       }
     }
 

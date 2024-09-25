@@ -4,6 +4,7 @@ import Button from '@/components/button/Button';
 import Input from '@/components/input/Input';
 import type { LoginFormInputs } from '@/types/auth';
 import { login } from '@/apis/auth.api';
+import { useUserStore } from '@/stores';
 import * as S from '@/styles/AuthFormStyles';
 
 export default function LoginPage() {
@@ -13,10 +14,12 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm<LoginFormInputs>();
   const navigate = useNavigate();
+  const { setUserFromCookie } = useUserStore();
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     try {
       await login(data);
+      setUserFromCookie();
       alert('로그인 성공!');
       navigate('/');
     } catch (error) {
