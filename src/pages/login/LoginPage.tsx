@@ -2,21 +2,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/button/Button';
 import Input from '@/components/input/Input';
-import {
-  Container,
-  ErrorMessage,
-  Form,
-  InputContainer,
-  LinkContainer,
-  StyledLink,
-  Span,
-  Title,
-} from '@/styles/AuthFormStyles';
-
 interface LoginFormInputs {
   userId: string;
   password: string;
 }
+import * as S from '@/styles/AuthFormStyles';
 
 export default function LoginPage() {
   const {
@@ -31,41 +21,40 @@ export default function LoginPage() {
   };
 
   return (
-    <Container>
-      <Title>로그인</Title>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <InputContainer>
+    <S.Container>
+      <S.Title>로그인</S.Title>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
+        <S.InputContainer>
           <Input
-            hasError={!!errors.userId}
+            hasError={!!errors.id}
             placeholder="아이디"
-            {...register('userId', {
+            {...register('id', {
               required: '아이디를 입력해주세요.',
             })}
           />
-          {errors.userId && (
-            <ErrorMessage>{errors.userId.message}</ErrorMessage>
-          )}
-        </InputContainer>
-        <InputContainer>
+          {errors.id && <S.ErrorMessage>{errors.id.message}</S.ErrorMessage>}
+        </S.InputContainer>
+        <S.InputContainer>
           <Input
             hasError={!!errors.password}
             placeholder="비밀번호"
+            type="password"
             {...register('password', {
               required: '비밀번호를 입력해주세요.',
             })}
           />
           {errors.password && (
-            <ErrorMessage>{errors.password.message}</ErrorMessage>
+            <S.ErrorMessage>{errors.password.message}</S.ErrorMessage>
           )}
-        </InputContainer>
+        </S.InputContainer>
         <Button type="submit" size="large">
           로그인
         </Button>
-      </Form>
-      <LinkContainer>
-        <Span>아직 회원이 아니신가요?</Span>
-        <StyledLink to={'/register'}>회원가입</StyledLink>
-      </LinkContainer>
-    </Container>
+      </S.Form>
+      <S.LinkContainer>
+        <S.Span>아직 회원이 아니신가요?</S.Span>
+        <S.StyledLink to={'/register'}>회원가입</S.StyledLink>
+      </S.LinkContainer>
+    </S.Container>
   );
 }
