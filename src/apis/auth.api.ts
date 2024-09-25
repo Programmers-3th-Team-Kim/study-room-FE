@@ -15,3 +15,10 @@ export const login = async (data: { id: string; password: string }) => {
   }
   return user;
 };
+
+export const logout = async () => {
+  await axiosInstance.post('/auth/logout', {}, { withCredentials: true });
+
+  const { clearAuthData } = useAuthStore.getState();
+  clearAuthData();
+};
