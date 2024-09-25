@@ -28,9 +28,9 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <LayoutStyle>
-      {!authPagePath && !studyRoomPagePath && <Sidebar />}
+      {!authPagePath && <Header title={pageTitle} />}
       <MainContentArea>
-        {!authPagePath && <Header title={pageTitle} />}
+        {!authPagePath && !studyRoomPagePath && <Sidebar />}
         {children}
       </MainContentArea>
       {studyRoomPagePath && <RSidebar />}
