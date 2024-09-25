@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@/components/button/Button';
 import Input from '@/components/input/Input';
 import type { LoginFormInputs } from '@/types/auth';
+import { login } from '@/apis/auth.api';
 import * as S from '@/styles/AuthFormStyles';
 
 export default function LoginPage() {
@@ -13,8 +14,18 @@ export default function LoginPage() {
   } = useForm<LoginFormInputs>();
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<LoginFormInputs> = () => {
-    navigate('/');
+  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+    try {
+      await login(data);
+      alert('로그인 성공!');
+      navigate('/');
+    } catch (error) {
+      console.error('로그인 실패', error);
+
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
   };
 
   return (
