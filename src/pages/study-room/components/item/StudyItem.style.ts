@@ -22,18 +22,22 @@ export const ItemContainer = styled.div.withConfig({
 `;
 
 export const ItemContent = styled.div`
-  position: absolute;
-  top: 10px;
-  left: 20px;
+  position: relative;
   color: white;
   display: flex;
   flex-direction: column;
+  flex: 1;
+  margin: 10px 20px;
 `;
 
 export const Title = styled.h3`
   margin: 0;
   padding-top: 70px;
   font-size: 25px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 `;
 
 export const ParticipantCount = styled.p`
@@ -49,19 +53,24 @@ export const Privacy = styled.p`
 
 export const ItemFooter = styled.div`
   padding: 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px 0;
 `;
 
 export const ItemTitle = styled.h4`
   margin: 0;
   font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  overflow-x: auto;
 `;
 
 export const Hashtags = styled.div`
   margin-top: 5px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  max-width: 100%;
 `;
 
 export const Hashtag = styled.span`
