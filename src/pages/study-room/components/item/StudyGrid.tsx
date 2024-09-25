@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import StudyItem from './StudyItem';
 import * as S from './StudyGrid.style';
 import axios from 'axios';
@@ -19,49 +19,53 @@ interface Room {
   currentNum: number;
 }
 
-function StudyGrid() {
-  const [rooms, setRooms] = useState<Room[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+interface FetchRoomsParams {
+  search?: string;
+  isPublic?: boolean;
+  isPossible?: string;
+  limit?: number;
+  offset?: number;
+}
 
-  useEffect(() => {
-    const fetchRooms = async () => {
-      setIsLoading(true);
-      try {
-        const res = await axios.get('http://localhost:3000/rooms');
-        console.log('API 응답:', res.data);
-        if (Array.isArray(res.data)) {
-          const roomData: Room[] = res.data.map((room) => ({
-            _id: room._id,
-            title: room.title,
-            tagList: room.tagList,
-            notice: room.notice,
-            maxNum: room.maxNum,
-            isPublic: room.isPublic,
-            password: room.password,
-            isChat: room.isChat,
-            imageUrl: room.imageUrl,
-            roomManager: room.roomManager,
-            currentMembers: room.currentMember,
-            createdAt: room.createdAt,
-            currentNum: room.currentNum,
-          }));
-          setRooms(roomData);
-        } else {
-          throw new Error('응답 데이터 형식이 올바르지 않습니다.');
-        }
-      } catch (error) {
-        console.error('데이터를 가져오는 중 오류 발생:', error);
-        setError(
-          '방 목록을 불러오는 데 실패했습니다.' + (error as Error).message
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
+// API 요청 함수
+const fetchRooms = async (params: FetchRoomsParams) => {
+  const { search, isPublic, isPossible, limit, offset } = params;
 
-    fetchRooms();
-  }, []);
+  const query = new URLSearchParams({
+    search: search || '',
+    isPublic: isPublic !== undefined ? String(isPublic) : '',
+    isPossible: isPossible || '',
+    limit: limit !== undefined ? String(limit) : '',
+    offset: offset !== undefined ? String(offset) : '',
+  }).toString();
+
+  const url = `http://localhost:3000/rooms?${query}`;
+  console.log('Fetching URL:', url);
+  const res = await axios.get(url);
+  return res.data;
+};
+
+function StudyGrid({
+  filter,
+}: {
+  filter: { isPublic?: boolean; isPossible?: string; search?: string }; // search 추가
+}) {
+  const params: FetchRoomsParams = {
+    search: filter.search || '', // 검색어를 filter에서 가져옴
+    isPublic: filter.isPublic,
+    isPossible: filter.isPossible,
+    limit: 10, // 예시로 10으로 설정
+    offset: 0, // 예시로 0으로 설정
+  };
+
+  const {
+    data: rooms = [],
+    isLoading,
+    error,
+  } = useQuery<Room[], Error>({
+    queryKey: ['rooms', params],
+    queryFn: () => fetchRooms(params),
+  });
 
   return (
     <S.ScrollContainer>
@@ -69,7 +73,7 @@ function StudyGrid() {
         {isLoading ? (
           <div>로딩 중...</div>
         ) : error ? (
-          <div>{error}</div>
+          <div>{`방 목록을 불러오는 데 실패했습니다: ${error.message}`}</div>
         ) : (
           rooms.map((room) => (
             <StudyItem

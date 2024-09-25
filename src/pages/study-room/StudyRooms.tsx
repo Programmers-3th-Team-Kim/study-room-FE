@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import SelectBox from './components/filter/SelectBox';
 import Search from './components/search/Search';
 import CreateButton from './components/button/CreateButton';
@@ -6,17 +7,38 @@ import CheckBox from './components/filter/CheckBox';
 import * as S from './StudyRooms.style';
 
 function StudyRooms() {
+  const [filter, setFilter] = useState<{
+    isPublic?: boolean;
+    isPossible?: string;
+    search?: string; // 검색어 추가
+  }>({});
+
+  const handleFilterChange = (newFilter: {
+    isPublic?: boolean;
+    isPossible?: string;
+    search?: string; // 검색어 추가
+  }) => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      ...newFilter,
+    }));
+  };
+
+  const handleSearchChange = (search: string) => {
+    handleFilterChange({ search });
+  };
+
   return (
     <S.StudyRoomsStyle>
       <S.MainContentArea>
         <div className="wrapper">
           <div className="header">
-            <Search />
-            <SelectBox />
-            <CheckBox />
+            <Search onSearchChange={handleSearchChange} />
+            <SelectBox onFilterChange={handleFilterChange} />
+            <CheckBox onFilterChange={handleFilterChange} />
             <CreateButton />
           </div>
-          <StudyGrid />
+          <StudyGrid filter={filter} />
         </div>
       </S.MainContentArea>
     </S.StudyRoomsStyle>
