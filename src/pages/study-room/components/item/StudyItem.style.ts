@@ -19,6 +19,18 @@ export const ItemContainer = styled.div.withConfig({
   background-position: center;
   border-radius: ${({ theme }) => theme.borderRadius.medium};
   overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: ${({ theme }) => theme.borderRadius.medium};
+    z-index: 0;
+  }
 `;
 
 export const ItemContent = styled.div`
@@ -28,6 +40,7 @@ export const ItemContent = styled.div`
   flex-direction: column;
   flex: 1;
   margin: 10px 20px;
+  z-index: 1;
 `;
 
 export const Title = styled.h3`
@@ -66,16 +79,16 @@ export const ItemTitle = styled.h4`
   overflow-y: hidden;
 
   &::-webkit-scrollbar {
-    height: 5px; // 가로 스크롤바의 높이
+    height: 5px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #d9d9d9; // 스크롤바 색상
-    border-radius: 10px; // 스크롤바 모서리 둥글게
+    background: #d9d9d9;
+    border-radius: 10px;
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent; // 스크롤바 배경색 제거
+    background: transparent;
   }
 `;
 
@@ -88,16 +101,16 @@ export const Hashtags = styled.div`
   overflow-y: hidden;
 
   &::-webkit-scrollbar {
-    height: 5px; // 가로 스크롤바의 높이
+    height: 5px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #d9d9d9; // 스크롤바 색상
-    border-radius: 10px; // 스크롤바 모서리 둥글게
+    background: #d9d9d9;
+    border-radius: 10px;
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent; // 스크롤바 배경색 제거
+    background: transparent;
   }
 `;
 
