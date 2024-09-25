@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StudyItemStyle = styled.div`
   width: 328px;
-  height: 300px;
+  height: 340px;
   display: flex;
   flex-direction: column;
 `;
@@ -63,14 +63,42 @@ export const ItemTitle = styled.h4`
   overflow: hidden;
   max-width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
+
+  &::-webkit-scrollbar {
+    height: 5px; // 가로 스크롤바의 높이
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #d9d9d9; // 스크롤바 색상
+    border-radius: 10px; // 스크롤바 모서리 둥글게
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent; // 스크롤바 배경색 제거
+  }
 `;
 
 export const Hashtags = styled.div`
   margin-top: 5px;
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: auto;
   max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  &::-webkit-scrollbar {
+    height: 5px; // 가로 스크롤바의 높이
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #d9d9d9; // 스크롤바 색상
+    border-radius: 10px; // 스크롤바 모서리 둥글게
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent; // 스크롤바 배경색 제거
+  }
 `;
 
 export const Hashtag = styled.span`
@@ -78,4 +106,5 @@ export const Hashtag = styled.span`
   font-size: 18px;
   color: ${({ theme }) => theme.color.plannerTimeGray};
   font-style: italic;
+  white-space: nowrap;
 `;
