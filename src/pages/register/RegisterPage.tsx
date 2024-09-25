@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { signUp } from '@/apis/auth.api';
 import type { RegisterFormInputs } from '@/types/auth';
 import Button from '@/components/button/Button';
 import Input from '@/components/input/Input';
@@ -15,8 +16,17 @@ export default function RegisterPage() {
   const navigate = useNavigate();
   const password = watch('password');
 
-  const onSubmit: SubmitHandler<RegisterFormInputs> = () => {
-    navigate('/login');
+  const onSubmit: SubmitHandler<RegisterFormInputs> = async (data) => {
+    try {
+      await signUp(data);
+      alert('회원가입이 성공적으로 완료되었습니다.');
+      navigate('/login');
+    } catch (error) {
+      console.error('회원가입 실패', error);
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
   };
 
   return (
