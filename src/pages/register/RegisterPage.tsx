@@ -1,15 +1,9 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import type { RegisterFormInputs } from '@/types/auth';
 import Button from '@/components/button/Button';
 import Input from '@/components/input/Input';
 import * as S from '@/styles/AuthFormStyles';
-
-interface RegisterFormInputs {
-  userId: string;
-  nickname: string;
-  password: string;
-  confirmPassword: string;
-}
 
 export default function RegisterPage() {
   const {

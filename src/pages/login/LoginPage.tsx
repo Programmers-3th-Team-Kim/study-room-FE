@@ -2,10 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/button/Button';
 import Input from '@/components/input/Input';
-interface LoginFormInputs {
-  userId: string;
-  password: string;
-}
+import type { LoginFormInputs } from '@/types/auth';
 import * as S from '@/styles/AuthFormStyles';
 
 export default function LoginPage() {
