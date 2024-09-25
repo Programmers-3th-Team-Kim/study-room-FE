@@ -19,7 +19,7 @@ interface ProfileImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 export const ProfileImage = styled.img<ProfileImageProps>`
   border-radius: 50%;
-  width: ${({ isDefault }) => (isDefault ? '80%' : '100%')};
-  height: ${({ isDefault }) => (isDefault ? '80%' : '100%')};
+  width: 80%;
+  height: 80%;
   object-fit: cover;
 `;
