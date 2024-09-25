@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/stores';
 import axiosInstance from './axiosInstance.api';
-import type { RegisterFormInputs } from '@/types/auth';
+import type { SignUpFormInputs } from '@/types/auth';
 
 export const login = async (data: { id: string; password: string }) => {
   const response = await axiosInstance.post('/auth/login', data, {
@@ -24,7 +24,7 @@ export const logout = async () => {
   clearAuthData();
 };
 
-export const signUp = async (data: RegisterFormInputs) => {
+export const signUp = async (data: SignUpFormInputs) => {
   const response = await axiosInstance.post('/auth/signup', data, {
     withCredentials: true,
   });

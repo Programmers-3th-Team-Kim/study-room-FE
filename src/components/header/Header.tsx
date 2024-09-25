@@ -30,7 +30,7 @@ export default function Header({ title }: HeaderProps) {
         ) : (
           <>
             <S.Button onClick={() => navigate('/login')}>로그인</S.Button>
-            <S.Button onClick={() => navigate('/register')}>회원가입</S.Button>
+            <S.Button onClick={() => navigate('/signup')}>회원가입</S.Button>
           </>
         )}
       </S.ButtonWrapper>
