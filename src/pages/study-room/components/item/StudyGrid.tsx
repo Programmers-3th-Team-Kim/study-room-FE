@@ -22,7 +22,7 @@ interface Room {
 interface FetchRoomsParams {
   search?: string;
   isPublic?: boolean;
-  isPossible?: string;
+  isPossible?: boolean;
   limit?: number;
   offset?: number;
 }
@@ -34,7 +34,7 @@ const fetchRooms = async (params: FetchRoomsParams) => {
   const query = new URLSearchParams({
     search: search || '',
     isPublic: isPublic !== undefined ? String(isPublic) : '',
-    isPossible: isPossible || '',
+    isPossible: isPossible !== undefined ? String(isPossible) : '',
     limit: limit !== undefined ? String(limit) : '',
     offset: offset !== undefined ? String(offset) : '',
   }).toString();
@@ -48,7 +48,7 @@ const fetchRooms = async (params: FetchRoomsParams) => {
 function StudyGrid({
   filter,
 }: {
-  filter: { isPublic?: boolean; isPossible?: string; search?: string };
+  filter: { isPublic?: boolean; isPossible?: boolean; search?: string };
 }) {
   const params: FetchRoomsParams = {
     search: filter.search || '',

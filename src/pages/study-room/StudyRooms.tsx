@@ -9,13 +9,13 @@ import * as S from './StudyRooms.style';
 function StudyRooms() {
   const [filter, setFilter] = useState<{
     isPublic?: boolean;
-    isPossible?: string;
+    isPossible?: boolean;
     search?: string; // 검색어 추가
   }>({});
 
   const handleFilterChange = (newFilter: {
     isPublic?: boolean;
-    isPossible?: string;
+    isPossible?: boolean;
     search?: string; // 검색어 추가
   }) => {
     setFilter((prevFilter) => ({

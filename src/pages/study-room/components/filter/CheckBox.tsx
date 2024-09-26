@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as S from './CheckBox.style';
 
 interface CheckBoxProps {
-  onFilterChange: (filter: { isPossible?: string }) => void;
+  onFilterChange: (filter: { isPossible?: boolean }) => void;
 }
 
 function CheckBox({ onFilterChange }: CheckBoxProps) {
@@ -11,7 +11,7 @@ function CheckBox({ onFilterChange }: CheckBoxProps) {
   const handleCheckboxChange = () => {
     const newCheckedState = !isChecked;
     setIsChecked(newCheckedState);
-    onFilterChange({ isPossible: newCheckedState ? "'true'" : '' });
+    onFilterChange({ isPossible: newCheckedState ? true : undefined });
   };
 
   return (
