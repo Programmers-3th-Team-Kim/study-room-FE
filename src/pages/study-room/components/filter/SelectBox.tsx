@@ -9,8 +9,8 @@ interface SelectBoxProps {
 function SelectBox({ onFilterChange }: SelectBoxProps) {
   const [selectedValue, setSelectedValue] = useState('all');
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
     setSelectedValue(value);
 
     if (value === 'public') {
