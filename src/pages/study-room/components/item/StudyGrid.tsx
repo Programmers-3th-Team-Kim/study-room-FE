@@ -48,13 +48,13 @@ const fetchRooms = async (params: FetchRoomsParams) => {
 function StudyGrid({
   filter,
 }: {
-  filter: { isPublic?: boolean; isPossible?: string; search?: string }; // search 추가
+  filter: { isPublic?: boolean; isPossible?: string; search?: string };
 }) {
   const params: FetchRoomsParams = {
-    search: filter.search || '', // 검색어를 filter에서 가져옴
+    search: filter.search || '',
     isPublic: filter.isPublic,
     isPossible: filter.isPossible,
-    limit: 10, // 예시로 10으로 설정
+    limit: 16, // 예시로 10으로 설정
     offset: 0, // 예시로 0으로 설정
   };
 
