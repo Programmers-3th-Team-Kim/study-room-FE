@@ -7,30 +7,6 @@ export const useRestoreUser = () => {
 
   const restoreUser = async () => {
     if (!accessToken) {
-      try {
-        const refreshResponse = await axiosInstance.post(
-          '/auth/refresh-token',
-          {},
-          {
-            withCredentials: true,
-          }
-        );
-
-        const newAccessToken = refreshResponse.data.access_token;
-
-        const response = await axiosInstance.get('/auth/me', {
-          headers: {
-            Authorization: `Bearer ${newAccessToken}`,
-          },
-          withCredentials: true,
-        });
-
-        const user = response.data.user;
-        setAuthData(newAccessToken, user);
-      } catch (error) {
-        console.error('Access Token을 복원할 수 없습니다:', error);
-        clearAuthData();
-      }
       return;
     }
 
@@ -52,5 +28,5 @@ export const useRestoreUser = () => {
 
   useEffect(() => {
     restoreUser();
-  }, []);
+  }, [accessToken]);
 };

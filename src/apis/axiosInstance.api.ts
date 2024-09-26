@@ -11,18 +11,23 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
         const { data } = await axiosInstance.post('/auth/refresh-token');
-        originalRequest.headers['Authorization'] =
-          `Bearer ${data.access_token}`;
+        const newAccessToken = data.access_token;
+
+        const { setAuthData } = useAuthStore.getState();
+        setAuthData(newAccessToken, data.user);
+
+        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         console.error('토큰 갱신 실패:', refreshError);
         const { clearAuthData } = useAuthStore.getState();
         clearAuthData();
+        return Promise.reject(refreshError);
       }
     }
 
