@@ -39,7 +39,7 @@ const fetchRooms = async (params: FetchRoomsParams) => {
     offset: offset !== undefined ? String(offset) : '',
   }).toString();
 
-  const url = `http://localhost:3000/rooms?${query}`;
+  const url = `${import.meta.env.VITE_REACT_APP_API_URL}/rooms?${query}`;
   console.log('Fetching URL:', url);
   const res = await axios.get(url);
   return res.data;
