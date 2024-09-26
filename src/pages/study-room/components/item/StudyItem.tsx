@@ -35,7 +35,7 @@ function StudyItem({
         <S.ItemTitle>{title}</S.ItemTitle>
         <S.Hashtags>
           {tagList.map((tag, index) => (
-            <S.Hashtag key={index}>#{tag}</S.Hashtag>
+            <S.Hashtag key={index}>{tag}</S.Hashtag>
           ))}
         </S.Hashtags>
       </S.ItemFooter>

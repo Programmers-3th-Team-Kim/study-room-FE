@@ -54,7 +54,7 @@ function StudyGrid({
     search: filter.search || '',
     isPublic: filter.isPublic,
     isPossible: filter.isPossible,
-    limit: 16, // 예시로 10으로 설정
+    limit: 40,
     offset: 0, // 예시로 0으로 설정
   };
 

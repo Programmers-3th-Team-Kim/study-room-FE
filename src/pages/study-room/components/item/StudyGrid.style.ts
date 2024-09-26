@@ -5,7 +5,7 @@ export const StudyGridStyle = styled.div`
   grid-template-columns: repeat(4, 328px);
   gap: 47px;
   grid-auto-rows: 330px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   max-height: 660px;
   padding-right: 20px;

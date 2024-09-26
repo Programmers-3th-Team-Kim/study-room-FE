@@ -66,19 +66,21 @@ export const Privacy = styled.p`
 
 export const ItemFooter = styled.div`
   padding: 5px;
-  margin: 20px 0;
+  margin: 10px 0;
 `;
 
 export const ItemTitle = styled.h4`
-  margin: 0;
+  /* margin: 0;
   font-size: 18px;
   white-space: nowrap;
   overflow: hidden;
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+  //text-overflow: ellipsis;
 
   &::-webkit-scrollbar {
+    display: none;
     height: 5px;
   }
 
@@ -89,7 +91,18 @@ export const ItemTitle = styled.h4`
 
   &::-webkit-scrollbar-track {
     background: transparent;
-  }
+  } */
+
+  margin: 0;
+  font-size: 20px;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-width: 100%;
+  line-height: 25px;
 `;
 
 export const Hashtags = styled.div`
@@ -101,6 +114,7 @@ export const Hashtags = styled.div`
   overflow-y: hidden;
 
   &::-webkit-scrollbar {
+    display: none;
     height: 5px;
   }
 
@@ -111,6 +125,11 @@ export const Hashtags = styled.div`
 
   &::-webkit-scrollbar-track {
     background: transparent;
+  }
+
+  /* 드래그 시 배경 색상 없애기 */
+  &:active {
+    cursor: grabbing; /* 드래그 중 커서 변경 */
   }
 `;
 
