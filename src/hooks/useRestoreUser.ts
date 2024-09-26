@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import axiosInstance from '@/apis/axiosInstance.api';
 import { useAuthStore } from '@/stores/auth.store';
+import { API_ROUTES } from '@/apis/apiRoutes';
 
 export const useRestoreUser = () => {
   const { accessToken, setAuthData, clearAuthData } = useAuthStore();
@@ -11,7 +12,7 @@ export const useRestoreUser = () => {
     }
 
     try {
-      const response = await axiosInstance.get('/auth/me', {
+      const response = await axiosInstance.get(API_ROUTES.ME, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

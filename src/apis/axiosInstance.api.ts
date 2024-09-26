@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useAuthStore } from '@/stores/auth.store';
+import { API_ROUTES } from './apiRoutes';
 
 const axiosInstance = axios.create({
   baseURL: `${import.meta.env.VITE_REACT_APP_API_URL}`,
@@ -15,7 +16,7 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const { data } = await axiosInstance.post('/auth/refresh-token');
+        const { data } = await axiosInstance.post(API_ROUTES.REFRESH_TOKEN);
         const newAccessToken = data.access_token;
 
         const { setAuthData } = useAuthStore.getState();
@@ -24,7 +25,7 @@ axiosInstance.interceptors.response.use(
         originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
         return axiosInstance(originalRequest);
       } catch (refreshError) {
-        console.error('토큰 갱신 실패:', refreshError);
+        console.error('토큰 갱신 실패', refreshError);
         const { clearAuthData } = useAuthStore.getState();
         clearAuthData();
         return Promise.reject(refreshError);
