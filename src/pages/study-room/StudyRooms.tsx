@@ -6,18 +6,16 @@ import StudyGrid from './components/item/StudyGrid';
 import CheckBox from './components/filter/CheckBox';
 import * as S from './StudyRooms.style';
 
-function StudyRooms() {
-  const [filter, setFilter] = useState<{
-    isPublic?: boolean;
-    isPossible?: boolean;
-    search?: string; // 검색어 추가
-  }>({});
+interface Filter {
+  isPublic?: boolean;
+  isPossible?: boolean;
+  search?: string;
+}
 
-  const handleFilterChange = (newFilter: {
-    isPublic?: boolean;
-    isPossible?: boolean;
-    search?: string; // 검색어 추가
-  }) => {
+function StudyRooms() {
+  const [filter, setFilter] = useState<Filter>({});
+
+  const handleFilterChange = (newFilter: Filter) => {
     setFilter((prevFilter) => ({
       ...prevFilter,
       ...newFilter,
