@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StudyItemStyle = styled.div`
   width: 328px;
-  height: 340px;
+  height: 350px;
   display: flex;
   flex-direction: column;
 `;
