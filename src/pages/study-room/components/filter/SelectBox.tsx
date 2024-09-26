@@ -18,7 +18,7 @@ function SelectBox({ onFilterChange }: SelectBoxProps) {
     } else if (value === 'secret') {
       onFilterChange({ isPublic: false });
     } else {
-      onFilterChange({}); // 전체 스터디인 경우
+      onFilterChange({ isPublic: undefined });
     }
   };
 
