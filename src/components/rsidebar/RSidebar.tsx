@@ -10,13 +10,10 @@ export default function RSidebar() {
   const [currentDateTime, setCurrentDateTime] =
     useState<string>(formatDateTime());
 
-  const [rawDateTime, setRawDateTime] = useState<Date>(new Date());
-
   const [selectedTab, setSelectedTab] = useState<Tabs>('할 일');
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setRawDateTime(new Date());
       setCurrentDateTime(formatDateTime());
     }, 1000);
     return () => clearInterval(interval);
