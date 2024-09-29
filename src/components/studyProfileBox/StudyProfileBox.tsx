@@ -19,14 +19,14 @@ const StudyProfileBox: React.FC<StudyProfileBoxProps> = ({
   return (
     <S.StudyProfileBoxStyle $isGroup={isGroup}>
       <S.ContentDisplay $isGroup={isGroup}>
-        <div className="content">선택된 할 일 공부 시간</div>
+        {!isGroup && <div className="content">선택된 할 일 공부 시간</div>}
         <div className="content">전체 공부 시간</div>
       </S.ContentDisplay>
       <S.TimeDisplay $isGroup={isGroup}>
-        <div className="time">{initialCurrentTaskTime}</div>
+        {!isGroup && <div className="time">{initialCurrentTaskTime}</div>}
         <div className="time">{initialTotalStudyTime}</div>
       </S.TimeDisplay>
-      <ProfileImageBox src={profileImage} width="428px" height="428px" />
+      <ProfileImageBox src={profileImage} width="400px" height="400px" />
       {isGroup && userId && (
         <S.UserIdDisplay $isGroup={isGroup}>{userId}</S.UserIdDisplay>
       )}
