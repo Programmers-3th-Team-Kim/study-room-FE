@@ -8,7 +8,7 @@ interface CreateButtonProps {
 
 function CreateButton({ marginRight }: CreateButtonProps) {
   return (
-    <S.CreateButtonStyle marginRight={marginRight}>
+    <S.CreateButtonStyle style={{ marginRight }}>
       <SCreateButton
         label="스터디방 개설"
         width="226px"
