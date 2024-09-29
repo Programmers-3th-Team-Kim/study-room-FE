@@ -2,18 +2,12 @@ import styled from 'styled-components';
 
 export const PrivateStudyRoomStyle = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  justify-content: space-between;
+  width: 100vw;
   height: 100vh;
 `;
 
 export const MainContentArea = styled.div`
-  display: flex;
-  justify-content: space-between;
-  height: calc(100% - 80px);
-`;
-
-export const StudyRoomHeaderWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +18,7 @@ export const StudyRoomHeaderWrap = styled.div`
 export const StudyRoomWrap = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
   height: 100vh;
   margin: 60px 0;
