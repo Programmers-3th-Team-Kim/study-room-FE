@@ -11,11 +11,11 @@ export const PrivateStudyRoomStyle = styled.div`
 export const InstructionText = styled.div`
   text-align: center;
   margin: 20px 0;
-  font-size: 35px;
+  font-size: 30px;
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 564px;
+  gap: 433px;
 `;

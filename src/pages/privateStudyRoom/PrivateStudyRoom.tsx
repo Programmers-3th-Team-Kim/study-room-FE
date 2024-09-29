@@ -14,7 +14,8 @@ const PrivateStudyRoom: React.FC<PrivateStudyRoomProps> = ({
 }) => {
   const initialCurrentTaskTime = '00:00:00'; // 초기 현재 작업 시간
   const initialTotalStudyTime = '00:05:00'; // 초기 총 공부 시간
-  const profileImage = ''; // 프로필 이미지 URL
+  const profileImage =
+    'https://product.cdn.cevaws.com/var/storage/images/_aliases/reference/media/feliway-2017/images/kor-kr/1_gnetb-7sfmbx49emluey4a/6341829-1-kor-KR/1_gNETb-7SfMBX49EMLUeY4A.jpg'; // 프로필 이미지 URL
 
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState(false);
