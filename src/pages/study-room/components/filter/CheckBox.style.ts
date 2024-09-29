@@ -8,7 +8,6 @@ export const CheckBoxStyle = styled.div`
     position: relative;
     align-items: center;
     font-size: 14px;
-    //margin-left: 5px;
 
     input {
       position: relative;
@@ -19,7 +18,7 @@ export const CheckBoxStyle = styled.div`
       margin: 0 5px;
       border-radius: 4px;
       cursor: pointer;
-      background-color: ${({ theme }) => theme.color.bgGray};
+      background-color: #f1f1f1;
       border: 1px solid ${({ theme }) => theme.color.plannerGray};
 
       &:checked {
@@ -33,7 +32,6 @@ export const CheckBoxStyle = styled.div`
         color: white;
         font-size: 10px;
         left: 2px;
-        //top: 1px;
       }
     }
   }

@@ -27,7 +27,7 @@ export const ItemContainer = styled.div.withConfig({
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.07);
     border-radius: 7px;
     z-index: 0;
   }
@@ -64,11 +64,10 @@ export const Privacy = styled.p`
 `;
 
 export const ItemFooter = styled.div`
-  margin: 7px;
+  margin: 10px 2px;
 `;
 
 export const ItemTitle = styled.h4`
-  margin: 0;
   font-size: 16px;
   white-space: normal;
   overflow: hidden;
@@ -81,7 +80,7 @@ export const ItemTitle = styled.h4`
 `;
 
 export const Hashtags = styled.div`
-  margin-top: 5px;
+  margin-top: 7px;
   display: flex;
   flex-wrap: nowrap;
   max-width: 100%;
@@ -111,8 +110,13 @@ export const Hashtags = styled.div`
 
 export const Hashtag = styled.span`
   margin-right: 5px;
-  font-size: 16px;
-  color: ${({ theme }) => theme.color.plannerTimeGray};
-  font-style: italic;
+  font-size: 13px;
+  color: ${({ theme }) => theme.color.mainStrong};
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: #f1f1f1;
 `;

@@ -69,7 +69,7 @@ function StudyItem({
           onMouseMove={handleMouseMove}
         >
           {tagList.map((tag, index) => (
-            <S.Hashtag key={index}>#{tag}</S.Hashtag>
+            <S.Hashtag key={index}>{tag}</S.Hashtag>
           ))}
         </S.Hashtags>
       </S.ItemFooter>
