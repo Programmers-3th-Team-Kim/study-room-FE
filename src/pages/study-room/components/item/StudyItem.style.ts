@@ -87,6 +87,8 @@ export const Hashtags = styled.div`
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+  cursor: grab;
+  user-select: none; // 텍스트 선택 방지
 
   &::-webkit-scrollbar {
     display: none;
@@ -102,9 +104,8 @@ export const Hashtags = styled.div`
     background: transparent;
   }
 
-  /* 드래그 시 배경 색상 없애기 */
   &:active {
-    cursor: grabbing; /* 드래그 중 커서 변경 */
+    cursor: grabbing;
   }
 `;
 
