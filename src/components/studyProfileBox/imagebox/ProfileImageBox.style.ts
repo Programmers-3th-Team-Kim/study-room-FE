@@ -14,7 +14,7 @@ export const ProfileImageContainer = styled.div<{
 `;
 
 interface ProfileImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  isDefault: boolean;
+  isDefault?: boolean;
 }
 
 export const ProfileImage = styled.img<ProfileImageProps>`
