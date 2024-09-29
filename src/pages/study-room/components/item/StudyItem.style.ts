@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const StudyItemStyle = styled.div`
   width: 226px;
-  //height: 236px;
   height: auto;
   display: flex;
   flex-direction: column;

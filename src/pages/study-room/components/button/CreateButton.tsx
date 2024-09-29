@@ -2,9 +2,13 @@ import SCreateButton from '@/components/button/SCreateButton';
 import { FaPlus } from 'react-icons/fa';
 import * as S from './CreateButton.style';
 
-function CreateButton() {
+interface CreateButtonProps {
+  marginRight?: string;
+}
+
+function CreateButton({ marginRight }: CreateButtonProps) {
   return (
-    <S.CreateButtonStyle>
+    <S.CreateButtonStyle marginRight={marginRight}>
       <SCreateButton
         label="스터디방 개설"
         width="226px"
