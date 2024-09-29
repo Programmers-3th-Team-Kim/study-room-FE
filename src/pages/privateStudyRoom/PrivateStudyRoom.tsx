@@ -103,6 +103,8 @@ const PrivateStudyRoom: React.FC<PrivateStudyRoomProps> = ({
         initialCurrentTaskTime={currentTaskTime}
         initialTotalStudyTime={totalStudyTime}
         profileImage={profileImage}
+        profileImageWidth="400px"
+        profileImageHeight="400px"
       />
       <S.InstructionText>
         우측 사이드바의 할 일을 선택하면 타이머가 시작됩니다.
