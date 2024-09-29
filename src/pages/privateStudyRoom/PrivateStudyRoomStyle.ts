@@ -3,6 +3,12 @@ import styled from 'styled-components';
 export const PrivateStudyRoomStyle = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+`;
+
+export const StudyRoomWrap = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 1;

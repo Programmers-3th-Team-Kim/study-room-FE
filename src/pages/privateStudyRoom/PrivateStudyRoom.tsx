@@ -4,6 +4,7 @@ import StartPauseButton from './components/button/StartPauseButton';
 import { useNavigate } from 'react-router-dom';
 import LeaveButton from './components/button/LeaveButton';
 import * as S from './PrivateStudyRoomStyle';
+import Header from '@/components/header/Header';
 
 interface PrivateStudyRoomProps {
   userId?: string; // 사용자 ID
@@ -97,22 +98,25 @@ const PrivateStudyRoom: React.FC<PrivateStudyRoomProps> = ({
 
   return (
     <S.PrivateStudyRoomStyle>
-      <StudyProfileBox
-        isGroup={false}
-        userId={userId}
-        initialCurrentTaskTime={currentTaskTime}
-        initialTotalStudyTime={totalStudyTime}
-        profileImage={profileImage}
-        profileImageWidth="400px"
-        profileImageHeight="400px"
-      />
-      <S.InstructionText>
-        우측 사이드바의 할 일을 선택하면 타이머가 시작됩니다.
-      </S.InstructionText>
-      <S.ButtonContainer>
-        <StartPauseButton isActive={isActive} onClick={handleStartPause} />
-        <LeaveButton onClick={handleLeaveRoom} />
-      </S.ButtonContainer>
+      <Header title="개인 공부방" />
+      <S.StudyRoomWrap>
+        <StudyProfileBox
+          isGroup={false}
+          userId={userId}
+          initialCurrentTaskTime={currentTaskTime}
+          initialTotalStudyTime={totalStudyTime}
+          profileImage={profileImage}
+          profileImageWidth="400px"
+          profileImageHeight="400px"
+        />
+        <S.InstructionText>
+          우측 사이드바의 할 일을 선택하면 타이머가 시작됩니다.
+        </S.InstructionText>
+        <S.ButtonContainer>
+          <StartPauseButton isActive={isActive} onClick={handleStartPause} />
+          <LeaveButton onClick={handleLeaveRoom} />
+        </S.ButtonContainer>
+      </S.StudyRoomWrap>
     </S.PrivateStudyRoomStyle>
   );
 };

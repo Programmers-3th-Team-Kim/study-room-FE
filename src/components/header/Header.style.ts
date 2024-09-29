@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-export const HeaderContainer = styled.header`
+export const HeaderContainer = styled.header<{ isStudyRoomPage?: boolean }>`
   background-color: white;
   width: 100%;
-  height: 80px;
   flex-shrink: 0;
   border-bottom: 1px solid ${({ theme }) => theme.color.bgGray};
   display: flex;
