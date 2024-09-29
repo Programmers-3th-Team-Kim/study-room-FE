@@ -139,21 +139,22 @@ export const ErrorText = styled.span`
 export const AddButton = styled.button`
   display: flex;
   align-items: center;
-  width: 439px;
-  height: 77px;
+  width: 256px;
+  height: 52px;
   border: none;
   border-radius: 10px;
-  background-color: ${({ theme }) => theme.color.mainStrong};
-  color: white;
-  font-size: 40px;
+  border-color: ${({ theme }) => theme.color.mainStrong};
+  background-color: white;
+  color: ${({ theme }) => theme.color.mainStrong};
+  font-size: 25px;
   font-weight: 600;
   margin-bottom: 20px;
-  padding: 0px 20px;
+  padding: 0px 110px;
 
   &:hover {
     cursor: pointer;
-    background-color: ${({ theme }) => theme.color.mainStrongHover};
-    border: 1px solid ${({ theme }) => theme.color.mainStrong};
+    //background-color: ${({ theme }) => theme.color.mainStrongHover};
+    //border: 1px solid ${({ theme }) => theme.color.mainStrong};
   }
 `;
 
@@ -163,4 +164,5 @@ export const PlusSign = styled.div`
 
 export const AddText = styled.span`
   margin: auto;
+  font-size: 25px;
 `;

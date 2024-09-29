@@ -7,15 +7,16 @@ export const CheckBoxStyle = styled.div`
     display: flex;
     position: relative;
     align-items: center;
-    font-size: 20px;
-    margin-left: 20px;
+    font-size: 14px;
+    //margin-left: 5px;
 
     input {
       position: relative;
       appearance: none;
-      width: 20px;
-      height: 20px;
-      margin-right: 10px;
+      align-items: center;
+      width: 14px;
+      height: 14px;
+      margin: 0 5px;
       border-radius: 4px;
       cursor: pointer;
       background-color: ${({ theme }) => theme.color.bgGray};
@@ -30,9 +31,9 @@ export const CheckBoxStyle = styled.div`
         position: absolute;
         content: '✔';
         color: white;
-        font-size: 14px;
-        left: 3px;
-        top: 1px;
+        font-size: 10px;
+        left: 2px;
+        //top: 1px;
       }
     }
   }

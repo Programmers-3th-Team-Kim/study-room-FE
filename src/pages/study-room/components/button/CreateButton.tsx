@@ -7,11 +7,12 @@ function CreateButton() {
     <S.CreateButtonStyle>
       <SCreateButton
         label="스터디방 개설"
-        size="medium"
+        width="226px"
+        height="46px"
         Icon={FaPlus}
-        borderRadius="10px"
-        fontSize="24px"
-        iconSize="32px"
+        borderRadius="7px"
+        fontSize="16px"
+        iconSize="22px"
       />
     </S.CreateButtonStyle>
   );

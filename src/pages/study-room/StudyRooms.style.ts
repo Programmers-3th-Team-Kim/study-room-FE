@@ -7,7 +7,7 @@ export const StudyRoomsStyle = styled.div`
   .wrapper {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100vh - 100px);
   }
 
   .header {
@@ -15,7 +15,7 @@ export const StudyRoomsStyle = styled.div`
     align-items: center;
     width: 100%;
     justify-content: space-between;
-    margin: 77px 0;
+    margin: 50px 0;
   }
 `;
 
@@ -25,5 +25,6 @@ export const MainContentArea = styled.div`
   align-items: center;
   flex: 1;
   height: calc(100vh - 100px);
+  width: 100%;
   overflow: auto;
 `;

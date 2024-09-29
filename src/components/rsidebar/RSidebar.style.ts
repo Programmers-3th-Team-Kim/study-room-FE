@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const RSidebarStyle = styled.div`
-  min-width: 600px;
+  min-width: 350px;
   height: 100vh;
   background: ${({ theme }) => theme.color.main};
   display: flex;
@@ -23,8 +23,8 @@ export const CurrentTime = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  width: 494px;
-  height: 750px;
+  width: 287px;
+  height: 634px;
   border-radius: 15px;
   background-color: white;
   margin: 8px 0px;
