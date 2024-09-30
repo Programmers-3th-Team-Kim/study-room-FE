@@ -17,12 +17,14 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const { data } = await axiosInstance.post(API_ROUTES.REFRESH_TOKEN);
-        const newAccessToken = data.access_token;
+        const refreshResponse = await axiosInstance.post(
+          API_ROUTES.REFRESH_TOKEN
+        );
+        const newAccessToken = refreshResponse.data.access_token;
 
         const { setAuthData } = useAuthStore.getState();
-        setAuthData(newAccessToken, data.user); // 상태 업데이트
-        Cookies.set('accessToken', newAccessToken, { expires: 1 }); // 쿠키 업데이트
+        setAuthData(newAccessToken, refreshResponse.data.user);
+        Cookies.set('accessToken', newAccessToken, { expires: 1 });
 
         originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
         return axiosInstance(originalRequest);
