@@ -1,25 +1,30 @@
 import { useEffect } from 'react';
 import axiosInstance from '@/apis/axiosInstance.api';
 import { useAuthStore } from '@/stores/auth.store';
+import { API_ROUTES } from '@/apis/apiRoutes';
+import Cookies from 'js-cookie';
 
 export const useRestoreUser = () => {
-  const { accessToken, setAuthData, clearAuthData } = useAuthStore();
+  const { setAuthData, clearAuthData } = useAuthStore();
 
   const restoreUser = async () => {
-    if (!accessToken) {
+    const tokenFromCookie = Cookies.get('accessToken');
+
+    if (!tokenFromCookie) {
+      clearAuthData();
       return;
     }
 
     try {
-      const response = await axiosInstance.get('/auth/me', {
+      const response = await axiosInstance.get(API_ROUTES.ME, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${tokenFromCookie}`,
         },
         withCredentials: true,
       });
 
       const user = response.data.user;
-      setAuthData(accessToken, user);
+      setAuthData(tokenFromCookie, user);
     } catch (error) {
       console.error('유저 정보를 복원할 수 없습니다:', error);
       clearAuthData();
@@ -28,5 +33,5 @@ export const useRestoreUser = () => {
 
   useEffect(() => {
     restoreUser();
-  }, [accessToken]);
+  }, []);
 };
