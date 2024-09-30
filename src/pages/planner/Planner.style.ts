@@ -7,6 +7,7 @@ export const PlannerWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   height: calc(100vh - 100px);
+  width: 100%;
 
   .label {
     color: ${({ theme }) => theme.color.labelGray};

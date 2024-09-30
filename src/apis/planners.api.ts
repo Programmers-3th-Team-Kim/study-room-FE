@@ -1,5 +1,6 @@
 import { PutPostTodoReq } from '@/models/studyRoomTodos.model';
 import axios from 'axios';
+import axiosInstance from './axiosInstance.api';
 
 /* 
 작성자 : 이진성 
@@ -11,7 +12,9 @@ JWT토큰이나 baseURL등 다른 설정들을 포함하지 않은
 */
 export const getTodos = async (date: string) => {
   try {
-    const res = await axios.get(`http://localhost:5555/planners?date=${date}`);
+    const res = await axiosInstance.get(
+      `http://localhost:5555/planners?date=${date}`
+    );
     console.log(res);
     return res.data;
   } catch (error) {

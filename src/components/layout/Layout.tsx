@@ -12,7 +12,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
-  const isAuthPage =
+  const authPagePath =
     location.pathname === '/login' || location.pathname === '/signup';
 
   const studyRoomPagePath = location.pathname.startsWith('/study-room/');
