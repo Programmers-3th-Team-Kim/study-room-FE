@@ -104,6 +104,16 @@ export default function CreateStudyRoomForm() {
         )}
 
         <S.FormInputField>
+          <S.FormLabel htmlFor="notice">공지사항</S.FormLabel>
+          <S.FormInput
+            id="notice"
+            placeholder="공지사항을 작성해 주세요."
+            onKeyDown={handleKeyDown}
+            {...register('notice')}
+          />
+        </S.FormInputField>
+
+        <S.FormInputField>
           <S.FormLabel htmlFor="isPublic">
             공개 여부 <FaStarOfLife size={6} color="#599BFC" />
           </S.FormLabel>
