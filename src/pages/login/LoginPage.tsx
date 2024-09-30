@@ -64,7 +64,7 @@ export default function LoginPage() {
       </S.Form>
       <S.LinkContainer>
         <S.Span>아직 회원이 아니신가요?</S.Span>
-        <S.StyledLink to={'/register'}>회원가입</S.StyledLink>
+        <S.StyledLink to={'/signup'}>회원가입</S.StyledLink>
       </S.LinkContainer>
     </S.Container>
   );
