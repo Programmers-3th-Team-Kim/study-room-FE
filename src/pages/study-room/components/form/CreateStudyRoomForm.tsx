@@ -7,7 +7,8 @@ import Radio from '../radio/Radio';
 import ToggleButton from '../toggleButton/ToggleButton';
 import ImageUpload from '../imageUpload/ImageUpload';
 import { FaPlus, FaStarOfLife } from 'react-icons/fa6';
-import { CreateStudyRoomFormData } from '@/types/createStudyRoom';
+import type { CreateStudyRoomFormData } from '@/types/createStudyRoom';
+import { createStudyRoom } from '@/apis/studyRooms.api';
 
 export default function CreateStudyRoomForm() {
   const {
@@ -19,10 +20,16 @@ export default function CreateStudyRoomForm() {
     setError,
   } = useForm<CreateStudyRoomFormData>({ mode: 'onSubmit' });
 
-  const onSubmit: SubmitHandler<CreateStudyRoomFormData> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<CreateStudyRoomFormData> = async (data) => {
+    try {
+      const result = await createStudyRoom(data);
+      console.log('공부방 생성 성공:', result);
+      console.log(data);
+    } catch (error) {
+      console.error('공부방 생성 에러:', error);
+      console.log(data);
+    }
   };
-
   const handleKeyDown = (
     e: KeyboardEvent<HTMLButtonElement | HTMLInputElement>
   ) => {
@@ -61,11 +68,12 @@ export default function CreateStudyRoomForm() {
         {errors.title && (
           <S.ErrorMessage>{errors.title.message}</S.ErrorMessage>
         )}
+
         <S.FormInputField>
           <S.FormLabel htmlFor="tagList">태그</S.FormLabel>
           <TagInput
             id="tagList"
-            value={watch('tagList', [])}
+            value={watch('tagList') || []}
             onChange={(newTags) => setValue('tagList', newTags)}
             setError={setError}
           />
@@ -73,6 +81,7 @@ export default function CreateStudyRoomForm() {
         {errors.tagList && (
           <S.ErrorMessage>{errors.tagList.message}</S.ErrorMessage>
         )}
+
         <S.FormInputField>
           <S.FormLabel htmlFor="maxNum">
             최대 인원 <FaStarOfLife size={6} color="#599BFC" />
