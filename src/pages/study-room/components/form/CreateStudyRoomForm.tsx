@@ -173,8 +173,8 @@ export default function CreateStudyRoomForm() {
         <S.FormInputField>
           <S.FormLabel htmlFor="bgImage">배경사진</S.FormLabel>
           <ImageUpload
+            setValue={setValue}
             onKeyDown={handleKeyDown}
-            {...register('imageUrl')}
             ref={ImageInputRef}
           />
         </S.FormInputField>
