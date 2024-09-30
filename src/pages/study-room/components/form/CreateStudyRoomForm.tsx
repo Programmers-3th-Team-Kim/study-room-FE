@@ -7,17 +7,7 @@ import Radio from '../radio/Radio';
 import ToggleButton from '../toggleButton/ToggleButton';
 import ImageUpload from '../imageUpload/ImageUpload';
 import { FaPlus, FaStarOfLife } from 'react-icons/fa6';
-
-interface CreateStudyRoomFormData {
-  title: string;
-  tagList: string[];
-  maxNum: number;
-  notice: string;
-  isPublic: boolean;
-  password: string;
-  isChat: boolean;
-  imageUrl?: string;
-}
+import { CreateStudyRoomFormData } from '@/types/createStudyRoom';
 
 export default function CreateStudyRoomForm() {
   const {
