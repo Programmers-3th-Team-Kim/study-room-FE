@@ -30,6 +30,7 @@ export default function CreateStudyRoomForm() {
       console.log(data);
     }
   };
+
   const handleKeyDown = (
     e: KeyboardEvent<HTMLButtonElement | HTMLInputElement>
   ) => {
@@ -119,16 +120,13 @@ export default function CreateStudyRoomForm() {
           <S.RadioGroupWrapper>
             <Radio
               id="isPublic"
-              {...register('isPublic')}
-              selectedValue={isPublic ? 'public' : 'private'}
-              onChange={(e) => {
-                const value = e.target.value;
-                setValue('isPublic', value === 'public');
-              }}
+              name="isPublic"
+              selectedValue={watch('isPublic')}
+              onChange={(value) => setValue('isPublic', value)}
               onKeyDown={handleKeyDown}
               options={[
-                { value: 'public', label: '공개' },
-                { value: 'private', label: '비공개' },
+                { value: true, label: '공개' },
+                { value: false, label: '비공개' },
               ]}
             />
             {!isPublic && (

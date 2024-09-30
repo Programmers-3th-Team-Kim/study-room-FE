@@ -1,12 +1,12 @@
-import { ChangeEvent, forwardRef, KeyboardEvent } from 'react';
+import { forwardRef, KeyboardEvent } from 'react';
 import * as S from '@/pages/study-room/components/radio/Radio.style';
 
 interface RadioProps {
   id: string;
   name: string;
-  options: { value: string; label: string }[];
-  selectedValue: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  options: { value: boolean; label: string }[];
+  selectedValue: boolean;
+  onChange: (value: boolean) => void;
   onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -15,14 +15,14 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
     return (
       <S.Radio>
         {options.map((option) => (
-          <S.RadioLabel key={option.value}>
+          <S.RadioLabel key={option.label}>
             <S.RadioButton
               ref={ref}
-              id={id + option.value}
+              id={id + option.label}
               name={name}
-              value={option.value}
+              value={String(option.value)}
               checked={selectedValue === option.value}
-              onChange={onChange}
+              onChange={() => onChange(option.value)}
               onKeyDown={onKeyDown}
             />
             {option.label}
