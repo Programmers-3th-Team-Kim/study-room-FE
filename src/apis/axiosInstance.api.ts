@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useAuthStore } from '@/stores/auth.store';
 import { API_ROUTES } from './apiRoutes';
+import Cookies from 'js-cookie';
 
 const axiosInstance = axios.create({
   baseURL: `${import.meta.env.VITE_REACT_APP_API_URL}`,
@@ -20,7 +21,8 @@ axiosInstance.interceptors.response.use(
         const newAccessToken = data.access_token;
 
         const { setAuthData } = useAuthStore.getState();
-        setAuthData(newAccessToken, data.user);
+        setAuthData(newAccessToken, data.user); // 상태 업데이트
+        Cookies.set('accessToken', newAccessToken, { expires: 1 }); // 쿠키 업데이트
 
         originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
         return axiosInstance(originalRequest);
