@@ -31,7 +31,6 @@ export default function CreateStudyRoomForm() {
       console.log('공부방 생성 성공:', result);
     } catch (error) {
       console.error('공부방 생성 에러:', error);
-      console.log(typeof formattedData.maxNum);
     }
   };
 
