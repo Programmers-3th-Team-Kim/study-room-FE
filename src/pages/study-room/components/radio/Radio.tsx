@@ -1,4 +1,4 @@
-import { KeyboardEvent } from 'react';
+import { ChangeEvent, forwardRef, KeyboardEvent } from 'react';
 import * as S from '@/pages/study-room/components/radio/Radio.style';
 
 interface RadioProps {
@@ -6,33 +6,33 @@ interface RadioProps {
   name: string;
   options: { value: string; label: string }[];
   selectedValue: string;
-  onChange: (value: string) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
-export default function Radio({
-  id,
-  name,
-  options,
-  selectedValue,
-  onChange,
-  onKeyDown,
-}: RadioProps) {
-  return (
-    <S.Radio>
-      {options.map((option) => (
-        <S.RadioLabel key={option.value}>
-          <S.RadioButton
-            id={id + option.value}
-            name={name}
-            value={option.value}
-            checked={selectedValue === option.value}
-            onChange={() => onChange(option.value)}
-            onKeyDown={onKeyDown}
-          />
-          {option.label}
-        </S.RadioLabel>
-      ))}
-    </S.Radio>
-  );
-}
+const Radio = forwardRef<HTMLInputElement, RadioProps>(
+  ({ id, name, options, selectedValue, onChange, onKeyDown }, ref) => {
+    return (
+      <S.Radio>
+        {options.map((option) => (
+          <S.RadioLabel key={option.value}>
+            <S.RadioButton
+              ref={ref}
+              id={id + option.value}
+              name={name}
+              value={option.value}
+              checked={selectedValue === option.value}
+              onChange={onChange}
+              onKeyDown={onKeyDown}
+            />
+            {option.label}
+          </S.RadioLabel>
+        ))}
+      </S.Radio>
+    );
+  }
+);
+
+Radio.displayName = 'Radio';
+
+export default Radio;

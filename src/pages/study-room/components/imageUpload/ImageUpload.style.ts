@@ -31,7 +31,12 @@ export const UploadButton = styled.button`
   }
 `;
 
-export const FileName = styled.p`
+export const FileName = styled.span`
   font-size: 14px;
   color: #333;
+  width: 180px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

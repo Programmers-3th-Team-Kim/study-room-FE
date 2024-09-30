@@ -19,8 +19,11 @@ export const CreateForm = styled.form`
 `;
 
 export const FormLabel = styled.label`
+  display: flex;
+  gap: 6px;
+  align-items: center;
   font-weight: bold;
-  min-width: 80px;
+  min-width: 100px;
   color: #353535;
   margin: 4px;
 `;
@@ -46,6 +49,7 @@ export const FormInput = styled.input`
   width: 100%;
   font-size: 14px;
   padding: 4px;
+  border-radius: 4px;
 
   &::placeholder {
     color: #989898;
@@ -55,6 +59,12 @@ export const FormInput = styled.input`
 export const RadioGroupWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const PrivateInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 `;
 
 export const PasswordInputWrapper = styled.div`
@@ -74,4 +84,10 @@ export const PasswordInputLabel = styled.span`
 export const PasswordInput = styled(FormInput)`
   border: 1px solid #ccc;
   border-radius: 4px;
+`;
+
+export const ErrorMessage = styled.span`
+  color: ${({ theme }) => theme.color.btnWarn};
+  font-size: 12px;
+  margin-top: 10px;
 `;
