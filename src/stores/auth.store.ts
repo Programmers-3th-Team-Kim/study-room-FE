@@ -5,7 +5,7 @@ interface AuthState {
   user: { id: string; nickname: string; imageUrl?: string } | null;
   setAuthData: (
     token: string,
-    user: { id: string; nickname: string; imageUrl?: string }
+    user: { id: string; nickname: string; imageUrl?: string } | null
   ) => void;
   clearAuthData: () => void;
 }

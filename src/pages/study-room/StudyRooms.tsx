@@ -17,6 +17,7 @@ interface Filter {
 function StudyRooms() {
   const [filter, setFilter] = useState<Filter>({});
   const [showModal, setShowModal] = useState(false);
+  const [_, setHasScrollbar] = useState(false);
 
   const handleFilterChange = (newFilter: Filter) => {
     setFilter((prevFilter) => ({
@@ -48,7 +49,7 @@ function StudyRooms() {
               <CreateStudyRoomForm />
             </Modal>
           )}
-          <StudyGrid filter={filter} />
+          <StudyGrid filter={filter} onScrollbarChange={setHasScrollbar} />
         </div>
       </S.MainContentArea>
     </S.StudyRoomsStyle>
