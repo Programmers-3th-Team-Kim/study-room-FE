@@ -1,22 +1,27 @@
 import { scrollMixin } from '@/styles/mixins';
 import styled, { css } from 'styled-components';
 import { MdCancel, MdEdit } from 'react-icons/md';
+import { FaPlus } from 'react-icons/fa6';
+import { FaCheck } from 'react-icons/fa';
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   height: 100%;
   justify-content: space-between;
+  padding: min(2vh, 20px) 0;
 `;
 
 export const DateWrapper = styled.div`
   display: flex;
-  font-size: 40px;
+  font-size: min(2.5vh, 40px);
+
   justify-content: space-around;
+  align-items: center;
   font-weight: 600;
   width: 100%;
-  margin-top: 20px;
 `;
 
 export const DateBox = styled.div``;
@@ -30,8 +35,9 @@ export const DateArrow = styled.div`
 export const TodosArea = styled.div`
   display: flex;
   flex-direction: column;
-  height: 70%;
-  padding-right: 5px;
+  height: 80%;
+  width: 100%;
+  padding: 0 6px;
   ${scrollMixin.customScrollbar()}
 `;
 
@@ -39,13 +45,13 @@ export const TodoBox = styled.div.withConfig({
   shouldForwardProp: (prop) => !['isSelected'].includes(prop),
 })<{ isSelected?: boolean }>`
   display: flex;
-  width: 459px;
-  height: 65px;
+  width: 100%;
+  height: 50px;
   flex-shrink: 0;
   border-radius: 10px;
 
   align-items: center;
-  padding: 0px 20px;
+  padding: 0px 10px;
 
   &:hover {
     cursor: pointer;
@@ -61,17 +67,20 @@ export const TodoBox = styled.div.withConfig({
 
 const TodoTextStyle = css`
   margin-left: 20px;
-  font-size: 28px;
+  font-size: 1.3rem;
 `;
 
-export const TodoTextArea = styled.div`
+export const TodoTextArea = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['isChecked'].includes(prop),
+})<{ isChecked: boolean | undefined }>`
   ${TodoTextStyle}
+  ${(props) => props.isChecked && 'text-decoration : line-through;'}
 `;
 
 export const TodoEditIcon = styled(MdEdit)`
   display: flex;
-  width: 35px;
-  height: 35px;
+  width: 2rem;
+  height: 2rem;
   padding: 3px;
   align-items: center;
   margin-left: auto;
@@ -79,30 +88,49 @@ export const TodoEditIcon = styled(MdEdit)`
 
   &:hover {
     cursor: pointer;
-    background-color: ${({ theme }) => theme.color.mainStrong};
+    filter: opacity(50%);
   }
 `;
 
 export const TodoSaveButton = styled.button`
   border: none;
-  border-radius: 16px;
-  background-color: ${({ theme }) => theme.color.mainStrong};
-  color: white;
-  font-size: 20px;
-  padding: 2px 10px;
+  background-color: transparent;
   margin-left: auto;
   flex-shrink: 0;
+  font-size: 20px;
+  width: 1em;
+  height: 1em;
 
   &:hover {
     cursor: pointer;
-    background-color: ${({ theme }) => theme.color.mainStrongHover};
   }
 `;
 
-export const TodoCancelButton = styled(MdCancel)`
-  margin-left: 10px;
-  width: 40px;
-  height: 40px;
+export const TodoSaveIcon = styled(FaCheck)`
+  background-color: ${({ theme }) => theme.color.mainStrong};
+  /* font-size: 20px;
+  width: 1em;
+  height: 1em; */
+  padding: 0.2em;
+  border-radius: 50%;
+  color: white;
+`;
+
+export const TodoCancelButton = styled.button`
+  border: none;
+  background-color: transparent;
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 24px;
+  width: 1em;
+  height: 1em;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const TodoCancelIcon = styled(MdCancel)`
   color: ${({ theme }) => theme.color.bgDarkGray};
 `;
 
@@ -111,7 +139,7 @@ export const TodoTextInput = styled.input`
   border-bottom: 1px solid black;
   ${TodoTextStyle}
   width : 70%;
-  border-radius: 8px 8px 0px 0px;
+  background-color: transparent;
 
   &:focus {
     outline: none;
@@ -122,6 +150,7 @@ export const TodoForm = styled.form`
   display: flex;
   width: 100%;
   align-items: center;
+  /* background-color: red; */
 `;
 
 export const TextAndErrorWrapper = styled.div`
@@ -131,7 +160,7 @@ export const TextAndErrorWrapper = styled.div`
 
 export const ErrorText = styled.span`
   ${TodoTextStyle}
-  font-size : 16px;
+  font-size : 12px;
   color: red;
   font-weight: 600;
 `;
@@ -139,30 +168,22 @@ export const ErrorText = styled.span`
 export const AddButton = styled.button`
   display: flex;
   align-items: center;
-  width: 256px;
-  height: 52px;
+  justify-content: center;
+  gap: 5px;
+  height: 2em;
   border: none;
-  border-radius: 10px;
-  border-color: ${({ theme }) => theme.color.mainStrong};
   background-color: white;
   color: ${({ theme }) => theme.color.mainStrong};
-  font-size: 25px;
+  font-size: clamp(20px, 2vh, 30px);
   font-weight: 600;
-  margin-bottom: 20px;
-  padding: 0px 110px;
 
   &:hover {
     cursor: pointer;
-    //background-color: ${({ theme }) => theme.color.mainStrongHover};
-    //border: 1px solid ${({ theme }) => theme.color.mainStrong};
   }
 `;
 
-export const PlusSign = styled.div`
+export const PlusSign = styled(FaPlus)`
   display: flex;
 `;
 
-export const AddText = styled.span`
-  margin: auto;
-  font-size: 25px;
-`;
+export const AddText = styled.span``;
