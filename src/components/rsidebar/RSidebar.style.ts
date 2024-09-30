@@ -5,7 +5,6 @@ export const RSidebarStyle = styled.div`
   max-width: 350px;
   height: 100vh;
   background: ${({ theme }) => theme.color.main};
-  display: flex;
   justify-content: center;
 `;
 

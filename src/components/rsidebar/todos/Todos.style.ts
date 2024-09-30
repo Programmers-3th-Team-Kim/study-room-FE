@@ -19,6 +19,7 @@ export const DateWrapper = styled.div`
   font-size: min(2.5vh, 40px);
 
   justify-content: space-around;
+  align-items: center;
   font-weight: 600;
   width: 100%;
 `;
