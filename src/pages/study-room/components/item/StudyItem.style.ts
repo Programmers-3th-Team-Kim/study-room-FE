@@ -56,6 +56,8 @@ export const ItemContent = styled.div`
 
 export const TextWrap = styled.div`
   flex-direction: column;
+  transform: translateY(calc(100% - 10px));
+  padding: 10px 0;
 `;
 
 export const Title = styled.h3`
