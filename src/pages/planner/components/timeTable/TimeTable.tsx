@@ -1,28 +1,32 @@
 import { useEffect, useState } from 'react';
-import { ITodoBox } from '@/models/todoBox.model';
-import { hex2rgba } from '@/data/colorMap';
+import { colorMap, hex2rgba } from '@/data/colorMap';
+import { GetTodosRes } from '@/models/studyRoomTodos.model';
 import * as S from './TimeTable.style';
 
 interface TimeTableProps {
-  todos: ITodoBox[];
+  todos: GetTodosRes[];
+}
+
+interface GetTodosResWithColor extends GetTodosRes {
+  color: string;
 }
 
 export default function TimeTable({ todos }: TimeTableProps) {
   const gridArray = new Array(7 * 24).fill(1);
-  const [todosWithTime, setTodosWithTime] = useState<ITodoBox[]>([]);
+  const [todosWithTime, setTodosWithTime] = useState<GetTodosResWithColor[]>(
+    []
+  );
 
   useEffect(() => {
-    const newTodos = todos.reduce((acc, todo, index) => {
-      if (todo.startTime && todo.endTime) {
-        const newTodo = { ...todo, index };
-        if (!acc.some((existingTodo) => existingTodo.id === newTodo.id)) {
-          acc.push(newTodo);
-        }
-      }
-      return acc;
-    }, [] as ITodoBox[]);
+    const newTodos = todos.filter((todo) => {
+      return todo.endTime && todo.startTime;
+    });
 
-    setTodosWithTime(newTodos);
+    const newTodosWithColor = newTodos.map((todo, index) => {
+      return { ...todo, color: colorMap[index] };
+    });
+
+    setTodosWithTime(newTodosWithColor);
   }, [todos]);
 
   return (
@@ -86,7 +90,7 @@ export default function TimeTable({ todos }: TimeTableProps) {
   );
 }
 
-const calcGridIndex: (todo: ITodoBox) => {
+const calcGridIndex: (todo: GetTodosResWithColor) => {
   startIndex: number | undefined;
   endIndex: number | undefined;
   color: string | undefined;

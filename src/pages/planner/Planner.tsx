@@ -1,14 +1,14 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import CustomDatePicker from '@/components/datePicker/DatePicker';
 import TodoBox from './components/todoBox/TodoBox';
 import TimeLine from './components/timeLine/TimeLine';
 import TimeTable from './components/timeTable/TimeTable';
 import { InputForm } from './components/inputForm/InputForm';
-import { colorMap } from '@/data/colorMap';
-import { useQuery } from '@tanstack/react-query';
 import { getTodos } from '@/apis/planners.api';
 import { GetTodosRes } from '@/models/studyRoomTodos.model';
-import dayjs from 'dayjs';
+import { colorMap } from '@/data/colorMap';
 import * as S from './Planner.style';
 
 export default function Planner() {
@@ -102,13 +102,13 @@ export default function Planner() {
                       </S.EachContentWrapper>
                       {isEditFormOpened && index === editIndex && (
                         <InputForm
-                          setIsEditFormOpened={setIsEditFormOpened}
-                          setTodos={setTodos}
                           formType="edit"
+                          setIsEditFormOpened={setIsEditFormOpened}
                           currentData={todo}
                           setEditIndex={setEditIndex}
                           currentIndex={index}
                           todos={todos}
+                          selectedDate={selectedDate}
                         />
                       )}
                     </Fragment>
@@ -123,12 +123,12 @@ export default function Planner() {
                 )}
             {isAddFormOpened ? (
               <InputForm
+                formType="add"
                 ref={inputFormRef}
                 setIsAddFormOpened={setIsAddFormOpened}
-                setTodos={setTodos}
-                formType="add"
                 setEditIndex={setEditIndex}
                 todos={todos ?? []}
+                selectedDate={selectedDate}
               />
             ) : null}
           </S.TodosWrapper>
@@ -137,15 +137,7 @@ export default function Planner() {
       <S.RightPanel>
         <div className="label">오늘의 공부 시간</div>
         <S.StudiedTime>XX시간 XX분 공부했어요!</S.StudiedTime>
-        <TimeTable
-          todos={
-            todos
-              ? todos.map((todo, index) => {
-                  return { ...todo, color: colorMap[index] };
-                })
-              : []
-          }
-        />
+        <TimeTable todos={todos ? todos : []} />
       </S.RightPanel>
     </S.PlannerWrapper>
   );

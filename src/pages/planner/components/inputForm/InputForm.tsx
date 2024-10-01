@@ -1,41 +1,36 @@
 import { forwardRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import RepeatDaysSelector from './RepeatDaySelector';
+import { GetTodosRes, PutPostTodoReq } from '@/models/studyRoomTodos.model';
+import { deleteTodo, postTodo, putTodo } from '@/apis/planners.api';
 import * as S from './InputForm.style';
-import { ITodoBox } from '@/models/todoBox.model';
-
-export interface TodoFormDatas {
-  id: string;
-  title?: string;
-  detail: string;
-  startTime?: string;
-  endTime?: string;
-  repeatDays?: string[];
-  repeatWeeks?: string;
-}
 
 interface InputFormProps extends React.HTMLProps<HTMLFormElement> {
   formType: 'add' | 'edit';
-  setTodos: React.Dispatch<React.SetStateAction<TodoFormDatas[]>>;
   setIsAddFormOpened?: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditFormOpened?: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedDate: Date;
+
+  todos: GetTodosRes[];
+  currentData?: PutPostTodoReq;
+
   setEditIndex?: React.Dispatch<React.SetStateAction<number | null>>;
   currentIndex?: number;
-  currentData?: TodoFormDatas;
-  todos: ITodoBox[];
 }
 
 export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
   (
     {
+      formType,
       setIsEditFormOpened,
       setIsAddFormOpened,
-      setEditIndex,
-      setTodos,
-      formType,
-      currentIndex,
       currentData,
       todos,
+      selectedDate,
+      setEditIndex,
+      currentIndex,
       ...props
     },
     ref
@@ -46,7 +41,7 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       watch,
       control,
       formState: { errors },
-    } = useForm<TodoFormDatas>({
+    } = useForm<PutPostTodoReq>({
       mode: 'onSubmit',
       defaultValues: {
         repeatDays: [],
@@ -57,10 +52,45 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       return todos.filter((_, index) => index !== currentIndex);
     });
 
+    const queryClient = useQueryClient();
+    const { isPending: isPostFetching, mutate: postData } = useMutation({
+      mutationFn: ({ data, date }: { data: PutPostTodoReq; date: string }) =>
+        postTodo(data, date),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['getTodos', selectedDate],
+        });
+      },
+    });
+    const { isPending: isPutFetching, mutate: putData } = useMutation({
+      mutationFn: ({
+        data,
+        plannerId,
+      }: {
+        data: PutPostTodoReq;
+        plannerId: string;
+      }) => putTodo(data, plannerId),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['getTodos', selectedDate],
+        });
+      },
+    });
+
+    const { isPending: isDeleteFetching, mutate: deleteData } = useMutation({
+      mutationFn: ({ plannerId }: { plannerId: string }) =>
+        deleteTodo(plannerId),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['getTodos', selectedDate],
+        });
+      },
+    });
+
     const startTime = watch('startTime');
     const endTime = watch('endTime');
 
-    const validateTime = (value: string | undefined) => {
+    const validateTime = () => {
       if (!!startTime !== !!endTime) {
         return '나머지 시간도 입력해주세요.';
       }
@@ -78,44 +108,34 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       return true;
     };
 
-    const validateRepeatWeeks = (value: string | undefined) => {
-      if (value && isNaN(parseInt(value))) {
-        return '20주 이내의 숫자를 입력해주세요.';
+    const validateRepeatWeeks = (value: number | undefined) => {
+      if (value && isNaN(value)) {
+        return '20주 이내의 "숫자"를 입력해주세요.';
       }
 
-      if (value && parseInt(value) > 20) {
+      if (value && value > 20) {
         return '반복은 최대 20주 가능합니다.';
       }
       return true;
     };
 
-    const onSubmit = (data: TodoFormDatas) => {
+    const onSubmit = (data: PutPostTodoReq) => {
       console.log(data);
 
       if (formType === 'add') {
-        setTodos((prev) => {
-          const updatedTodos = [
-            ...prev,
-            { ...data, id: Date.now().toString() },
-          ];
-          updatedTodos.sort(sortTodos);
-          return updatedTodos;
-        });
+        postData({ data, date: dayjs(selectedDate).format('YYYY-MM-DD') });
+
         if (setIsAddFormOpened) {
           setIsAddFormOpened(false);
         }
       }
       if (formType === 'edit' && currentIndex !== undefined) {
-        setTodos((prev) => {
-          const updatedTodos = [...prev];
-          updatedTodos[currentIndex] = {
-            ...updatedTodos[currentIndex],
-            ...data,
-          };
-          updatedTodos.sort(sortTodos);
-
-          return updatedTodos;
-        });
+        console.log(`data : ${data} , plannerId : ${currentData?._id}`);
+        if (currentData?._id) {
+          putData({ data, plannerId: currentData._id });
+        } else {
+          alert('수정 중 오류가 발생했습니다.');
+        }
         if (setIsEditFormOpened) {
           setIsEditFormOpened(false);
         }
@@ -137,12 +157,8 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
     };
 
     const handleDelButton = () => {
-      if (currentIndex !== undefined) {
-        setTodos((prev) => {
-          const updatedTodos = [...prev];
-          updatedTodos.splice(currentIndex, 1);
-          return updatedTodos;
-        });
+      if (currentData?._id) {
+        deleteData({ plannerId: currentData._id });
       }
       if (setIsEditFormOpened) {
         setIsEditFormOpened(false);
@@ -154,14 +170,12 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
         <S.Form onSubmit={handleSubmit(onSubmit)} ref={ref}>
           <S.TodoArea>
             <S.LabelErrorWrapper>
-              <S.Label htmlFor="detail">할 일</S.Label>
-              {errors.detail && (
-                <S.ErrorText>{errors.detail.message}</S.ErrorText>
-              )}
+              <S.Label htmlFor="todo">할 일</S.Label>
+              {errors.todo && <S.ErrorText>{errors.todo.message}</S.ErrorText>}
             </S.LabelErrorWrapper>
             <S.TextInputBox
-              id="detail"
-              {...register('detail', {
+              id="todo"
+              {...register('todo', {
                 required: '필수로 입력해야 합니다.',
                 validate: {
                   trim: (value) =>
@@ -174,14 +188,14 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
 
           <S.Title>
             <S.LabelErrorWrapper>
-              <S.Label htmlFor="title">과목</S.Label>
-              {errors.title && (
-                <S.ErrorText>{errors.title.message}</S.ErrorText>
+              <S.Label htmlFor="subject">과목</S.Label>
+              {errors.subject && (
+                <S.ErrorText>{errors.subject.message}</S.ErrorText>
               )}
             </S.LabelErrorWrapper>
             <S.TextInputBox
-              id="title"
-              {...register('title', { validate: validateTextLength })}
+              id="subject"
+              {...register('subject', { validate: validateTextLength })}
             />
           </S.Title>
 
@@ -279,7 +293,7 @@ function subtractMinutes(time: string, minutes: number) {
   return `${String(newHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')}`;
 }
 
-function compareTime(todos: ITodoBox[], startTime: string, endTime: string) {
+function compareTime(todos: GetTodosRes[], startTime: string, endTime: string) {
   const endTimeMinus10 = subtractMinutes(endTime, 10);
 
   if (endTime < startTime) {
@@ -296,14 +310,14 @@ function compareTime(todos: ITodoBox[], startTime: string, endTime: string) {
   return true;
 }
 
-const sortTodos = (a: TodoFormDatas, b: TodoFormDatas) => {
-  const startA = a.startTime ? a.startTime.split(':').map(Number) : [24, 0];
-  const startB = b.startTime ? b.startTime.split(':').map(Number) : [24, 0];
-  return startA[0] - startB[0] || startA[1] - startB[1];
-};
+// const sortTodos = (a: PutPostTodoReq, b: PutPostTodoReq) => {
+//   const startA = a.startTime ? a.startTime.split(':').map(Number) : [24, 0];
+//   const startB = b.startTime ? b.startTime.split(':').map(Number) : [24, 0];
+//   return startA[0] - startB[0] || startA[1] - startB[1];
+// };
 
 const isTimeOverlap = (
-  todos: ITodoBox[],
+  todos: GetTodosRes[],
   startTime: string,
   endTime: string
 ) => {

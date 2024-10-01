@@ -1,11 +1,11 @@
 import { Control, Controller } from 'react-hook-form';
-import { TodoFormDatas } from './InputForm';
+import { PutPostTodoReq } from '@/models/studyRoomTodos.model';
 import * as S from './RepeatDaySelector.style';
 
 export default function RepeatDaysSelector({
   control,
 }: {
-  control: Control<TodoFormDatas>;
+  control: Control<PutPostTodoReq>;
 }) {
   return (
     <S.DaySelectWrapper>
@@ -19,8 +19,8 @@ export default function RepeatDaysSelector({
                 <S.DaySelectInput
                   id={day}
                   type="checkbox"
-                  value={day}
-                  checked={field.value?.includes(day) ?? false}
+                  value={getDayLabel(day)}
+                  checked={field.value?.includes(getDayLabel(day)) ?? false}
                   onChange={(e) => {
                     const value = e.target.value;
                     const newValue = e.target.checked

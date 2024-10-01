@@ -118,6 +118,7 @@ export const WeekInput = styled.input`
   width: max(15px, 1.3vw);
   height: max(15px, 1.3vw);
   text-align: center;
+  font-size: max(8px, 0.6vw);
 
   &:focus {
     outline: none;

@@ -1,9 +1,9 @@
+import { MouseEventHandler } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import CheckBox from '@/components/checkBox/CheckBox';
-import { MouseEventHandler, useEffect } from 'react';
+import { patchCheckBox } from '@/apis/planners.api';
 import { GetTodosRes } from '@/models/studyRoomTodos.model';
 import * as S from './TodoBox.style';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { patchCheckBox } from '@/apis/planners.api';
 
 interface TodoBoxProps extends GetTodosRes {
   onClick?: MouseEventHandler<HTMLDivElement>;
