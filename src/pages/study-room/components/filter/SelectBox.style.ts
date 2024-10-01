@@ -2,40 +2,54 @@ import styled from 'styled-components';
 
 export const SelectBoxStyle = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+`;
 
-  .select-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: auto;
-    height: auto;
-    min-width: 100px;
+export const Select = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  width: 100%;
+`;
 
-    select {
-      border: none;
-      appearance: none;
-      box-sizing: border-box;
-      outline: none;
-      background: transparent;
-      width: 100%;
-      height: 100%;
-      font-size: 14px;
-      text-align: center;
-    }
+export const Arrow = styled.div`
+  transform: rotate(90deg);
+  margin-right: 7px;
+`;
 
-    .triangle {
-      position: relative;
-      font-size: 14px;
-      color: ${({ theme }) => theme.color.plannerGray};
-      margin-left: 5px;
-    }
-  }
+export const SelectedLabel = styled.span`
+  flex: 1;
+  text-align: right;
+  white-space: nowrap;
+  font-size: 14px;
+`;
 
-  select option {
+export const Options = styled.div`
+  position: absolute;
+  padding: 10px 0;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid ${({ theme }) => theme.color.plannerGray};
+  border-radius: 4px;
+  z-index: 100;
+  max-height: 200px;
+  overflow-y: auto;
+`;
+
+export const Option = styled.div`
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover {
     background: ${({ theme }) => theme.color.bgLightGray};
-    font-size: 14px;
-    border-radius: 4px;
-    border-color: #e4e4e4;
   }
 `;

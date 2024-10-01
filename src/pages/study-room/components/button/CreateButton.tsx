@@ -9,7 +9,7 @@ function CreateButton({ onClick }: CreateButtonProps) {
   return (
     <SCreateButton
       label="공부방 개설"
-      width="226px"
+      width="400px"
       height="46px"
       Icon={FaPlus}
       borderRadius="7px"
