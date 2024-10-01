@@ -2,30 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import StudyItem from './StudyItem';
 import * as S from './StudyGrid.style';
 import axios from 'axios';
-
-interface Room {
-  _id: string;
-  title: string;
-  tagList: string[];
-  notice?: string;
-  maxNum: number;
-  isPublic: boolean;
-  password?: string;
-  isChat?: boolean;
-  imageUrl?: string;
-  roomManager: string;
-  currentMembers: string[];
-  createdAt: string;
-  currentNum: number;
-}
-
-interface FetchRoomsParams {
-  search?: string;
-  isPublic?: boolean;
-  isPossible?: boolean;
-  limit?: number;
-  offset?: number;
-}
+import { FetchRoomsParams, Room } from '@/types/studyRoom';
 
 // API 요청 함수
 const fetchRooms = async (params: FetchRoomsParams) => {
