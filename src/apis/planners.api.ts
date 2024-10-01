@@ -1,15 +1,6 @@
 import { PutPostTodoReq } from '@/models/studyRoomTodos.model';
-import axios from 'axios';
 import axiosInstance from './axiosInstance.api';
 
-/*
-작성자 : 이진성
-날짜 : 2024-09-21
-목적 : PrivateStudyRoom.tsx에서 React-Query를 사용하기 위해서 만든,
-JWT토큰이나 baseURL등 다른 설정들을 포함하지 않은
-임시 api 입니다.
-로그인 API, httpClient 설정이 되면 수정 예정입니다.
-*/
 export const getTodos = async (date: string) => {
   try {
     const res = await axiosInstance.get(`/planners?date=${date}`);
@@ -24,17 +15,34 @@ export const getTodos = async (date: string) => {
 export const postTodo = async (data: PutPostTodoReq, date: string) => {
   try {
     const req = { ...data, date };
-    await axios.post('http://localhost:5555/planners', req);
+    await axiosInstance.post('/planners', req);
   } catch (error) {
     console.log(error);
     throw error;
   }
 };
 
-//planners/:plannerId(_id: ObjectId)
-export const putTodo = async (data: PutPostTodoReq, _id: string) => {
+export const putTodo = async (data: PutPostTodoReq, plannerId: string) => {
   try {
-    await axios.put(`http://localhost:5555/planners/${_id}`, data);
+    await axiosInstance.put(`/planners/${plannerId}`, data);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const deleteTodo = async (plannerId: string) => {
+  try {
+    await axiosInstance.delete(`/planners/${plannerId}`);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const patchCheckBox = async (plannerId: string) => {
+  try {
+    await axiosInstance.patch(`/planners/completed/${plannerId}`);
   } catch (error) {
     console.log(error);
     throw error;

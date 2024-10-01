@@ -6,7 +6,7 @@ export interface ITodoBox {
   endTime?: string;
   repeatDays?: string[];
   repeatWeeks?: string;
-  index?: number;
   isChecked?: boolean;
-  color?: string;
+  index?: number; //
+  color?: string; //
 }
