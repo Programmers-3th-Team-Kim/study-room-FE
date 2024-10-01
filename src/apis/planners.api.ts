@@ -24,7 +24,7 @@ export const getTodos = async (date: string) => {
 export const postTodo = async (data: PutPostTodoReq, date: string) => {
   try {
     const req = { ...data, date };
-    await axios.post('http://localhost:5555/planners', req);
+    await axios.post('http://localhost:3000/planners', req);
   } catch (error) {
     console.log(error);
     throw error;
@@ -34,7 +34,7 @@ export const postTodo = async (data: PutPostTodoReq, date: string) => {
 //planners/:plannerId(_id: ObjectId)
 export const putTodo = async (data: PutPostTodoReq, _id: string) => {
   try {
-    await axios.put(`http://localhost:5555/planners/${_id}`, data);
+    await axios.put(`http://localhost:3000/planners/${_id}`, data);
   } catch (error) {
     console.log(error);
     throw error;

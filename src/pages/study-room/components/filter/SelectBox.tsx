@@ -1,62 +1,3 @@
-// import { useState } from 'react';
-// import * as S from './SelectBox.style';
-// import { GoArrowSwitch } from 'react-icons/go';
-
-// interface SelectBoxProps {
-//   onFilterChange: (filter: { isPublic?: boolean }) => void;
-// }
-
-// const options = [
-//   { value: 'all', label: '전체 공부방' },
-//   { value: 'public', label: '공개 공부방' },
-//   { value: 'secret', label: '비공개 공부방' },
-// ];
-
-// function SelectBox({ onFilterChange }: SelectBoxProps) {
-//   const [selectedValue, setSelectedValue] = useState('all');
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const handleSelect = (value: string) => {
-//     setSelectedValue(value);
-//     setIsOpen(false);
-
-//     if (value === 'public') {
-//       onFilterChange({ isPublic: true });
-//     } else if (value === 'secret') {
-//       onFilterChange({ isPublic: false });
-//     } else {
-//       onFilterChange({ isPublic: undefined });
-//     }
-//   };
-
-//   return (
-//     <S.SelectBoxStyle>
-//       <div className="select" onClick={() => setIsOpen(!isOpen)}>
-//         <GoArrowSwitch className="arrow" />
-//         <span className="selected-label">
-//           {options.find((option) => option.value === selectedValue)?.label}
-//         </span>
-//       </div>
-
-//       {isOpen && (
-//         <div className="options">
-//           {options.map((option) => (
-//             <div
-//               key={option.value}
-//               className="option"
-//               onClick={() => handleSelect(option.value)}
-//             >
-//               {option.label}
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </S.SelectBoxStyle>
-//   );
-// }
-
-// export default SelectBox;
-
 import { useState } from 'react';
 import * as S from './SelectBox.style';
 import { GoArrowSwitch } from 'react-icons/go';
@@ -105,6 +46,7 @@ function SelectBox({ onFilterChange }: SelectBoxProps) {
             <S.Option
               key={option.value}
               onClick={() => handleSelect(option.value)}
+              isSelected={option.value === selectedValue}
             >
               {option.label}
             </S.Option>

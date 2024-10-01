@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SearchStyle = styled.div`
-  width: 100%;
+  //width: 100%;
   display: flex;
   position: relative;
   align-items: center;
@@ -9,6 +9,7 @@ export const SearchStyle = styled.div`
   border-radius: 7px;
   border: 1.5px solid;
   border-color: ${({ theme }) => theme.color.mainStrong};
+  width: 550px;
 
   input {
     flex: 1;
@@ -21,13 +22,13 @@ export const SearchStyle = styled.div`
   }
 
   .search-icon {
-    font-size: 2vw;
+    font-size: 30px;
     margin: 0 10px;
     color: ${({ theme }) => theme.color.mainStrong};
   }
 
   .close-icon {
-    font-size: 2vw;
+    font-size: 30px;
     margin: 0 10px;
     color: ${({ theme }) => theme.color.mainStrong};
     cursor: pointer;

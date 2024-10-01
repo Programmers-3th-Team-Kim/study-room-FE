@@ -14,7 +14,6 @@ export const Select = styled.div`
   padding: 10px;
   background: transparent;
   border: none;
-  width: 100%;
 `;
 
 export const Arrow = styled.div`
@@ -43,13 +42,17 @@ export const Options = styled.div`
   overflow-y: auto;
 `;
 
-export const Option = styled.div`
+export const Option = styled.div<{ isSelected: boolean }>`
   padding: 10px;
   font-size: 14px;
   cursor: pointer;
   white-space: nowrap;
+  font-weight: ${({ isSelected }) => (isSelected ? 'bold' : 'normal')};
+  color: ${({ isSelected, theme }) =>
+    isSelected ? theme.color.mainStrong : 'inherit'};
 
   &:hover {
     background: ${({ theme }) => theme.color.bgLightGray};
+    color: ${({ theme }) => theme.color.mainStrong};
   }
 `;

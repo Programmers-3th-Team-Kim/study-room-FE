@@ -52,11 +52,13 @@ function StudyItem({
       <S.ItemContainer imageUrl={imageUrl}>
         <S.ItemContent>
           <S.Privacy>{isPublic ? <FaLockOpen /> : <FaLock />}</S.Privacy>
-          <S.Title>{title}</S.Title>
-          <S.ParticipantCount>
-            <MdPerson />
-            {currentNum}/{maxNum}
-          </S.ParticipantCount>
+          <S.TextWrap>
+            <S.Title>{title}</S.Title>
+            <S.ParticipantCount>
+              <MdPerson />
+              {currentNum}/{maxNum}
+            </S.ParticipantCount>
+          </S.TextWrap>
         </S.ItemContent>
       </S.ItemContainer>
       <S.ItemFooter>
