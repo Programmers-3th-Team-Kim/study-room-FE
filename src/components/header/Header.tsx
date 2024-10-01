@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { logout } from '@/apis/auth.api';
-import { useAuthStore } from '@/stores';
 import * as S from './Header.style';
+import { useAuthStore } from '@/stores/auth.store';
 
 interface HeaderProps {
   title: string;

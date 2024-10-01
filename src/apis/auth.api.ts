@@ -1,7 +1,7 @@
-import { useAuthStore } from '@/stores';
 import axiosInstance from './axiosInstance.api';
 import type { SignUpFormInputs } from '@/types/auth';
 import { API_ROUTES } from './apiRoutes';
+import { useAuthStore } from '@/stores/auth.store';
 
 export const login = async (data: { id: string; password: string }) => {
   const response = await axiosInstance.post(API_ROUTES.LOGIN, data, {
