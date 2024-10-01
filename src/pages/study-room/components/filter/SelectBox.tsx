@@ -27,13 +27,13 @@ function SelectBox({ onFilterChange }: SelectBoxProps) {
       <div className="select-wrap">
         <select
           id="study-select"
-          name="전체 스터디"
+          name="전체 공부방"
           value={selectedValue}
           onChange={handleChange}
         >
-          <option value="all">전체 스터디</option>
-          <option value="public">공개 스터디</option>
-          <option value="secret">비공개 스터디</option>
+          <option value="all">전체 공부방</option>
+          <option value="public">공개 공부방</option>
+          <option value="secret">비공개 공부방</option>
         </select>
         <TbTriangleInvertedFilled className="triangle" />
       </div>
