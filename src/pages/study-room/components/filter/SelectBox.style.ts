@@ -10,6 +10,7 @@ export const SelectBoxStyle = styled.div`
     justify-content: space-between;
     width: auto;
     height: auto;
+    min-width: 100px;
 
     select {
       border: none;
