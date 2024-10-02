@@ -120,7 +120,9 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
     };
 
     const onSubmit = (data: PutPostTodoReq) => {
-      console.log(data);
+      if (!data.repeatWeeks) {
+        data = { ...data, repeatWeeks: 1 };
+      }
 
       if (formType === 'add') {
         postData({ data, date: dayjs(selectedDate).format('YYYY-MM-DD') });
