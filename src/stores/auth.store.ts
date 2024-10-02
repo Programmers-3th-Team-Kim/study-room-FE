@@ -2,10 +2,22 @@ import { create } from 'zustand';
 
 interface AuthState {
   accessToken: string | null;
-  user: { id: string; nickname: string; imageUrl?: string } | null;
+  user: {
+    id: string;
+    nickname: string;
+    imageUrl?: string;
+    introduction?: string;
+    dDay?: string;
+  } | null;
   setAuthData: (
-    token: string,
-    user: { id: string; nickname: string; imageUrl?: string } | null
+    accessToken: string,
+    user: {
+      id: string;
+      nickname: string;
+      imageUrl?: string;
+      introduction?: string;
+      dDay?: string;
+    } | null
   ) => void;
   clearAuthData: () => void;
 }
@@ -13,7 +25,6 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   accessToken: null,
   user: null,
-
-  setAuthData: (token, user) => set({ accessToken: token, user }),
-  clearAuthData: () => set({ user: null }),
+  setAuthData: (accessToken, user) => set(() => ({ accessToken, user })),
+  clearAuthData: () => set(() => ({ accessToken: null, user: null })),
 }));
