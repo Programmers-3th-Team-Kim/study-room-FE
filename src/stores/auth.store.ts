@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import Cookies from 'js-cookie';
 
 interface AuthState {
   accessToken: string | null;
@@ -23,8 +24,19 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  accessToken: null,
+  accessToken: Cookies.get('accessToken') || null,
   user: null,
-  setAuthData: (accessToken, user) => set(() => ({ accessToken, user })),
-  clearAuthData: () => set(() => ({ accessToken: null, user: null })),
+  setAuthData: (accessToken, user) => {
+    set(() => ({ accessToken, user }));
+    if (accessToken) {
+      Cookies.set('accessToken', accessToken, { expires: 0.0104 });
+    } else {
+      Cookies.remove('accessToken');
+    }
+  },
+
+  clearAuthData: () => {
+    set({ accessToken: null, user: null });
+    Cookies.remove('accessToken');
+  },
 }));
