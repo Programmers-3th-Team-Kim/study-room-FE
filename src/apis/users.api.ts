@@ -11,3 +11,12 @@ export const updateProfile = async (data: updateProfileFormData) => {
     console.error(error);
   }
 };
+
+export const deleteAccount = async () => {
+  try {
+    await axiosInstance.delete(API_ROUTES.USER);
+  } catch (error) {
+    throw new Error('회원 탈퇴 중 오류가 발생했습니다.');
+    console.error(error);
+  }
+};
