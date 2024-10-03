@@ -1,6 +1,8 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { signUp } from '@/apis/auth.api';
+import useDebounce from '@/hooks/useDebounce';
+import { checkDuplicate, signUp } from '@/apis/auth.api';
 import type { SignUpFormInputs } from '@/types/auth';
 import Button from '@/components/button/Button';
 import Input from '@/components/input/Input';
@@ -10,11 +12,50 @@ export default function SignUpPage() {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<SignUpFormInputs>();
+    formState: { errors, isValid },
+    control,
+  } = useForm<SignUpFormInputs>({ mode: 'onChange' });
   const navigate = useNavigate();
-  const password = watch('password');
+  const [idDuplicateError, setIdDuplicateError] = useState<string | null>(null);
+  const [nicknameDuplicateError, setNicknameDuplicateError] = useState<
+    string | null
+  >(null);
+
+  const id = useWatch({ control, name: 'id' });
+  const nickname = useWatch({ control, name: 'nickname' });
+  const password = useWatch({ control, name: 'password' });
+
+  const checkFieldDuplicate = async (
+    field: 'id' | 'nickname',
+    value: string
+  ) => {
+    if (!value) return;
+
+    try {
+      const response = await checkDuplicate(field, value);
+
+      const errorMessage = {
+        id: '이미 사용 중인 아이디입니다.',
+        nickname: '이미 사용 중인 닉네임입니다.',
+      };
+
+      const clearMessage = {
+        id: setIdDuplicateError,
+        nickname: setNicknameDuplicateError,
+      };
+
+      if (response?.isDuplicate) {
+        clearMessage[field](errorMessage[field]);
+      } else {
+        clearMessage[field](null);
+      }
+    } catch (error) {
+      console.error('중복 확인 에러:', error);
+    }
+  };
+
+  useDebounce(() => checkFieldDuplicate('id', id), 500, [id]);
+  useDebounce(() => checkFieldDuplicate('nickname', nickname), 500, [nickname]);
 
   const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
     const { password, nickname, id } = data;
@@ -31,11 +72,11 @@ export default function SignUpPage() {
   return (
     <S.Container>
       <S.Title>회원가입</S.Title>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
+      <S.Form onSubmit={handleSubmit(onSubmit)} noValidate>
         <S.InputContainer>
           <S.Label>아이디</S.Label>
           <Input
-            hasError={!!errors.id}
+            hasError={!!errors.id || !!idDuplicateError}
             placeholder="아이디"
             {...register('id', {
               required: '아이디를 입력해주세요.',
@@ -45,12 +86,16 @@ export default function SignUpPage() {
               },
             })}
           />
-          {errors.id && <S.ErrorMessage>{errors.id.message}</S.ErrorMessage>}
+          {(errors.id || idDuplicateError) && (
+            <S.ErrorMessage>
+              {errors.id?.message || idDuplicateError}
+            </S.ErrorMessage>
+          )}
         </S.InputContainer>
         <S.InputContainer>
           <S.Label>닉네임</S.Label>
           <Input
-            hasError={!!errors.nickname}
+            hasError={!!errors.nickname || !!nicknameDuplicateError}
             placeholder="닉네임"
             {...register('nickname', {
               required: '닉네임을 입력해주세요.',
@@ -61,8 +106,10 @@ export default function SignUpPage() {
               },
             })}
           />
-          {errors.nickname && (
-            <S.ErrorMessage>{errors.nickname.message}</S.ErrorMessage>
+          {(errors.nickname || nicknameDuplicateError) && (
+            <S.ErrorMessage>
+              {errors.nickname?.message || nicknameDuplicateError}
+            </S.ErrorMessage>
           )}
         </S.InputContainer>
         <S.InputContainer>
@@ -101,7 +148,7 @@ export default function SignUpPage() {
             <S.ErrorMessage>{errors.confirmPassword.message}</S.ErrorMessage>
           )}
         </S.InputContainer>
-        <Button type="submit" size="large">
+        <Button type="submit" size="large" disabled={!isValid}>
           회원가입
         </Button>
       </S.Form>

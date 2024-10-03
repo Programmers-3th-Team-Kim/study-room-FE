@@ -2,6 +2,8 @@ import { useAuthStore } from '@/stores';
 import axiosInstance from './axiosInstance.api';
 import type { SignUpData } from '@/types/auth';
 import { API_ROUTES } from './apiRoutes';
+import { useAuthStore } from '@/stores/auth.store';
+import axios from 'axios';
 
 export const login = async (data: { id: string; password: string }) => {
   const response = await axiosInstance.post(API_ROUTES.LOGIN, data, {
@@ -25,11 +27,19 @@ export const logout = async () => {
   clearAuthData();
 };
 
-export const signUp = async (data: SignUpFormInputs) => {
-  const response = await axiosInstance.post(API_ROUTES.SIGNUP, data, {
-    withCredentials: true,
-  });
-  return response.data;
+export const checkDuplicate = async (field: string, value: string) => {
+  try {
+    await axiosInstance.get(API_ROUTES.DUPLICATE, {
+      params: { field, value },
+    });
+    return { isDuplicate: false };
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 409) {
+      return { isDuplicate: true, message: error.response.data.message };
+    }
+    throw new Error('중복 확인 중 오류가 발생했습니다.');
+  }
+};
 
 export const signUp = async (data: SignUpData) => {
   try {
