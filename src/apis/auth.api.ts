@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/stores';
 import axiosInstance from './axiosInstance.api';
-import type { SignUpFormInputs } from '@/types/auth';
+import type { SignUpData } from '@/types/auth';
 import { API_ROUTES } from './apiRoutes';
 
 export const login = async (data: { id: string; password: string }) => {
@@ -30,4 +30,17 @@ export const signUp = async (data: SignUpFormInputs) => {
     withCredentials: true,
   });
   return response.data;
+
+export const signUp = async (data: SignUpData) => {
+  try {
+    const response = await axiosInstance.post(API_ROUTES.SIGNUP, data);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        error.response?.data.message || '회원가입 중 오류가 발생했습니다.'
+      );
+    }
+    throw new Error('회원가입 중 서버 오류가 발생했습니다.');
+  }
 };

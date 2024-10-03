@@ -17,15 +17,14 @@ export default function SignUpPage() {
   const password = watch('password');
 
   const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
+    const { password, nickname, id } = data;
+
     try {
-      await signUp(data);
+      await signUp({ password, nickname, id });
       alert('회원가입이 성공적으로 완료되었습니다.');
       navigate('/login');
     } catch (error) {
-      console.error('회원가입 실패', error);
-      if (error instanceof Error) {
-        alert(error.message);
-      }
+      console.log(error, '회원가입 중 오류 발생');
     }
   };
 
