@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import useDebounce from '@/hooks/useDebounce';
-import { checkDuplicate, signUp } from '@/apis/auth.api';
+import { signUp } from '@/apis/auth.api';
 import type { SignUpFormInputs } from '@/types/auth';
 import Button from '@/components/button/Button';
 import Input from '@/components/input/Input';
 import * as S from '@/styles/AuthFormStyles';
+import checkFieldDuplicate from '@/utils/checkFieldDuplicate';
 
 export default function SignUpPage() {
   const {
@@ -25,37 +26,14 @@ export default function SignUpPage() {
   const nickname = useWatch({ control, name: 'nickname' });
   const password = useWatch({ control, name: 'password' });
 
-  const checkFieldDuplicate = async (
-    field: 'id' | 'nickname',
-    value: string
-  ) => {
-    if (!value) return;
-
-    try {
-      const response = await checkDuplicate(field, value);
-
-      const errorMessage = {
-        id: '이미 사용 중인 아이디입니다.',
-        nickname: '이미 사용 중인 닉네임입니다.',
-      };
-
-      const clearMessage = {
-        id: setIdDuplicateError,
-        nickname: setNicknameDuplicateError,
-      };
-
-      if (response?.isDuplicate) {
-        clearMessage[field](errorMessage[field]);
-      } else {
-        clearMessage[field](null);
-      }
-    } catch (error) {
-      console.error('중복 확인 에러:', error);
-    }
-  };
-
-  useDebounce(() => checkFieldDuplicate('id', id), 500, [id]);
-  useDebounce(() => checkFieldDuplicate('nickname', nickname), 500, [nickname]);
+  useDebounce(() => checkFieldDuplicate('id', id, setIdDuplicateError), 500, [
+    id,
+  ]);
+  useDebounce(
+    () => checkFieldDuplicate('nickname', nickname, setNicknameDuplicateError),
+    500,
+    [nickname]
+  );
 
   const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
     const { password, nickname, id } = data;
