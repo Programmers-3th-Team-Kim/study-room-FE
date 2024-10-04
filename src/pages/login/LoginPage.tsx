@@ -4,7 +4,6 @@ import Button from '@/components/button/Button';
 import Input from '@/components/input/Input';
 import type { LoginFormInputs } from '@/types/auth';
 import { login } from '@/apis/auth.api';
-import { useUserStore } from '@/stores';
 import * as S from '@/styles/AuthFormStyles';
 import { toast } from 'react-toastify';
 
@@ -15,7 +14,6 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm<LoginFormInputs>();
   const navigate = useNavigate();
-  const { setUserFromCookie } = useUserStore();
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     try {

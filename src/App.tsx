@@ -10,8 +10,6 @@ import CustomToastContainer from './components/toast/Toast';
 const queryClient = new QueryClient();
 
 function App() {
-  useRestoreUser();
-
   return (
     <QueryClientProvider client={queryClient}>
       <CustomToastContainer />
