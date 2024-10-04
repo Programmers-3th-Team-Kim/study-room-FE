@@ -9,8 +9,10 @@ import ImageUpload from '../imageUpload/ImageUpload';
 import { FaPlus, FaStarOfLife } from 'react-icons/fa6';
 import type { CreateStudyRoomFormData } from '@/types/createStudyRoom';
 import { createStudyRoom } from '@/apis/studyRooms.api';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateStudyRoomForm() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -29,6 +31,8 @@ export default function CreateStudyRoomForm() {
     try {
       const result = await createStudyRoom(formattedData);
       console.log('공부방 생성 성공:', result);
+
+      navigate(`/study-room/${result._id}`);
     } catch (error) {
       console.error('공부방 생성 에러:', error);
     }
@@ -43,7 +47,6 @@ export default function CreateStudyRoomForm() {
   };
 
   const isPublic = watch('isPublic', true);
-
   const ImageInputRef = useRef<HTMLInputElement>(null);
 
   return (
