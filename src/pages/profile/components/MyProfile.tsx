@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { useAuthStore } from '@/stores/auth.store';
 import { updateProfileFormData } from '@/types/updateProfile';
 import { updateProfile } from '@/apis/users.api';
@@ -45,13 +46,12 @@ export default function MyProfile() {
 
   const onSubmit = async (data: updateProfileFormData) => {
     try {
-      const result = await updateProfile({
+      await updateProfile({
         nickname: data.nickname,
         introduction: data.introduction,
         imageUrl: preview || '',
       });
-
-      console.log('프로필 수정 성공', result);
+      toast.success('프로필 수정 완료!');
     } catch (error) {
       console.error('프로필 수정 실패', error);
     }

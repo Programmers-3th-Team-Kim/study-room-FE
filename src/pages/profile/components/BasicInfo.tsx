@@ -1,6 +1,8 @@
-import { useForm, useWatch } from 'react-hook-form';
-import * as S from '../ProfilePage.style';
 import { useState } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
+import { toast } from 'react-toastify';
+
+import * as S from '../ProfilePage.style';
 import { changePassword, verifyCurrentPassword } from '@/apis/auth.api';
 
 interface CurrentPasswordFormData {
@@ -33,6 +35,8 @@ export default function PasswordChange() {
     try {
       const response = await verifyCurrentPassword(data.currentPassword);
       if (response.isPasswordCorrect) {
+        toast.success('비밀번호가 확인되었습니다!');
+
         setIsPasswordVerified(true);
         setErrorMessage(null);
       } else {
@@ -47,7 +51,7 @@ export default function PasswordChange() {
   const onSubmitNewPassword = async (data: { newPassword: string }) => {
     try {
       await changePassword(data.newPassword);
-      setErrorMessage('비밀번호가 성공적으로 변경되었습니다.');
+      toast.success('비밀번호가 변경되었습니다!');
     } catch (error) {
       setErrorMessage('비밀번호 변경 중 오류가 발생했습니다.');
       console.error(error);
