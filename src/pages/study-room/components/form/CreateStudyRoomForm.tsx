@@ -20,7 +20,12 @@ export default function CreateStudyRoomForm() {
     watch,
     setValue,
     setError,
-  } = useForm<CreateStudyRoomFormData>({ mode: 'onSubmit' });
+  } = useForm<CreateStudyRoomFormData>({
+    mode: 'onSubmit',
+    defaultValues: {
+      isPublic: true,
+    },
+  });
 
   const onSubmit: SubmitHandler<CreateStudyRoomFormData> = async (data) => {
     const formattedData = {
