@@ -4,5 +4,7 @@ export const API_ROUTES = {
   SIGNUP: '/auth/signup',
   REFRESH_TOKEN: '/auth/refresh-token',
   DUPLICATE: '/auth/check-duplicate',
+  VERIFY_PASSWORD: '/auth/change-password',
+  CHANGE_PASSWORD: '/auth/change-password',
   USER: '/users/me',
 };
