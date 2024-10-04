@@ -32,19 +32,14 @@ export default function PasswordChange() {
   } = useForm<NewPasswordFormData>({ mode: 'onChange' });
 
   const onSubmitCurrentPassword = async (data: { currentPassword: string }) => {
-    try {
-      const response = await verifyCurrentPassword(data.currentPassword);
-      if (response.isPasswordCorrect) {
-        toast.success('비밀번호가 확인되었습니다!');
+    const response = await verifyCurrentPassword(data.currentPassword);
+    if (response.isPasswordCorrect) {
+      toast.success('비밀번호가 확인되었습니다!');
 
-        setIsPasswordVerified(true);
-        setErrorMessage(null);
-      } else {
-        setErrorMessage('현재 비밀번호가 일치하지 않습니다.');
-      }
-    } catch (error) {
-      setErrorMessage('현재 비밀번호 확인 중 오류가 발생했습니다.');
-      console.error(error);
+      setIsPasswordVerified(true);
+      setErrorMessage(null);
+    } else {
+      setErrorMessage('현재 비밀번호가 일치하지 않습니다.');
     }
   };
 

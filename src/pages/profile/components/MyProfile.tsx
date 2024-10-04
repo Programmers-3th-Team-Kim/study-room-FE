@@ -45,16 +45,12 @@ export default function MyProfile() {
   );
 
   const onSubmit = async (data: updateProfileFormData) => {
-    try {
-      await updateProfile({
-        nickname: data.nickname,
-        introduction: data.introduction,
-        imageUrl: preview || '',
-      });
-      toast.success('프로필 수정 완료!');
-    } catch (error) {
-      console.error('프로필 수정 실패', error);
-    }
+    await updateProfile({
+      nickname: data.nickname,
+      introduction: data.introduction,
+      imageUrl: preview || '',
+    });
+    toast.success('프로필 수정 완료!');
   };
 
   return (

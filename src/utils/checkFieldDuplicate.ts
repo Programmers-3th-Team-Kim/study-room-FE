@@ -7,20 +7,16 @@ export default async function checkFieldDuplicate(
 ) {
   if (!value) return;
 
-  try {
-    const response = await checkDuplicate(field, value);
+  const response = await checkDuplicate(field, value);
 
-    const errorMessage = {
-      id: '이미 사용 중인 아이디입니다.',
-      nickname: '이미 사용 중인 닉네임입니다.',
-    };
+  const errorMessage = {
+    id: '이미 사용 중인 아이디입니다.',
+    nickname: '이미 사용 중인 닉네임입니다.',
+  };
 
-    if (response?.isDuplicate) {
-      setError(errorMessage[field]);
-    } else {
-      setError(null);
-    }
-  } catch (error) {
-    console.error('중복 확인 에러:', error);
+  if (response?.isDuplicate) {
+    setError(errorMessage[field]);
+  } else {
+    setError(null);
   }
 }

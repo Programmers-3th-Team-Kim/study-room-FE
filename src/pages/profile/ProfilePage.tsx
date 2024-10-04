@@ -13,13 +13,9 @@ export default function ProfilePage() {
     const confirmDelete = confirm('정말로 회원 탈퇴하시겠습니까?');
 
     if (confirmDelete) {
-      try {
-        await deleteAccount();
-        logout();
-        router('/login');
-      } catch (error) {
-        console.error('회원 탈퇴 실패:', error);
-      }
+      await deleteAccount();
+      logout();
+      router('/login');
     }
   };
 

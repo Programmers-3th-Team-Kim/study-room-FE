@@ -56,25 +56,15 @@ export const signUp = async (data: SignUpData) => {
 };
 
 export const verifyCurrentPassword = async (currentPassword: string) => {
-  try {
-    const response = await axiosInstance.post(API_ROUTES.VERIFY_PASSWORD, {
-      currentPassword,
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error('현재 비밀번호 확인 중 오류가 발생했습니다.');
-    console.error(error);
-  }
+  const response = await axiosInstance.post(API_ROUTES.VERIFY_PASSWORD, {
+    currentPassword,
+  });
+  return response.data;
 };
 
 export const changePassword = async (newPassword: string) => {
-  try {
-    const response = await axiosInstance.patch(API_ROUTES.CHANGE_PASSWORD, {
-      newPassword,
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error('비밀번호 변경 중 오류가 발생했습니다.');
-    console.error(error);
-  }
+  const response = await axiosInstance.patch(API_ROUTES.CHANGE_PASSWORD, {
+    newPassword,
+  });
+  return response.data;
 };
