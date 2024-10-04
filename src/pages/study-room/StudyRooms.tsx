@@ -25,19 +25,11 @@ function StudyRooms() {
     }));
   };
 
-  const handleSearchChange = (search: string) => {
-    handleFilterChange({ search });
-  };
-
-  const handleModalClose = () => {
-    setShowModal(false);
-  };
-
   return (
     <S.StudyRoomsStyle>
       <S.Wrapper>
         <S.Header>
-          <Search onSearchChange={handleSearchChange} />
+          <Search onSearchChange={(search) => handleFilterChange({ search })} />
           <CreateButton onClick={() => setShowModal(true)} />
         </S.Header>
         <S.Filter>
@@ -45,7 +37,7 @@ function StudyRooms() {
           <CheckBox onFilterChange={handleFilterChange} />
         </S.Filter>
         {showModal && (
-          <Modal onClose={handleModalClose}>
+          <Modal onClose={() => setShowModal(false)}>
             <CreateStudyRoomForm />
           </Modal>
         )}
