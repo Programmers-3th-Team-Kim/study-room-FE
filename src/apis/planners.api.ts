@@ -1,9 +1,11 @@
 import { PutPostTodoReq } from '@/models/studyRoomTodos.model';
 import axiosInstance from './axiosInstance.api';
+import { API_ROUTES } from './apiRoutes';
 
 export const getTodos = async (date: string) => {
   try {
-    const res = await axiosInstance.get(`/planners?date=${date}`);
+    console.log('get실행');
+    const res = await axiosInstance.get(`${API_ROUTES.PLANNERS}?date=${date}`);
     console.log(res);
     return res.data;
   } catch (error) {
@@ -15,7 +17,8 @@ export const getTodos = async (date: string) => {
 export const postTodo = async (data: PutPostTodoReq, date: string) => {
   try {
     const req = { ...data, date };
-    await axiosInstance.post('/planners', req);
+    console.log('post실행');
+    await axiosInstance.post(`${API_ROUTES.PLANNERS}`, req);
   } catch (error) {
     console.log(error);
     throw error;
@@ -24,7 +27,11 @@ export const postTodo = async (data: PutPostTodoReq, date: string) => {
 
 export const putTodo = async (data: PutPostTodoReq, plannerId: string) => {
   try {
-    await axiosInstance.put(`/planners/${plannerId}`, data);
+    console.log('put 실행');
+    console.log(`url ${plannerId}`);
+    console.log(data);
+
+    await axiosInstance.put(`${API_ROUTES.PLANNERS}/${plannerId}`, data);
   } catch (error) {
     console.log(error);
     throw error;
@@ -33,7 +40,7 @@ export const putTodo = async (data: PutPostTodoReq, plannerId: string) => {
 
 export const deleteTodo = async (plannerId: string) => {
   try {
-    await axiosInstance.delete(`/planners/${plannerId}`);
+    await axiosInstance.delete(`${API_ROUTES.PLANNERS}/${plannerId}`);
   } catch (error) {
     console.log(error);
     throw error;
@@ -42,7 +49,7 @@ export const deleteTodo = async (plannerId: string) => {
 
 export const patchCheckBox = async (plannerId: string) => {
   try {
-    await axiosInstance.patch(`/planners/completed/${plannerId}`);
+    await axiosInstance.patch(`${API_ROUTES.PLANNERS}/completed/${plannerId}`);
   } catch (error) {
     console.log(error);
     throw error;
