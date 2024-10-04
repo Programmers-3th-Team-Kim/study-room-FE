@@ -19,7 +19,8 @@ export const ColorBarStyle = styled.div.withConfig({
   margin-right: 20px;
   height: 100%;
   min-width: min(0.6vw, 11px);
-  background-color: ${(props) => (props.barColor ? props.barColor : null)};
+  background-color: ${(props) =>
+    props.barColor ? props.barColor : 'gainsboro'};
   border-radius: 8px;
 `;
 

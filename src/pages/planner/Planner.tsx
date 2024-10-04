@@ -22,7 +22,7 @@ export default function Planner() {
   const inputFormRef = useRef<HTMLFormElement | null>(null);
   const editFormRef = useRef<Record<number, HTMLDivElement | null>>({});
 
-  const { data: todos } = useQuery<GetTodosRes[]>({
+  const { data: todos, isPending: todosPending } = useQuery<GetTodosRes[]>({
     queryKey: ['getTodos', selectedDate],
     queryFn: () => getTodos(dayjs(selectedDate).format('YYYY-MM-DD')) ?? [],
   });
@@ -96,7 +96,7 @@ export default function Planner() {
                           onClick={() => {
                             handleTodoBoxClick(index);
                           }}
-                          color={colorMap[index]}
+                          color={colorMap[index] ?? 'gainsboro'}
                           selectedDate={selectedDate}
                         ></TodoBox>
                       </S.EachContentWrapper>
@@ -114,13 +114,16 @@ export default function Planner() {
                     </Fragment>
                   );
                 })
-              : !isAddFormOpened && (
+              : !isAddFormOpened &&
+                (todosPending ? (
+                  <S.Loader />
+                ) : (
                   <S.NoData>
                     오늘의 공부 계획을
                     <br />
                     세워보세요!
                   </S.NoData>
-                )}
+                ))}
             {isAddFormOpened ? (
               <InputForm
                 formType="add"
@@ -137,7 +140,7 @@ export default function Planner() {
       <S.RightPanel>
         <div className="label">오늘의 공부 시간</div>
         <S.StudiedTime>XX시간 XX분 공부했어요!</S.StudiedTime>
-        <TimeTable todos={todos ? todos : []} />
+        <TimeTable selectedDate={selectedDate} />
       </S.RightPanel>
     </S.PlannerWrapper>
   );

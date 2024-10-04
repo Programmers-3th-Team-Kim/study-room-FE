@@ -1,4 +1,4 @@
-interface StartEndTime {
+export interface StartEndTime {
   startTime: { date: string; time: string };
   endTime: { date: string; time: string };
 }
@@ -15,8 +15,6 @@ export interface GetTodosRes {
   isComplete?: boolean;
   timelineList?: StartEndTime[] | undefined;
   userId: string;
-  // index?: number; 색깔
-  // color? : string;
 }
 
 export interface PutPostTodoReq {
