@@ -272,28 +272,28 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
                   />
                   <label htmlFor="repeatWeeks">주 반복</label>
                 </S.WeekWrapper>
-                {formType === 'add' ? (
-                  <S.SaveDelWrapper>
-                    <S.SaveButton type="submit">+ 추가하기</S.SaveButton>
-                  </S.SaveDelWrapper>
-                ) : (
-                  <S.SaveDelWrapper>
-                    <S.DelButton
-                      type="button"
-                      onClick={() => {
-                        handleDelButton();
-                        if (setEditIndex) {
-                          setEditIndex(null);
-                        }
-                      }}
-                    >
-                      삭제하기
-                    </S.DelButton>
-                    <S.SaveButton type="submit">수정하기</S.SaveButton>
-                  </S.SaveDelWrapper>
-                )}
               </S.DaysWrapper>
             </S.Repeat>
+            {formType === 'add' ? (
+              <S.SaveDelWrapper>
+                <S.SaveButton type="submit">+ 추가하기</S.SaveButton>
+              </S.SaveDelWrapper>
+            ) : (
+              <S.SaveDelWrapper>
+                <S.DelButton
+                  type="button"
+                  onClick={() => {
+                    handleDelButton();
+                    if (setEditIndex) {
+                      setEditIndex(null);
+                    }
+                  }}
+                >
+                  삭제하기
+                </S.DelButton>
+                <S.SaveButton type="submit">수정하기</S.SaveButton>
+              </S.SaveDelWrapper>
+            )}
           </S.Footer>
         </S.Form>
       </S.InputFormStyle>

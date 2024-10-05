@@ -15,6 +15,7 @@ export interface GetTodosRes {
   isComplete?: boolean;
   timelineList?: StartEndTime[] | undefined;
   totalTime: number;
+  repeatEndDate: string;
   // userId: string;
 }
 

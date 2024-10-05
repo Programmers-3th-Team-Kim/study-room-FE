@@ -77,7 +77,7 @@ export const EachContentWrapper = styled.div`
   display: flex;
   position: relative;
   width: 100%;
-  min-height: 17%;
+  min-height: 20%;
   justify-content: center;
 `;
 

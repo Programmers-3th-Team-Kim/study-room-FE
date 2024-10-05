@@ -69,7 +69,6 @@ export const TimeLabelWrapper = styled.div`
   display: flex;
   flex-direction: column;
   color: ${({ theme }) => theme.color.plannerTimeGray};
-  /* background-color: red; */
 `;
 
 export const Hyphen = styled.div`
