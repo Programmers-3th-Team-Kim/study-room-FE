@@ -14,7 +14,7 @@ interface InputFormProps extends React.HTMLProps<HTMLFormElement> {
   selectedDate: Date;
 
   todos: GetTodosRes[];
-  currentData?: PutPostTodoReq;
+  currentData?: GetTodosRes;
 
   setEditIndex?: React.Dispatch<React.SetStateAction<number | null>>;
   currentIndex?: number;
@@ -35,6 +35,14 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
     },
     ref
   ) => {
+    let defaultData;
+
+    if (currentData) {
+      // eslint-disable-next-line
+      const { totalTime: _1, timelineList: _2, ...putDatas } = currentData;
+      defaultData = putDatas;
+    }
+
     const {
       register,
       handleSubmit,
@@ -45,7 +53,7 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       mode: 'onSubmit',
       defaultValues: {
         repeatDays: [],
-        ...currentData,
+        ...(defaultData || {}),
       },
     });
     const [todosExceptCurrent, setTodosExceptCurrent] = useState(() => {
@@ -132,7 +140,6 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
         }
       }
       if (formType === 'edit' && currentIndex !== undefined) {
-        console.log(`data : ${data} , plannerId : ${currentData?._id}`);
         if (currentData?._id) {
           putData({ data, plannerId: currentData._id });
         } else {

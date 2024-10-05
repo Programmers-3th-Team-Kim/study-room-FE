@@ -14,7 +14,8 @@ export interface GetTodosRes {
   parentObjectId?: string | undefined;
   isComplete?: boolean;
   timelineList?: StartEndTime[] | undefined;
-  userId: string;
+  totalTime: number;
+  // userId: string;
 }
 
 export interface PutPostTodoReq {
@@ -28,5 +29,6 @@ export interface PutPostTodoReq {
   repeatWeeks?: number;
   parentObjectId?: string | undefined;
   isComplete?: boolean;
-  timelineList?: StartEndTime[] | undefined;
+  // timelineList?: StartEndTime[] | undefined;
+  // totalTime?: number;
 }
