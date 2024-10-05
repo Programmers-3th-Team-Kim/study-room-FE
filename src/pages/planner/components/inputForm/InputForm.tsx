@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -42,7 +42,6 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       const { totalTime: _1, timelineList: _2, ...putDatas } = currentData;
       defaultData = putDatas;
     }
-
     const {
       register,
       handleSubmit,
@@ -59,6 +58,17 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
     const [todosExceptCurrent, setTodosExceptCurrent] = useState(() => {
       return todos.filter((_, index) => index !== currentIndex);
     });
+
+    const [currentDate, setCurrentDate] = useState(
+      new Date().setHours(0, 0, 0, 0)
+    );
+    const [disableSaveButton, setDisableSaveButton] = useState(false);
+
+    useEffect(() => {
+      if (selectedDate.setHours(0, 0, 0, 0) < currentDate) {
+        setDisableSaveButton(true);
+      }
+    }, [selectedDate, currentDate]);
 
     const queryClient = useQueryClient();
     const { isPending: isPostFetching, mutate: postData } = useMutation({
@@ -291,7 +301,18 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
                 >
                   삭제하기
                 </S.DelButton>
-                <S.SaveButton type="submit">수정하기</S.SaveButton>
+                <S.SaveButton
+                  type="submit"
+                  disabled={disableSaveButton}
+                  onMouseEnter={() => {
+                    setCurrentDate(new Date().setHours(0, 0, 0, 0));
+                  }}
+                >
+                  수정하기
+                </S.SaveButton>
+                <S.DisabledInform isDisabled={disableSaveButton}>
+                  지난 날짜의 할 일은 수정이 불가능합니다.
+                </S.DisabledInform>
               </S.SaveDelWrapper>
             )}
           </S.Footer>

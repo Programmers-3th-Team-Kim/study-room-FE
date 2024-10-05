@@ -137,6 +137,7 @@ export const SaveDelWrapper = styled.div`
   gap: 5px;
   justify-content: center;
   margin-left: auto;
+  position: relative;
 `;
 
 const SaveAndDelButton = css`
@@ -157,6 +158,28 @@ const SaveAndDelButton = css`
 
 export const SaveButton = styled.button`
   ${SaveAndDelButton}
+  &:disabled {
+    background-color: lightgray;
+    color: darkgray;
+    cursor: not-allowed;
+  }
+`;
+
+export const DisabledInform = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['isDisabled'].includes(prop),
+})<{ isDisabled?: boolean }>`
+  display: none;
+  width: 11em;
+  font-size: max(0.6rem, 0.7vw);
+  top: -5%;
+  left: -15%;
+  border: 1px solid black;
+  background-color: white;
+  padding: 0.5em;
+  position: absolute;
+  ${SaveButton}:hover + & {
+    display: ${(props) => props.isDisabled && 'flex'};
+  }
 `;
 
 export const DelButton = styled.button`
