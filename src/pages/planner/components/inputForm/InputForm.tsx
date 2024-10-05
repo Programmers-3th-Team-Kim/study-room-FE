@@ -68,6 +68,10 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
         queryClient.invalidateQueries({
           queryKey: ['getTodos', selectedDate],
         });
+        alert('새로운 할 일이 등록되었습니다.');
+      },
+      onError: () => {
+        alert('할 일 등록에 실패했습니다. \n 잠시 후 다시 시도해주세요.');
       },
     });
     const { isPending: isPutFetching, mutate: putData } = useMutation({
@@ -82,6 +86,10 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
         queryClient.invalidateQueries({
           queryKey: ['getTodos', selectedDate],
         });
+        alert('선택된 할 일이 수정되었습니다.');
+      },
+      onError: () => {
+        alert('할 일 수정에 실패했습니다.\n 잠시 후 다시 시도해주세요.');
       },
     });
 
@@ -92,6 +100,7 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
         queryClient.invalidateQueries({
           queryKey: ['getTodos', selectedDate],
         });
+        alert('선택된 할 일이 삭제되었습니다.');
       },
     });
 
