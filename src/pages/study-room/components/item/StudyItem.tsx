@@ -1,8 +1,8 @@
-import { FaLock, FaLockOpen } from 'react-icons/fa';
 import { MdPerson } from 'react-icons/md';
 import * as S from './StudyItem.style';
 import { useRef, useState } from 'react';
 import { StudyItem } from '@/types/studyRoom';
+import { FaLock, FaUnlock } from 'react-icons/fa6';
 
 function StudyItem({
   title,
@@ -43,7 +43,7 @@ function StudyItem({
     <S.StudyItemStyle>
       <S.ItemContainer imageUrl={imageUrl}>
         <S.ItemContent>
-          <S.Privacy>{isPublic ? <FaLockOpen /> : <FaLock />}</S.Privacy>
+          <S.Privacy>{isPublic ? <FaUnlock /> : <FaLock />}</S.Privacy>
           <S.TextWrap>
             <S.Title>{title}</S.Title>
             <S.ParticipantCount>
