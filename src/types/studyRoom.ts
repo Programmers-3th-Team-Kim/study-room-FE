@@ -22,7 +22,7 @@ export interface FetchRoomsParams {
   offset?: number;
 }
 
-export interface StudyItemProps {
+export interface StudyItem {
   title: string;
   imageUrl?: string;
   tagList?: string[];
