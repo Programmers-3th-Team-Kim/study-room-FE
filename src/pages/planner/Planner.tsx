@@ -73,7 +73,20 @@ export default function Planner() {
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
-          <S.AddButton onClick={handleAddButton}></S.AddButton>
+          <S.AddButton
+            onClick={() => {
+              if (
+                selectedDate.setHours(0, 0, 0, 0) <
+                new Date().setHours(0, 0, 0, 0)
+              ) {
+                alert(
+                  `지난 날짜의 할 일 추가는 불가능합니다. \n${dayjs().format('YYYY-MM-DD')} 이후의 날짜에서 다시 시도해주세요.`
+                );
+                return;
+              }
+              handleAddButton();
+            }}
+          ></S.AddButton>
         </S.LeftHeader>
         <S.LeftContentWrapper ref={timeLineHeightRef}>
           {todos && todos.length !== 0 && (

@@ -5,6 +5,8 @@ import dayjs from 'dayjs';
 import RepeatDaysSelector from './RepeatDaySelector';
 import { GetTodosRes, PutPostTodoReq } from '@/models/studyRoomTodos.model';
 import { deleteTodo, postTodo, putTodo } from '@/apis/planners.api';
+import DatePicker from 'react-datepicker';
+import { ko } from 'date-fns/locale';
 import * as S from './InputForm.style';
 
 interface InputFormProps extends React.HTMLProps<HTMLFormElement> {
@@ -47,6 +49,8 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       handleSubmit,
       watch,
       control,
+      setValue,
+      getValues,
       formState: { errors },
     } = useForm<PutPostTodoReq>({
       mode: 'onSubmit',
@@ -59,16 +63,21 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       return todos.filter((_, index) => index !== currentIndex);
     });
 
-    const [currentDate, setCurrentDate] = useState(
-      new Date().setHours(0, 0, 0, 0)
-    );
+    const [todayDate, setTodayDate] = useState(new Date().setHours(0, 0, 0, 0));
     const [disableSaveButton, setDisableSaveButton] = useState(false);
+    const [repeatEndDate, setRepeatEndDate] = useState(() => {
+      if (currentData?.repeatEndDate) {
+        return new Date(currentData.repeatEndDate);
+      }
+
+      return null;
+    });
 
     useEffect(() => {
-      if (selectedDate.setHours(0, 0, 0, 0) < currentDate) {
+      if (selectedDate.setHours(0, 0, 0, 0) < todayDate) {
         setDisableSaveButton(true);
       }
-    }, [selectedDate, currentDate]);
+    }, [selectedDate, todayDate]);
 
     const queryClient = useQueryClient();
     const { isPending: isPostFetching, mutate: postData } = useMutation({
@@ -135,24 +144,37 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       return true;
     };
 
-    const validateRepeatWeeks = (value: number | undefined) => {
-      if (value && isNaN(value)) {
-        return '20주 이내의 "숫자"를 입력해주세요.';
+    const validateRepeatEndDate = (value: string | undefined) => {
+      if (value) {
+        if (
+          dayjs(value).isBefore(dayjs()) ||
+          dayjs(value).isBefore(dayjs(selectedDate))
+        ) {
+          return '현재 날짜 이전의 날짜를 선택할 수 없습니다.';
+        }
       }
 
-      if (value && value > 20) {
-        return '반복은 최대 20주 가능합니다.';
+      const repeatDaysArr = getValues('repeatDays');
+      if (repeatDaysArr && repeatDaysArr.length > 0 && !value) {
+        return '반복 종료일을 설정해주세요.';
       }
+
       return true;
     };
 
     const onSubmit = (data: PutPostTodoReq) => {
-      if (!data.repeatWeeks) {
-        data = { ...data, repeatWeeks: 1 };
+      let reqData = { ...data };
+      if (!data.repeatEndDate) {
+        // eslint-disable-next-line
+        const { repeatEndDate, ...restData } = data;
+        reqData = restData;
       }
 
       if (formType === 'add') {
-        postData({ data, date: dayjs(selectedDate).format('YYYY-MM-DD') });
+        postData({
+          data: reqData,
+          date: dayjs(selectedDate).format('YYYY-MM-DD'),
+        });
 
         if (setIsAddFormOpened) {
           setIsAddFormOpened(false);
@@ -160,7 +182,7 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       }
       if (formType === 'edit' && currentIndex !== undefined) {
         if (currentData?._id) {
-          putData({ data, plannerId: currentData._id });
+          putData({ data: reqData, plannerId: currentData._id });
         } else {
           alert('수정 중 오류가 발생했습니다.');
         }
@@ -191,6 +213,13 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
       if (setIsEditFormOpened) {
         setIsEditFormOpened(false);
       }
+    };
+
+    const handleDatePickerChange = (date: Date | null) => {
+      setRepeatEndDate(date);
+      setValue('repeatEndDate', dayjs(date).format('YYYY-MM-DD'), {
+        shouldValidate: true,
+      });
     };
 
     return (
@@ -236,7 +265,7 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
             </S.LabelErrorWrapper>
             <S.InputTimeWrapper>
               <S.TimeLabelWrapper>
-                <S.TimeLabel htmlFor="startTime">시작</S.TimeLabel>
+                <S.SubLabel htmlFor="startTime">시작</S.SubLabel>
                 <S.InputTimeStyle
                   id="startTime"
                   type="time"
@@ -248,7 +277,7 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
               </S.TimeLabelWrapper>
               <S.Hyphen />
               <S.TimeLabelWrapper>
-                <S.TimeLabel htmlFor="endTime">종료</S.TimeLabel>
+                <S.SubLabel htmlFor="endTime">종료</S.SubLabel>
                 <S.InputTimeStyle
                   id="endTime"
                   type="time"
@@ -266,23 +295,38 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
             <S.Repeat>
               <S.LabelErrorWrapper>
                 <S.Label>반복</S.Label>
-                {errors.repeatWeeks && (
-                  <S.ErrorText>{errors.repeatWeeks.message}</S.ErrorText>
-                )}
+                {errors.repeatEndDate ? (
+                  <S.ErrorText>{errors.repeatEndDate.message}</S.ErrorText>
+                ) : errors.repeatDays ? (
+                  <S.ErrorText>{errors.repeatDays.message}</S.ErrorText>
+                ) : null}
               </S.LabelErrorWrapper>
-              <S.DaysWrapper>
-                <RepeatDaysSelector control={control} />
-
-                <S.WeekWrapper>
-                  <S.WeekInput
-                    id="repeatWeeks"
-                    {...register('repeatWeeks', {
-                      validate: validateRepeatWeeks,
-                    })}
-                  />
-                  <label htmlFor="repeatWeeks">주 반복</label>
-                </S.WeekWrapper>
-              </S.DaysWrapper>
+              <S.SubLabel htmlFor="repeatDays">반복 요일</S.SubLabel>
+              <RepeatDaysSelector
+                control={control}
+                repeatEndDate={repeatEndDate}
+              />
+              <S.SubLabel htmlFor="repeatEndDate">반복 종료일</S.SubLabel>
+              <S.StyledDatePicker>
+                <DatePicker
+                  showIcon
+                  icon={<S.CalendarIcon />}
+                  locale={ko}
+                  selected={repeatEndDate}
+                  dateFormatCalendar="YYYY년 MMMM"
+                  dateFormat="yyyy.MM.dd (EE)"
+                  onChange={handleDatePickerChange}
+                  isClearable
+                  placeholderText="반복 날짜를 선택해주세요."
+                ></DatePicker>
+              </S.StyledDatePicker>
+              <input
+                id="repeatEndDate"
+                type="hidden"
+                {...register('repeatEndDate', {
+                  validate: validateRepeatEndDate,
+                })}
+              ></input>
             </S.Repeat>
             {formType === 'add' ? (
               <S.SaveDelWrapper>
@@ -305,7 +349,7 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
                   type="submit"
                   disabled={disableSaveButton}
                   onMouseEnter={() => {
-                    setCurrentDate(new Date().setHours(0, 0, 0, 0));
+                    setTodayDate(new Date().setHours(0, 0, 0, 0));
                   }}
                 >
                   수정하기

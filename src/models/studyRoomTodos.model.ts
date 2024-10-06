@@ -27,7 +27,8 @@ export interface PutPostTodoReq {
   startTime?: string;
   endTime?: string;
   repeatDays?: string[];
-  repeatWeeks?: number;
+  // repeatWeeks?: number;
+  repeatEndDate?: string;
   parentObjectId?: string | undefined;
   isComplete?: boolean;
   // timelineList?: StartEndTime[] | undefined;
