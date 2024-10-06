@@ -23,11 +23,12 @@ export interface FetchRoomsParams {
 }
 
 export interface StudyItem {
+  _id?: string;
   title: string;
   imageUrl?: string;
   tagList?: string[];
   isPublic: boolean;
-  isChat: boolean;
+  isChat?: boolean;
   maxNum: number;
   currentNum: number;
 }
