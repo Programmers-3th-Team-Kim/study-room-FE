@@ -21,3 +21,13 @@ export interface FetchRoomsParams {
   limit?: number;
   offset?: number;
 }
+
+export interface StudyItemProps {
+  title: string;
+  imageUrl?: string;
+  tagList?: string[];
+  isPublic: boolean;
+  isChat: boolean;
+  maxNum: number;
+  currentNum: number;
+}

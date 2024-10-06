@@ -2,15 +2,7 @@ import { FaLock, FaLockOpen } from 'react-icons/fa';
 import { MdPerson } from 'react-icons/md';
 import * as S from './StudyItem.style';
 import { useRef, useState } from 'react';
-
-interface StudyItemProps {
-  title: string;
-  imageUrl?: string;
-  tagList?: string[];
-  isPublic: boolean;
-  maxNum: number;
-  currentNum: number;
-}
+import { StudyItemProps } from '@/types/studyRoom';
 
 function StudyItem({
   title,
