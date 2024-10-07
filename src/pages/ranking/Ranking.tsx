@@ -100,16 +100,6 @@ const TEMP_DATA: RankingResponse = {
       nickname: 'myNickname',
       studyTime: '06:35:00',
     },
-    {
-      rank: 3,
-      nickname: 'nickname1',
-      studyTime: '05:34:56',
-    },
-    {
-      rank: 4,
-      nickname: 'myNickname',
-      studyTime: '03:35:00',
-    },
   ],
   monthList: [
     {

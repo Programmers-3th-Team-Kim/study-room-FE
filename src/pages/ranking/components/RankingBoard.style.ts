@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PiCrownSimpleFill } from 'react-icons/pi';
 
 export const BoardContainer = styled.div`
   display: flex;
@@ -34,8 +35,7 @@ export const BoardWrapper = styled.div.withConfig({
   height: 80%;
   border: 1px solid black;
   border-radius: 0.8rem;
-  /* background-color: ${(props) => props.bgColor}; */
-  /* background-color: ${({ theme }) => theme.color.bgGray}; */
+  background-color: ${(props) => props.bgColor};
   box-shadow: 2px 2px 4px 1px rgb(0 0 0 / 20%);
 `;
 
@@ -96,4 +96,34 @@ export const GridItem = styled.div`
   &:nth-last-child(3) {
     border-top: 1px solid black;
   }
+`;
+
+export const CrownWrapper = styled.div`
+  position: relative;
+  width: 2em;
+  height: 2em;
+`;
+
+export const CrownIcon = styled(PiCrownSimpleFill).withConfig({
+  shouldForwardProp: (prop) => prop !== 'rank',
+})<{ rank?: number }>`
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: ${(props) =>
+    props.rank === 1 ? '#FFD700' : props.rank === 2 ? '#C0C0C0' : '#CD7F32'};
+`;
+
+export const CrownText = styled.div`
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  z-index: 10;
+  font-size: 0.8em;
+  font-weight: 600;
 `;

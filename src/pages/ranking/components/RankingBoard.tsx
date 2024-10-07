@@ -13,7 +13,7 @@ export default function RankingBoard({
   rankingList,
   userInfo,
 }: RankingBoardProps) {
-  const processedRankingList =
+  const processedRankingList: RankingList[] =
     rankingList.length > 10
       ? rankingList.slice(0, 10)
       : [...rankingList, ...Array(10 - rankingList.length).fill({})];
@@ -35,7 +35,16 @@ export default function RankingBoard({
             {processedRankingList.map((rankInfo, index) => {
               return (
                 <Fragment key={index}>
-                  <S.GridItem>{rankInfo.rank}</S.GridItem>
+                  {rankInfo.rank < 4 ? (
+                    <S.GridItem>
+                      <S.CrownWrapper>
+                        <S.CrownText>{rankInfo.rank}</S.CrownText>
+                        <S.CrownIcon rank={rankInfo.rank} />
+                      </S.CrownWrapper>
+                    </S.GridItem>
+                  ) : (
+                    <S.GridItem>{rankInfo.rank}</S.GridItem>
+                  )}
                   <S.GridItem>{rankInfo.nickname}</S.GridItem>
                   <S.GridItem>{rankInfo.studyTime}</S.GridItem>
                 </Fragment>
