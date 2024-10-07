@@ -52,10 +52,16 @@ export default function Sidebar() {
         </S.IconWrapper>
       </S.DropdownToggle>
       <S.DropdownItems $isOpen={isStatsDropdownOpen}>
-        <S.SidebarItem to="/stats/my" $focused={selectedMenu === '/stats/my'}>
+        <S.SidebarItem
+          to="/statistics/my"
+          $focused={selectedMenu === '/statistics/my'}
+        >
           나의 통계
         </S.SidebarItem>
-        <S.SidebarItem to="/stats/all" $focused={selectedMenu === '/stats/all'}>
+        <S.SidebarItem
+          to="/statistics/all"
+          $focused={selectedMenu === '/statistics/all'}
+        >
           전체 통계
         </S.SidebarItem>
       </S.DropdownItems>
