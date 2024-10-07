@@ -7,6 +7,7 @@ export const createStudyRoom = async (data: CreateStudyRoomFormData) => {
     return response.data;
   } catch (error) {
     console.error('공부방 생성 실패:', error);
+    console.log(data);
     throw error;
   }
 };
