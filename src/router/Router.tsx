@@ -7,7 +7,8 @@ import SignUpPage from '@/pages/signUp/SignUpPage';
 import ProfilePage from '@/pages/profile/ProfilePage';
 import Planner from '@/pages/planner/Planner';
 import PrivateStudyRoom from '@/pages/privateStudyRoom/PrivateStudyRoom';
-import StatisticsPage from '@/pages/statistics/StatisticsPage';
+import AllStatisticsPage from '@/pages/statistics/all/AllStatisticsPage';
+import MyStatisticsPage from '@/pages/statistics/my/MyStatisticsPage';
 
 export default function Router() {
   return (
@@ -19,7 +20,8 @@ export default function Router() {
       <Route path="/planner" element={<Planner />} />
       <Route path="/study-rooms" element={<StudyRooms />} />
       <Route path="/study-room" element={<PrivateStudyRoom />} />
-      <Route path="/statistics" element={<StatisticsPage />} />
+      <Route path="/statistics/all" element={<AllStatisticsPage />} />
+      <Route path="/statistics/my" element={<MyStatisticsPage />} />
     </Routes>
   );
 }
