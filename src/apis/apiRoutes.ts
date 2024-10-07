@@ -7,4 +7,5 @@ export const API_ROUTES = {
   VERIFY_PASSWORD: '/auth/verify-password',
   CHANGE_PASSWORD: '/auth/change-password',
   USER: '/users/me',
+  PLANNERS: '/planners',
 };
