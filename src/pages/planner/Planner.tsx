@@ -63,6 +63,11 @@ export default function Planner() {
     }
   }, [isAddFormOpened, isEditFormOpened, editIndex]);
 
+  useEffect(() => {
+    setIsAddFormOpened(false);
+    setIsEditFormOpened(false);
+  }, [selectedDate]);
+
   return (
     <S.PlannerWrapper>
       <S.LeftPanel>
