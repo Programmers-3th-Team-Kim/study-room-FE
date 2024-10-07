@@ -22,6 +22,8 @@ export default function Layout({ children }: LayoutProps) {
     '/profile': '프로필',
     '/planner': '스터디 플래너',
     '/study-rooms': '스터디방',
+    '/statistics/all': '전체 통계',
+    '/statistics/my': '나의 통계',
   };
 
   const pageTitle = pageTitles[location.pathname];
