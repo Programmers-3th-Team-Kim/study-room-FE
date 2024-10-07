@@ -30,7 +30,7 @@ const TEMP_DATA: RankingResponse = {
   dayList: [
     {
       rank: 1,
-      nickname: 'nickname1',
+      nickname: 'ㅡㅡㅡㅡㅡㅡㅡㅡ',
       studyTime: '12:34:56',
     },
     {

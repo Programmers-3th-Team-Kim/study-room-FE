@@ -80,15 +80,27 @@ export const ContentWrapper = styled.div`
 `;
 
 export const GridItem = styled.div`
-  /* border: 1px solid black; */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: max(0.5rem, 1vw);
+  font-size: max(0.5rem, 0.8vw);
 
   &:nth-child(3n + 2):nth-child(n + 4) {
     border-left: 1px solid ${({ theme }) => theme.color.bgGray};
     border-right: 1px solid ${({ theme }) => theme.color.bgGray};
+  }
+
+  &:nth-child(3n + 1):nth-child(n + 4) {
+    font-size: max(0.5rem, 1vw);
+  }
+  &:nth-child(3n + 3):nth-child(n + 4) {
+    font-size: max(0.5rem, 0.9vw);
+  }
+
+  &:nth-child(1),
+  &:nth-child(2),
+  &:nth-child(3) {
+    font-size: max(0.5rem, 0.9vw);
   }
 
   &:nth-last-child(1),
