@@ -9,7 +9,7 @@ const ToPrivateButton = () => {
 
   const handleClick = async () => {
     const bodyData: CreateStudyRoomFormData = {
-      title: '개인공부방',
+      title: '개인 스터디룸',
       tagList: [],
       maxNum: 1,
       notice: '',
@@ -38,7 +38,7 @@ const ToPrivateButton = () => {
 
   return (
     <SCreateButton
-      label="1인 공부방 입장"
+      label="1인 스터디룸 입장"
       width="100%"
       height="46px"
       Icon={FaPlus}

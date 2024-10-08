@@ -11,7 +11,7 @@ const ToStudyRooms = () => {
 
   return (
     <SCreateButton
-      label="공부방 찾기"
+      label="스터디룸 찾기"
       width="100%"
       height="46px"
       Icon={FaArrowRight}
