@@ -4,11 +4,12 @@ export const HomeStudyRoomsStyle = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #f9f9f9;
-  width: 500px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   overflow-x: auto;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
 export const Title = styled.div`
@@ -16,21 +17,24 @@ export const Title = styled.div`
   justify-content: center;
   font-size: 1.2rem;
   font-weight: 600;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+`;
+
+export const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 20px;
 `;
 
 export const StudyRoomWrap = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
   gap: 20px;
-  padding: 10px 0;
+  height: 100%;
 `;
 
 export const ButtonWrap = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
   gap: 20px;
-  padding: 10px 0;
 `;

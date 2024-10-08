@@ -4,10 +4,8 @@ export const HomeStudyItemStyle = styled.div.withConfig({
   shouldForwardProp: (prop) => !['imageUrl'].includes(prop),
 })<{ imageUrl?: string }>`
   position: relative;
-  /* width: 195px;
-  height: 124px; */
   width: 100%;
-  height: 140px;
+  height: 100%;
   background: ${(props) =>
     props.imageUrl ? `url(${props.imageUrl})` : `#FFFFFF`};
   background-size: cover;

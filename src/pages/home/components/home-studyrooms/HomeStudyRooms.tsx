@@ -47,24 +47,26 @@ function HomeStudyRooms() {
   return (
     <S.HomeStudyRoomsStyle>
       <S.Title>최신 공부방</S.Title>
-      <S.StudyRoomWrap>
-        {rooms.map((room) => (
-          <HomeStudyItem
-            key={room._id}
-            title={room.title}
-            imageUrl={room.imageUrl}
-            tagList={room.tagList}
-            isPublic={room.isPublic}
-            isChat={room.isChat}
-            maxNum={room.maxNum}
-            currentNum={room.currentNum}
-          />
-        ))}
-      </S.StudyRoomWrap>
-      <S.ButtonWrap>
-        <ToPrivateButton />
-        <ToStudyRooms />
-      </S.ButtonWrap>
+      <S.Wrap>
+        <S.StudyRoomWrap>
+          {rooms.map((room) => (
+            <HomeStudyItem
+              key={room._id}
+              title={room.title}
+              imageUrl={room.imageUrl}
+              tagList={room.tagList}
+              isPublic={room.isPublic}
+              isChat={room.isChat}
+              maxNum={room.maxNum}
+              currentNum={room.currentNum}
+            />
+          ))}
+        </S.StudyRoomWrap>
+        <S.ButtonWrap>
+          <ToPrivateButton />
+          <ToStudyRooms />
+        </S.ButtonWrap>
+      </S.Wrap>
     </S.HomeStudyRoomsStyle>
   );
 }
