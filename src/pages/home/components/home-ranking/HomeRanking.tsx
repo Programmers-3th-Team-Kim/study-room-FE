@@ -21,7 +21,7 @@ const DATA: RankingResponse = {
     },
     {
       rank: 2,
-      nickname: 'nickname2',
+      nickname: 'Kim0hun',
       totalTime: '10:00:32',
     },
     {
@@ -32,7 +32,7 @@ const DATA: RankingResponse = {
   ],
   userInfo: {
     rank: 275,
-    nickname: 'myNickname',
+    nickname: 'Kim0hun',
     totalTime: '01:05:00',
   },
   prevUserInfo: {
@@ -40,11 +40,14 @@ const DATA: RankingResponse = {
     nickname: 'nickname274',
     totalTime: '01:07:00',
   },
-  nextUserInfo: {
-    rank: 276,
-    nickname: 'nickname276',
-    totalTime: '01:00:00',
-  },
+  // nextUserInfo: {
+  //   rank: 276,
+  //   nickname: 'nickname276',
+  //   totalTime: '01:00:00',
+  // },
+  // userInfo: {},
+  // prevUserInfo: {},
+  nextUserInfo: {},
   weekList: [],
   monthList: [],
 };

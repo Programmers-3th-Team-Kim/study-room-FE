@@ -50,41 +50,53 @@ export const MyList = styled.div`
   background-color: white;
 `;
 
-export const RankItem = styled.div`
+export const RankItem = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['isCurrentUser'].includes(prop),
+})<{ isCurrentUser?: boolean }>`
   display: flex;
   width: 100%;
   height: 100%;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
-  //background-color: #ddebfd;
+  background-color: ${({ isCurrentUser }) =>
+    isCurrentUser ? '#ddebfd' : 'transparent'};
 `;
 
 export const ItemWrap = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 70%;
   align-items: center;
   justify-content: center;
   gap: 10px;
 `;
 
-export const Rank = styled.div<{ isDayList?: boolean }>`
+export const Rank = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['isDayList'].includes(prop),
+})<{ isDayList?: boolean }>`
   display: flex;
   width: 30%;
   align-items: center;
   justify-content: center;
-  font-size: ${({ isDayList }) => (isDayList ? '24px' : '16px')};
-  /* border: ${({ isDayList }) => (isDayList ? 'none' : '1px solid #e4e4e4')};
-  border-radius: ${({ isDayList }) => (isDayList ? 'none' : '10px')}; */
+  font-size: ${({ isDayList }) => (isDayList ? '1.5rem' : '1rem')};
+
+  img {
+    width: 2.5rem;
+    height: 2.5rem;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const NickName = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
+  font-size: 1.2rem;
 `;
 
 export const TotalTime = styled.div`
@@ -92,5 +104,5 @@ export const TotalTime = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
+  font-size: 1.2rem;
 `;

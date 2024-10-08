@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const SCreateButtonStyle = styled.button.withConfig({
-  shouldForwardProp: (prop) => !['borderRadius'].includes(prop),
+  shouldForwardProp: (prop) =>
+    !['borderRadius', 'backgroundColor', 'borderColor'].includes(prop),
 })<{
   borderRadius?: string;
   fontSize?: string;
