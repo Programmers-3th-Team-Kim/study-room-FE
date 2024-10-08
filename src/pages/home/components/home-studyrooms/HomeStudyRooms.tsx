@@ -46,7 +46,7 @@ function HomeStudyRooms() {
 
   return (
     <S.HomeStudyRoomsStyle>
-      <S.Title>최신 공부방</S.Title>
+      <S.Title>최신 스터디룸</S.Title>
       <S.Wrap>
         <S.StudyRoomWrap>
           {rooms.map((room) => (

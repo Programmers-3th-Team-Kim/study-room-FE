@@ -23,7 +23,7 @@ export default function Layout({ children }: LayoutProps) {
     '/statistics/all': '전체 통계',
     '/statistics/my': '나의 통계',
     '/planner': '플래너',
-    '/study-rooms': '공부방',
+    '/study-rooms': '스터디룸',
     '/ranking': '랭킹',
   };
 
