@@ -8,7 +8,6 @@ interface AuthState {
     nickname: string;
     imageUrl?: string;
     introduction?: string;
-    dDay?: string;
   } | null;
   setAuthData: (
     accessToken: string,
@@ -17,7 +16,6 @@ interface AuthState {
       nickname: string;
       imageUrl?: string;
       introduction?: string;
-      dDay?: string;
     } | null
   ) => void;
   clearAuthData: () => void;
