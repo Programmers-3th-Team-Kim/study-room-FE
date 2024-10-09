@@ -52,7 +52,7 @@ export default function Header({ title }: HeaderProps) {
     return user?.imageUrl ? (
       <S.ProfileImg src={user?.imageUrl} alt="Profile" />
     ) : (
-      <IoPersonCircle size={32} />
+      <IoPersonCircle size={32} color="gray" />
     );
   };
 
