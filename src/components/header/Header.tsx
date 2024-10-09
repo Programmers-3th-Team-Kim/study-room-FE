@@ -3,7 +3,7 @@ import { logout } from '@/apis/auth.api';
 import * as S from './Header.style';
 import { useAuthStore } from '@/stores/auth.store';
 import { toast } from 'react-toastify';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   IoPersonCircle,
   IoSettingsOutline,
@@ -18,6 +18,26 @@ export default function Header({ title }: HeaderProps) {
   const navigate = useNavigate();
   const { accessToken, user, clearAuthData } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const profileRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node) &&
+        profileRef.current &&
+        !profileRef.current.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleLogout = async () => {
     await logout();
@@ -63,7 +83,9 @@ export default function Header({ title }: HeaderProps) {
       <S.ButtonWrapper>
         {accessToken ? (
           <>
-            <div onClick={toggleDropdown}>{renderProfileImage()}</div>
+            <div ref={profileRef} onClick={toggleDropdown}>
+              {renderProfileImage()}
+            </div>
             {renderDropdown()}
           </>
         ) : (
