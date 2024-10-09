@@ -58,22 +58,18 @@ export default function Header({ title }: HeaderProps) {
 
   const renderDropdown = () => {
     return (
-      isOpen && (
-        <S.DropDownWrapper ref={dropdownRef}>
-          <S.UserInfo>
-            {renderProfileImage()}
-            <S.DropdownText>{user?.nickname} 님</S.DropdownText>
-          </S.UserInfo>
-          <S.DropdownItems onClick={() => navigate('/profile')}>
-            <IoSettingsOutline />
-            프로필 수정
-          </S.DropdownItems>
-          <S.DropdownItems onClick={handleLogout}>
-            <IoLogOutOutline />
-            로그아웃
-          </S.DropdownItems>
-        </S.DropDownWrapper>
-      )
+      <S.DropDownWrapper ref={dropdownRef} isOpen={isOpen}>
+        <S.UserInfo>
+          {renderProfileImage()}
+          <S.DropdownText>{user?.nickname} 님</S.DropdownText>
+        </S.UserInfo>
+        <S.DropdownItems onClick={() => navigate('/profile')}>
+          <IoSettingsOutline /> 프로필 수정
+        </S.DropdownItems>
+        <S.DropdownItems onClick={handleLogout}>
+          <IoLogOutOutline /> 로그아웃
+        </S.DropdownItems>
+      </S.DropDownWrapper>
     );
   };
 

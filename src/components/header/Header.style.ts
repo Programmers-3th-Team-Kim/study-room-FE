@@ -57,7 +57,7 @@ export const DropdownProfileImg = styled.img`
   border: 1px solid lightgray;
 `;
 
-export const DropDownWrapper = styled.div`
+export const DropDownWrapper = styled.div<{ isOpen: boolean }>`
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -67,6 +67,11 @@ export const DropDownWrapper = styled.div`
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: white;
+  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
+  transform: translateY(${({ isOpen }) => (isOpen ? '0' : '-10px')});
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 `;
 
 export const UserInfo = styled.div`
