@@ -58,7 +58,7 @@ export default function Header({ title }: HeaderProps) {
 
   const renderDropdown = () => {
     return (
-      <S.DropDownWrapper ref={dropdownRef} isOpen={isOpen}>
+      <S.DropDownWrapper ref={dropdownRef} $isOpen={isOpen}>
         <S.UserInfo>
           {renderProfileImage()}
           <S.DropdownText>{user?.nickname} 님</S.DropdownText>
