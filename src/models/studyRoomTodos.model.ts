@@ -34,3 +34,16 @@ export interface PutPostTodoReq {
   // timelineList?: StartEndTime[] | undefined;
   // totalTime?: number;
 }
+
+export interface TodoStatistic {
+  todo: string;
+  totalTime: string;
+  percentage: number;
+}
+
+export interface GetStatisticsRes {
+  totalTime: string;
+  maxTime: string;
+  restTime: string;
+  planner: TodoStatistic[];
+}

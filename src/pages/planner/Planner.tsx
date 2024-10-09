@@ -6,8 +6,8 @@ import TodoBox from './components/todoBox/TodoBox';
 import TimeLine from './components/timeLine/TimeLine';
 import TimeTable from './components/timeTable/TimeTable';
 import { InputForm } from './components/inputForm/InputForm';
-import { getTodos } from '@/apis/planners.api';
-import { GetTodosRes } from '@/models/studyRoomTodos.model';
+import { getTodos, getStatistics } from '@/apis/planners.api';
+import { GetStatisticsRes, GetTodosRes } from '@/models/studyRoomTodos.model';
 import { colorMap } from '@/data/colorMap';
 import * as S from './Planner.style';
 
@@ -26,6 +26,17 @@ export default function Planner() {
     queryKey: ['getTodos', selectedDate],
     queryFn: () => getTodos(dayjs(selectedDate).format('YYYY-MM-DD')) ?? [],
   });
+
+  const { data: statistics, isPending: statisticsPending } =
+    useQuery<GetStatisticsRes>({
+      queryKey: ['getStatistics', selectedDate],
+      queryFn: () =>
+        getStatistics(
+          selectedDate.getFullYear(),
+          selectedDate.getMonth() + 1,
+          selectedDate.getDate()
+        ),
+    });
 
   useEffect(() => {
     if (timeLineHeightRef.current) {
@@ -157,7 +168,14 @@ export default function Planner() {
       </S.LeftPanel>
       <S.RightPanel>
         <div className="label">오늘의 공부 시간</div>
-        <S.StudiedTime>XX시간 XX분 공부했어요!</S.StudiedTime>
+        <S.StudiedTime>
+          {statistics
+            ? (() => {
+                const [hours, minutes] = statistics.totalTime.split(':');
+                return `${hours}시간 ${minutes}분 공부했어요!`;
+              })()
+            : '00시간 00분 공부했어요!'}
+        </S.StudiedTime>
         <TimeTable selectedDate={selectedDate} />
       </S.RightPanel>
     </S.PlannerWrapper>
