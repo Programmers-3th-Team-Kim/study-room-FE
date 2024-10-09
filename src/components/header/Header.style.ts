@@ -40,3 +40,11 @@ export const ButtonWrapper = styled.div`
   display: flex;
   gap: 10px;
 `;
+
+export const ProfileImg = styled.img`
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  border: 1px solid lightgray;
+`;

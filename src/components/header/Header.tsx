@@ -3,6 +3,7 @@ import { logout } from '@/apis/auth.api';
 import * as S from './Header.style';
 import { useAuthStore } from '@/stores/auth.store';
 import { toast } from 'react-toastify';
+import { IoPersonCircle } from 'react-icons/io5';
 
 interface HeaderProps {
   title: string;
@@ -10,7 +11,7 @@ interface HeaderProps {
 
 export default function Header({ title }: HeaderProps) {
   const navigate = useNavigate();
-  const { accessToken, clearAuthData } = useAuthStore();
+  const { accessToken, user, clearAuthData } = useAuthStore();
 
   const handleLogout = async () => {
     await logout();
@@ -19,14 +20,20 @@ export default function Header({ title }: HeaderProps) {
     navigate('/');
   };
 
+  const renderProfileImage = () => {
+    return user?.imageUrl ? (
+      <S.ProfileImg src={user?.imageUrl} alt="Profile" />
+    ) : (
+      <IoPersonCircle size={32} />
+    );
+  };
   return (
     <S.HeaderContainer>
       <S.HeaderTitle>{title}</S.HeaderTitle>
       <S.ButtonWrapper>
         {accessToken ? (
           <>
-            <S.Button onClick={handleLogout}>로그아웃</S.Button>
-            <S.Button onClick={() => navigate('/profile')}>프로필</S.Button>
+            {renderProfileImage()}
           </>
         ) : (
           <>
