@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StudyGridStyle = styled.div`
   display: grid;
   gap: 30px;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
   padding-right: 20px;
   box-sizing: border-box;
