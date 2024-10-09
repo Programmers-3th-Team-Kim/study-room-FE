@@ -152,34 +152,38 @@ function StudyGrid({
   };
 
   return (
-    <S.StudyGridStyle ref={gridContainerWidthRef}>
+    <>
       {isLoading ? (
-        <div>로딩 중...</div>
+        <S.Loader>로딩 중...</S.Loader>
       ) : error ? (
-        <div>{`방 목록을 불러오는 데 실패했습니다: ${error.message}`}</div>
+        <S.ErrorMessage>{`방 목록을 불러오는 데 실패했습니다: ${error.message}`}</S.ErrorMessage>
+      ) : data?.pages[0].rooms.length === 0 ? (
+        <S.NoData>검색 결과가 없습니다.</S.NoData>
       ) : (
-        data?.pages.map(({ rooms }) => {
-          return rooms.map((room, index) => {
-            const isLastRoom = index === rooms.length - 1;
-            return (
-              <div
-                key={room._id}
-                onClick={() => handleRoomClick(room)}
-                ref={isLastRoom ? lastRoomRef : null}
-              >
-                <StudyItem
+        <S.StudyGridItem ref={gridContainerWidthRef}>
+          {data?.pages.map(({ rooms }) => {
+            return rooms.map((room, index) => {
+              const isLastRoom = index === rooms.length - 1;
+              return (
+                <div
                   key={room._id}
-                  title={room.title}
-                  imageUrl={room.imageUrl}
-                  tagList={room.tagList}
-                  isPublic={room.isPublic}
-                  maxNum={room.maxNum}
-                  currentNum={room.currentNum}
-                />
-              </div>
-            );
-          });
-        })
+                  onClick={() => handleRoomClick(room)}
+                  ref={isLastRoom ? lastRoomRef : null}
+                >
+                  <StudyItem
+                    key={room._id}
+                    title={room.title}
+                    imageUrl={room.imageUrl}
+                    tagList={room.tagList}
+                    isPublic={room.isPublic}
+                    maxNum={room.maxNum}
+                    currentNum={room.currentNum}
+                  />
+                </div>
+              );
+            });
+          })}
+        </S.StudyGridItem>
       )}
       {showPasswordModal && selectedRoom && (
         <Modal onClose={() => setShowPasswordModal(false)}>
@@ -189,7 +193,7 @@ function StudyGrid({
           />
         </Modal>
       )}
-    </S.StudyGridStyle>
+    </>
   );
 }
 
