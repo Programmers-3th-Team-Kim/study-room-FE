@@ -9,6 +9,7 @@ import { InputForm } from './components/inputForm/InputForm';
 import { getTodos, getStatistics } from '@/apis/planners.api';
 import { GetStatisticsRes, GetTodosRes } from '@/models/studyRoomTodos.model';
 import { colorMap } from '@/data/colorMap';
+import Loader from '@/components/loader/Loader';
 import * as S from './Planner.style';
 
 export default function Planner() {
@@ -145,7 +146,7 @@ export default function Planner() {
                 })
               : !isAddFormOpened &&
                 (todosPending ? (
-                  <S.Loader />
+                  <Loader />
                 ) : (
                   <S.NoData>
                     오늘의 공부 계획을

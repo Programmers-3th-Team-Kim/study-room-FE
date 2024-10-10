@@ -9,4 +9,5 @@ export const API_ROUTES = {
   USER: '/users/me',
   PLANNERS: '/planners',
   STATISTICS: '/statistics',
+  RANKINGS: '/rankings',
 };
