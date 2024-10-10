@@ -81,7 +81,12 @@ export default function Planner() {
   }, [selectedDate]);
 
   return (
-    <S.PlannerWrapper>
+    <S.PlannerWrapper
+      onClick={() => {
+        setIsAddFormOpened(false);
+        setIsEditFormOpened(false);
+      }}
+    >
       <S.LeftPanel>
         <div className="label">오늘의 계획</div>
         <S.LeftHeader>
@@ -91,7 +96,8 @@ export default function Planner() {
             setSelectedDate={setSelectedDate}
           />
           <S.AddButton
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               if (
                 selectedDate.setHours(0, 0, 0, 0) <
                 new Date().setHours(0, 0, 0, 0)
@@ -116,6 +122,9 @@ export default function Planner() {
                     <Fragment key={todo._id}>
                       <S.EachContentWrapper
                         ref={(el) => (editFormRef.current[index] = el)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
                       >
                         <TimeLine
                           startTime={todo.startTime}

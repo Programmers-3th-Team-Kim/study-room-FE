@@ -228,7 +228,11 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
     };
 
     return (
-      <S.InputFormStyle>
+      <S.InputFormStyle
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <S.Form onSubmit={handleSubmit(onSubmit)} ref={ref}>
           <S.TodoArea>
             <S.LabelErrorWrapper>
