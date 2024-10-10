@@ -79,7 +79,9 @@ export const InputForm = forwardRef<HTMLFormElement, InputFormProps>(
     });
 
     useEffect(() => {
-      if (selectedDate.setHours(0, 0, 0, 0) < todayDate) {
+      const selectedDateMidnight = new Date(selectedDate).setHours(0, 0, 0, 0);
+
+      if (selectedDateMidnight < todayDate) {
         setDisableSaveButton(true);
       }
     }, [selectedDate, todayDate]);

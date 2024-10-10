@@ -38,6 +38,7 @@ export default function Planner() {
           selectedDate.getMonth() + 1,
           selectedDate.getDate()
         ),
+      enabled: !!todos,
     });
 
   useEffect(() => {
@@ -100,10 +101,13 @@ export default function Planner() {
           <S.AddButton
             onClick={(e) => {
               e.stopPropagation();
-              if (
-                selectedDate.setHours(0, 0, 0, 0) <
-                new Date().setHours(0, 0, 0, 0)
-              ) {
+              const selectedDateMidnight = new Date(selectedDate).setHours(
+                0,
+                0,
+                0,
+                0
+              );
+              if (selectedDateMidnight < new Date().setHours(0, 0, 0, 0)) {
                 alert(
                   `지난 날짜의 할 일 추가는 불가능합니다. \n${dayjs().format('YYYY-MM-DD')} 이후의 날짜에서 다시 시도해주세요.`
                 );
@@ -118,53 +122,55 @@ export default function Planner() {
             <S.TimeLineFull height={timeLineFullHeight} />
           )}
           <S.TodosWrapper>
-            {todos && todos.length
-              ? todos.map((todo, index) => {
-                  return (
-                    <Fragment key={todo._id}>
-                      <S.EachContentWrapper
-                        ref={(el) => (editFormRef.current[index] = el)}
-                        onClick={(e) => {
-                          e.stopPropagation();
+            {todosPending || statisticsPending ? (
+              <Loader />
+            ) : todos && todos.length ? (
+              todos.map((todo, index) => {
+                return (
+                  <Fragment key={todo._id}>
+                    <S.EachContentWrapper
+                      ref={(el) => (editFormRef.current[index] = el)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      <TimeLine
+                        startTime={todo.startTime}
+                        endTime={todo.endTime}
+                      />
+                      <TodoBox
+                        {...todo}
+                        onClick={() => {
+                          handleTodoBoxClick(index);
                         }}
-                      >
-                        <TimeLine
-                          startTime={todo.startTime}
-                          endTime={todo.endTime}
-                        />
-                        <TodoBox
-                          {...todo}
-                          onClick={() => {
-                            handleTodoBoxClick(index);
-                          }}
-                          color={colorMap[index] ?? 'gainsboro'}
-                          selectedDate={selectedDate}
-                        ></TodoBox>
-                      </S.EachContentWrapper>
-                      {isEditFormOpened && index === editIndex && (
-                        <InputForm
-                          formType="edit"
-                          setIsEditFormOpened={setIsEditFormOpened}
-                          currentData={todo}
-                          setEditIndex={setEditIndex}
-                          currentIndex={index}
-                          todos={todos}
-                          selectedDate={selectedDate}
-                        />
-                      )}
-                    </Fragment>
-                  );
-                })
-              : !isAddFormOpened &&
-                (todosPending ? (
-                  <Loader />
-                ) : (
-                  <S.NoData>
-                    오늘의 공부 계획을
-                    <br />
-                    세워보세요!
-                  </S.NoData>
-                ))}
+                        color={colorMap[index] ?? 'gainsboro'}
+                        selectedDate={selectedDate}
+                      ></TodoBox>
+                    </S.EachContentWrapper>
+                    {isEditFormOpened && index === editIndex && (
+                      <InputForm
+                        formType="edit"
+                        setIsEditFormOpened={setIsEditFormOpened}
+                        currentData={todo}
+                        setEditIndex={setEditIndex}
+                        currentIndex={index}
+                        todos={todos}
+                        selectedDate={selectedDate}
+                      />
+                    )}
+                  </Fragment>
+                );
+              })
+            ) : !isAddFormOpened ? (
+              <S.NoData>
+                오늘의 공부 계획을
+                <br />
+                세워보세요!
+              </S.NoData>
+            ) : (
+              <></>
+            )}
+
             {isAddFormOpened ? (
               <InputForm
                 formType="add"
@@ -181,15 +187,17 @@ export default function Planner() {
       <S.RightPanel>
         <div className="label">오늘의 공부 시간</div>
         <S.StudiedTime>
-          {statistics
-            ? (() => {
-                const [hours, minutes] = statistics.totalTime.split(':');
-                if (hours === '00' && minutes === '00') {
-                  return DEFAULT_TEXT;
-                }
-                return `${hours}시간 ${minutes}분 공부했어요!`;
-              })()
-            : DEFAULT_TEXT}
+          {statisticsPending
+            ? ''
+            : statistics
+              ? (() => {
+                  const [hours, minutes] = statistics.totalTime.split(':');
+                  if (hours === '00' && minutes === '00') {
+                    return DEFAULT_TEXT;
+                  }
+                  return `${hours}시간 ${minutes}분 공부했어요!`;
+                })()
+              : DEFAULT_TEXT}
         </S.StudiedTime>
         <TimeTable selectedDate={selectedDate} />
       </S.RightPanel>

@@ -139,4 +139,5 @@ export const StudiedTime = styled.div`
   font-weight: 600;
   font-size: max(1rem, 1.3vw);
   margin: 1.5rem 0px;
+  height: 1em;
 `;
