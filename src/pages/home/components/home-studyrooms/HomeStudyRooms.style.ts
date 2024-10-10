@@ -14,8 +14,7 @@ export const HomeStudyRoomsStyle = styled.div`
 
 export const Title = styled.div`
   display: flex;
-  justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 600;
   padding-bottom: 20px;
 `;
