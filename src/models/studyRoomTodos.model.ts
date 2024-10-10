@@ -20,7 +20,6 @@ export interface GetTodosRes {
 }
 
 export interface PutPostTodoReq {
-  _id?: string;
   todo: string;
   date: string;
   subject?: string;
