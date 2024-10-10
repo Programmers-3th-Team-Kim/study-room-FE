@@ -4,6 +4,10 @@ import * as S from './HomeStudyItem.style';
 import { FaLock, FaUnlock } from 'react-icons/fa6';
 import { StudyItem } from '@/types/studyRoom';
 
+interface HomeStudyItemProps extends StudyItem {
+  onClick?: () => void;
+}
+
 function HomeStudyItem({
   title,
   imageUrl,
@@ -11,9 +15,10 @@ function HomeStudyItem({
   isChat,
   currentNum,
   maxNum,
-}: StudyItem) {
+  onClick,
+}: HomeStudyItemProps) {
   return (
-    <S.HomeStudyItemStyle imageUrl={imageUrl}>
+    <S.HomeStudyItemStyle imageUrl={imageUrl} onClick={onClick}>
       <S.ItemContainer imageUrl={imageUrl}>
         <S.Title>{title}</S.Title>
         <S.Footer>

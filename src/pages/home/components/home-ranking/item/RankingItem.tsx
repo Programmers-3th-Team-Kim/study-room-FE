@@ -1,9 +1,9 @@
-import { RankingResponse } from '@/types/ranking';
+import { RankingResponseJWT } from '@/types/ranking';
 import * as S from './RankingItem.style';
 import { useAuthStore } from '@/stores/auth.store';
 
 interface RankingItemProps {
-  data: RankingResponse;
+  data: RankingResponseJWT;
 }
 
 const RankDisplay = ({
@@ -19,8 +19,6 @@ const RankDisplay = ({
 }) => {
   const { user } = useAuthStore();
   const isCurrentUser = user?.nickname === nickname;
-
-  //console.log('현재 사용자 닉네임:', user?.nickname);
 
   const renderRank = () => {
     if (rank === 1) {
@@ -61,69 +59,34 @@ const RankDisplay = ({
 };
 
 function RankingItem({ data }: RankingItemProps) {
-  const myListItems = [];
-
-  // prevUserInfo가 존재할 경우 추가
-  if (data.prevUserInfo && Object.keys(data.prevUserInfo).length > 0) {
-    myListItems.push(
-      <RankDisplay
-        key={'prev'}
-        rank={data.prevUserInfo.rank}
-        nickname={data.prevUserInfo.nickname}
-        totalTime={data.prevUserInfo.totalTime}
-      />
-    );
-  } else {
-    myListItems.push(
-      <S.NoUserMessage key={'prev'}>불러올 데이터가 없습니다.</S.NoUserMessage>
-    );
-  }
-
-  // userInfo는 항상 보여줌
-  myListItems.push(
-    <RankDisplay
-      key={'current'}
-      rank={data.userInfo.rank}
-      nickname={data.userInfo.nickname}
-      totalTime={data.userInfo.totalTime}
-    />
-  );
-
-  // nextUserInfo가 존재할 경우 추가
-  if (data.nextUserInfo && Object.keys(data.nextUserInfo).length > 0) {
-    myListItems.push(
-      <RankDisplay
-        key={'next'}
-        rank={data.nextUserInfo.rank}
-        nickname={data.nextUserInfo.nickname}
-        totalTime={data.nextUserInfo.totalTime}
-      />
-    );
-  } else {
-    myListItems.push(
-      <S.NoUserMessage key={'next'}>불러올 데이터가 없습니다.</S.NoUserMessage>
-    );
-  }
+  const top10 = data?.dayList?.top10 || [];
 
   return (
     <S.RankingItemStyle>
       <S.Wrap>
-        <S.Ttile>Top 3</S.Ttile>
+        <S.Title>Top 10</S.Title>
         <S.DayList>
-          {data.dayList.map((item) => (
-            <RankDisplay
-              key={item.rank}
-              rank={item.rank}
-              nickname={item.nickname}
-              totalTime={item.totalTime}
-              isDayList={true}
-            />
-          ))}
+          {top10.length > 0 ? (
+            top10.map((item, index) => (
+              <RankDisplay
+                key={index}
+                rank={item.rank}
+                nickname={item.nickname}
+                totalTime={item.totalTime}
+                isDayList={true}
+              />
+            ))
+          ) : (
+            <S.NoUserMessage>오늘의 랭킹이 없습니다.</S.NoUserMessage>
+          )}
+          {top10.length > 0 &&
+            top10.length < 10 &&
+            Array.from({ length: 10 - top10.length }).map((_, index) => (
+              <S.NoUserMessage key={`empty-${index}`}>
+                불러올 데이터가 없습니다.
+              </S.NoUserMessage>
+            ))}
         </S.DayList>
-      </S.Wrap>
-      <S.Wrap>
-        <S.Ttile>내 순위</S.Ttile>
-        <S.MyList>{myListItems}</S.MyList>
       </S.Wrap>
     </S.RankingItemStyle>
   );

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { RankingResponseJWT } from '@/types/ranking';
 import { HomeRankingStyle } from './HomeRanking.style';
-import RankingItem from './item/RankingItem';
-import axios from 'axios';
+import axiosInstance from '@/apis/axiosInstance.api';
+import JWTRankingItem from './item/JWTRankingItem';
 
-function HomeRanking() {
+function JWTHomeRanking() {
   const [data, setData] = useState<RankingResponseJWT | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -12,9 +12,7 @@ function HomeRanking() {
   useEffect(() => {
     const fetchRankingData = async () => {
       try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_REACT_APP_API_URL}/rankings`
-        );
+        const res = await axiosInstance.get('/rankings/jwt');
         console.log(res.data);
 
         setData(res.data);
@@ -38,8 +36,10 @@ function HomeRanking() {
   }
 
   return (
-    <HomeRankingStyle>{data && <RankingItem data={data} />}</HomeRankingStyle>
+    <HomeRankingStyle>
+      {data && <JWTRankingItem data={data} />}
+    </HomeRankingStyle>
   );
 }
 
-export default HomeRanking;
+export default JWTHomeRanking;

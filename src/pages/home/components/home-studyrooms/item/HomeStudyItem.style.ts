@@ -14,8 +14,6 @@ export const HomeStudyItemStyle = styled.div.withConfig({
   border: 1px solid;
   border-color: #e4e4e4;
 
-  min-width: 200px;
-
   ${(props) =>
     props.imageUrl &&
     `

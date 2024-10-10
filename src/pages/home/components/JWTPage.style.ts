@@ -1,0 +1,18 @@
+import styled from 'styled-components';
+
+export const JWTPageStyle = styled.div`
+  display: flex;
+  width: 100%;
+  //height: 100%;
+  flex-direction: row;
+  gap: 40px;
+  padding: 40px;
+`;
+
+export const Wrap = styled.div`
+  display: flex;
+  width: 100%;
+  //height: 100%;
+  flex-direction: column;
+  gap: 40px;
+`;
