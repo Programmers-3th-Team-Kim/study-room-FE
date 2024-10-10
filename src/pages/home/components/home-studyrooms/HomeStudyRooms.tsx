@@ -1,18 +1,24 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import HomeStudyItem from './item/HomeStudyItem';
 import * as S from './HomeStudyRooms.style';
 import ToStudyRooms from './button/ToStudyRooms';
 import ToPrivateButton from './button/ToPrivateButton';
 import { StudyItem } from '@/types/studyRoom';
-import { useNavigate } from 'react-router-dom';
+import { HomeRankingStyle } from '../home-ranking/HomeRanking.style';
 
-const url = `${import.meta.env.VITE_REACT_APP_API_URL}/rooms?limit=6`;
+interface HomeStudyRoomsProps {
+  limit: number;
+  isJWT: boolean;
+}
 
-function HomeStudyRooms() {
+const HomeStudyRooms = ({ limit, isJWT }: HomeStudyRoomsProps) => {
   const [rooms, setRooms] = useState<StudyItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const url = `${import.meta.env.VITE_REACT_APP_API_URL}/rooms?limit=${limit}`;
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -35,18 +41,29 @@ function HomeStudyRooms() {
     };
 
     fetchRooms();
-  }, []);
+  }, [url]);
 
-  const handleItemClick = () => {
-    navigate('/login');
+  const handleItemClick = (id: string) => {
+    if (isJWT) {
+      navigate(`/study-room/${id}`);
+    } else {
+      navigate('/login');
+    }
   };
 
   if (loading) {
-    return <div>로딩 중...</div>;
+    return (
+      <HomeRankingStyle>
+        <S.Loading>
+          <div className="spinner" />
+          <S.Text>로딩 중...</S.Text>
+        </S.Loading>
+      </HomeRankingStyle>
+    );
   }
 
   if (error) {
-    return <div>오류 발생: {error}</div>;
+    return <S.Text>{error}</S.Text>;
   }
 
   return (
@@ -54,9 +71,11 @@ function HomeStudyRooms() {
       <S.Title>스터디룸</S.Title>
       <S.Wrap>
         <S.StudyRoomWrap>
-          {rooms.map((room) => (
-            <div key={room._id} onClick={handleItemClick}>
+          {rooms.map((room) => {
+            const roomId = room._id;
+            return (
               <HomeStudyItem
+                key={roomId}
                 title={room.title}
                 imageUrl={room.imageUrl}
                 tagList={room.tagList}
@@ -64,9 +83,10 @@ function HomeStudyRooms() {
                 isChat={room.isChat}
                 maxNum={room.maxNum}
                 currentNum={room.currentNum}
+                onClick={roomId ? () => handleItemClick(roomId) : undefined}
               />
-            </div>
-          ))}
+            );
+          })}
         </S.StudyRoomWrap>
         <S.ButtonWrap>
           <ToPrivateButton />
@@ -75,6 +95,6 @@ function HomeStudyRooms() {
       </S.Wrap>
     </S.HomeStudyRoomsStyle>
   );
-}
+};
 
 export default HomeStudyRooms;

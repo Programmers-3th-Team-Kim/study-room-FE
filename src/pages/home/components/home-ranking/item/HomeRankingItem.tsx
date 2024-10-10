@@ -1,9 +1,10 @@
 import { RankingResponseJWT } from '@/types/ranking';
-import * as S from './RankingItem.style';
+import * as S from './HomeRankingItem.style';
 import { useAuthStore } from '@/stores/auth.store';
 
-interface JWTRankingItemProps {
+interface RankingItemProps {
   data: RankingResponseJWT;
+  isJWT?: boolean;
 }
 
 const RankDisplay = ({
@@ -58,11 +59,11 @@ const RankDisplay = ({
   );
 };
 
-function JWTRankingItem({ data }: JWTRankingItemProps) {
+function Item({ data, isJWT }: RankingItemProps) {
   const myListItems = [];
 
   // prevUserInfo가 존재할 경우 추가
-  if (data.prevUserInfo && Object.keys(data.prevUserInfo).length > 0) {
+  if (isJWT && data.prevUserInfo && Object.keys(data.prevUserInfo).length > 0) {
     myListItems.push(
       <RankDisplay
         key={'prev'}
@@ -71,7 +72,7 @@ function JWTRankingItem({ data }: JWTRankingItemProps) {
         totalTime={data.prevUserInfo.totalTime}
       />
     );
-  } else {
+  } else if (isJWT) {
     myListItems.push(
       <S.NoUserMessage key={'prev'}>불러올 데이터가 없습니다.</S.NoUserMessage>
     );
@@ -90,7 +91,7 @@ function JWTRankingItem({ data }: JWTRankingItemProps) {
   }
 
   // nextUserInfo가 존재할 경우 추가
-  if (data.nextUserInfo && Object.keys(data.nextUserInfo).length > 0) {
+  if (isJWT && data.nextUserInfo && Object.keys(data.nextUserInfo).length > 0) {
     myListItems.push(
       <RankDisplay
         key={'next'}
@@ -99,35 +100,51 @@ function JWTRankingItem({ data }: JWTRankingItemProps) {
         totalTime={data.nextUserInfo.totalTime}
       />
     );
-  } else {
+  } else if (isJWT) {
     myListItems.push(
       <S.NoUserMessage key={'next'}>불러올 데이터가 없습니다.</S.NoUserMessage>
     );
   }
 
+  const top10 = data?.dayList?.top10 || [];
+
   return (
     <S.RankingItemStyle>
       <S.Wrap>
-        <S.Title>Top 3</S.Title>
+        <S.Title>{isJWT ? 'Top 3' : 'Top 10'}</S.Title>
         <S.DayList>
-          {data.dayList.top10.length > 0 ? (
-            data.dayList.top10
-              .slice(0, 3)
-              .map((item, index) => (
-                <RankDisplay
-                  key={index}
-                  rank={item.rank}
-                  nickname={item.nickname}
-                  totalTime={item.totalTime}
-                  isDayList={true}
-                />
-              ))
+          {isJWT ? (
+            top10.length > 0 ? (
+              top10
+                .slice(0, 3)
+                .map((item, index) => (
+                  <RankDisplay
+                    key={index}
+                    rank={item.rank}
+                    nickname={item.nickname}
+                    totalTime={item.totalTime}
+                    isDayList={true}
+                  />
+                ))
+            ) : (
+              <S.NoUserMessage>오늘의 랭킹이 없습니다.</S.NoUserMessage>
+            )
+          ) : top10.length > 0 ? (
+            top10.map((item, index) => (
+              <RankDisplay
+                key={index}
+                rank={item.rank}
+                nickname={item.nickname}
+                totalTime={item.totalTime}
+                isDayList={true}
+              />
+            ))
           ) : (
             <S.NoUserMessage>오늘의 랭킹이 없습니다.</S.NoUserMessage>
           )}
-          {data.dayList.top10.length > 0 &&
-            data.dayList.top10.length < 3 &&
-            Array.from({ length: 3 - data.dayList.top10.length }).map(
+          {top10.length > 0 &&
+            top10.length < (isJWT ? 3 : 10) &&
+            Array.from({ length: (isJWT ? 3 : 10) - top10.length }).map(
               (_, index) => (
                 <S.NoUserMessage key={`empty-${index}`}>
                   불러올 데이터가 없습니다.
@@ -136,12 +153,14 @@ function JWTRankingItem({ data }: JWTRankingItemProps) {
             )}
         </S.DayList>
       </S.Wrap>
-      <S.Wrap>
-        <S.Title>내 순위</S.Title>
-        <S.MyList>{myListItems}</S.MyList>
-      </S.Wrap>
+      {isJWT && (
+        <S.Wrap>
+          <S.Title>내 순위</S.Title>
+          <S.MyList>{myListItems}</S.MyList>
+        </S.Wrap>
+      )}
     </S.RankingItemStyle>
   );
 }
 
-export default JWTRankingItem;
+export default Item;

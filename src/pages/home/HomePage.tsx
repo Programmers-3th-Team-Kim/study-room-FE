@@ -1,28 +1,28 @@
 import { useAuthStore } from '@/stores/auth.store';
-import { HomePageStyle, JWTPageStyle, Wrap } from './HomePage.style';
-import StudyRooms from './components/home-studyrooms/StudyRooms';
-import Ranking from './components/home-ranking/Ranking';
+import * as S from './HomePage.style';
 import HomeMy from './components/my/HomeMy';
+import HomeStudyRooms from './components/home-studyrooms/HomeStudyRooms';
+import HomeRanking from './components/home-ranking/HomeRanking';
 
 export default function HomePage() {
   const accessToken = useAuthStore((state) => state.accessToken);
 
   if (accessToken) {
     return (
-      <JWTPageStyle>
-        <Wrap>
-          <StudyRooms limit={2} isJWT={true} />
-          <Ranking isJWT={true} />
-        </Wrap>
+      <S.JWTPageStyle>
+        <S.Wrap>
+          <HomeStudyRooms limit={2} isJWT={true} />
+          <HomeRanking isJWT={true} />
+        </S.Wrap>
         <HomeMy />
-      </JWTPageStyle>
+      </S.JWTPageStyle>
     );
   } else {
     return (
-      <HomePageStyle>
-        <StudyRooms limit={6} isJWT={false} />
-        <Ranking isJWT={false} />
-      </HomePageStyle>
+      <S.HomePageStyle>
+        <HomeStudyRooms limit={6} isJWT={false} />
+        <HomeRanking isJWT={false} />
+      </S.HomePageStyle>
     );
   }
 }
