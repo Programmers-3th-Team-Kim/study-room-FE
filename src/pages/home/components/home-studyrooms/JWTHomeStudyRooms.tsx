@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import HomeStudyItem from './item/HomeStudyItem';
 import * as S from './HomeStudyRooms.style';
 import ToStudyRooms from './button/ToStudyRooms';
 import ToPrivateButton from './button/ToPrivateButton';
 import { StudyItem } from '@/types/studyRoom';
-import { useNavigate } from 'react-router-dom';
 
-const url = `${import.meta.env.VITE_REACT_APP_API_URL}/rooms?limit=6`;
+const url = `${import.meta.env.VITE_REACT_APP_API_URL}/rooms?limit=2`;
 
-function HomeStudyRooms() {
+function JWTHomeStudyRooms() {
   const [rooms, setRooms] = useState<StudyItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -37,8 +37,8 @@ function HomeStudyRooms() {
     fetchRooms();
   }, []);
 
-  const handleItemClick = () => {
-    navigate('/login');
+  const handleItemClick = (id: string) => {
+    navigate(`/study-room/${id}`);
   };
 
   if (loading) {
@@ -54,9 +54,11 @@ function HomeStudyRooms() {
       <S.Title>스터디룸</S.Title>
       <S.Wrap>
         <S.StudyRoomWrap>
-          {rooms.map((room) => (
-            <div key={room._id} onClick={handleItemClick}>
+          {rooms.map((room) => {
+            const roomId = room._id;
+            return (
               <HomeStudyItem
+                key={roomId}
                 title={room.title}
                 imageUrl={room.imageUrl}
                 tagList={room.tagList}
@@ -64,9 +66,10 @@ function HomeStudyRooms() {
                 isChat={room.isChat}
                 maxNum={room.maxNum}
                 currentNum={room.currentNum}
+                onClick={roomId ? () => handleItemClick(roomId) : undefined}
               />
-            </div>
-          ))}
+            );
+          })}
         </S.StudyRoomWrap>
         <S.ButtonWrap>
           <ToPrivateButton />
@@ -77,4 +80,4 @@ function HomeStudyRooms() {
   );
 }
 
-export default HomeStudyRooms;
+export default JWTHomeStudyRooms;

@@ -28,7 +28,8 @@ export const Wrap = styled.div`
 `;
 
 export const StudyRoomWrap = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   height: 100%;
 `;

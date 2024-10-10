@@ -15,7 +15,7 @@ export const Wrap = styled.div`
   gap: 20px;
 `;
 
-export const Ttile = styled.div`
+export const Title = styled.div`
   display: flex;
   width: 100%;
   font-size: 1.25rem;
@@ -29,7 +29,6 @@ export const DayList = styled.div`
   flex-direction: column;
   border: 1px solid #e4e4e4;
   border-radius: 8px;
-  padding: 10px 0;
   background-color: white;
 `;
 
@@ -40,7 +39,6 @@ export const MyList = styled.div`
   flex-direction: column;
   border: 1px solid #e4e4e4;
   border-radius: 8px;
-  padding: 10px 0;
   background-color: white;
 `;
 
@@ -77,8 +75,8 @@ export const Rank = styled.div.withConfig({
   font-size: ${({ isDayList }) => (isDayList ? '1.5rem' : '1rem')};
 
   img {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.5vw;
+    height: 2.5vw;
     justify-content: center;
     align-items: center;
   }
@@ -90,7 +88,7 @@ export const NickName = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1vw;
 `;
 
 export const TotalTime = styled.div`
@@ -98,7 +96,7 @@ export const TotalTime = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1vw;
 `;
 
 export const NoUserMessage = styled.div`
@@ -108,6 +106,6 @@ export const NoUserMessage = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
-  font-size: 0.9rem;
+  font-size: 0.9vw;
   color: ${({ theme }) => theme.color.plannerTimeGray};
 `;
