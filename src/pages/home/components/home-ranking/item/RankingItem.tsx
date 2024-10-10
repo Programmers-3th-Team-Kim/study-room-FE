@@ -20,7 +20,7 @@ const RankDisplay = ({
   const { user } = useAuthStore();
   const isCurrentUser = user?.nickname === nickname;
 
-  console.log('현재 사용자 닉네임:', user?.nickname);
+  //console.log('현재 사용자 닉네임:', user?.nickname);
 
   const renderRank = () => {
     if (rank === 1) {
@@ -73,6 +73,10 @@ function RankingItem({ data }: RankingItemProps) {
         totalTime={data.prevUserInfo.totalTime}
       />
     );
+  } else {
+    myListItems.push(
+      <S.NoUserMessage key={'prev'}>불러올 데이터가 없습니다.</S.NoUserMessage>
+    );
   }
 
   // userInfo는 항상 보여줌
@@ -94,6 +98,10 @@ function RankingItem({ data }: RankingItemProps) {
         nickname={data.nextUserInfo.nickname}
         totalTime={data.nextUserInfo.totalTime}
       />
+    );
+  } else {
+    myListItems.push(
+      <S.NoUserMessage key={'next'}>불러올 데이터가 없습니다.</S.NoUserMessage>
     );
   }
 

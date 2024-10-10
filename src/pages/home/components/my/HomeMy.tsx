@@ -1,12 +1,13 @@
 import * as S from './HomeMy.style';
-import Statistics from './statistics/Statistics';
-import Todo from './todo/Todo';
+import HomeStatistics from './statistics/HomeStatistics';
+import HomeTodo from './todo/HomeTodo';
 
 function HomeMy() {
   return (
     <S.HomeMyStyle>
-      <Todo />
-      <Statistics />
+      <HomeTodo />
+      <S.HorizontalLine />
+      <HomeStatistics />
     </S.HomeMyStyle>
   );
 }

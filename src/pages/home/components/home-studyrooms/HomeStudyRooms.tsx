@@ -21,7 +21,7 @@ function HomeStudyRooms() {
         }
         const data = await response.json();
         setRooms(data);
-        console.log(data);
+        //console.log(data);
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -46,7 +46,7 @@ function HomeStudyRooms() {
 
   return (
     <S.HomeStudyRoomsStyle>
-      <S.Title>최신 스터디룸</S.Title>
+      <S.Title>스터디룸</S.Title>
       <S.Wrap>
         <S.StudyRoomWrap>
           {rooms.map((room) => (
