@@ -27,6 +27,7 @@ export default function Planner() {
     queryKey: ['getTodos', selectedDate],
     queryFn: () => getTodos(dayjs(selectedDate).format('YYYY-MM-DD')) ?? [],
   });
+  const DEFAULT_TEXT = '오늘의 첫 공부 시간을 기록해보세요!';
 
   const { data: statistics, isPending: statisticsPending } =
     useQuery<GetStatisticsRes>({
@@ -85,6 +86,7 @@ export default function Planner() {
       onClick={() => {
         setIsAddFormOpened(false);
         setIsEditFormOpened(false);
+        setEditIndex(null);
       }}
     >
       <S.LeftPanel>
@@ -182,9 +184,12 @@ export default function Planner() {
           {statistics
             ? (() => {
                 const [hours, minutes] = statistics.totalTime.split(':');
+                if (hours === '00' && minutes === '00') {
+                  return DEFAULT_TEXT;
+                }
                 return `${hours}시간 ${minutes}분 공부했어요!`;
               })()
-            : '00시간 00분 공부했어요!'}
+            : DEFAULT_TEXT}
         </S.StudiedTime>
         <TimeTable selectedDate={selectedDate} />
       </S.RightPanel>
