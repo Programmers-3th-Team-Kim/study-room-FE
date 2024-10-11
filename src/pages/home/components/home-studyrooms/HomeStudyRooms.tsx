@@ -7,6 +7,7 @@ import ToPrivateButton from './button/ToPrivateButton';
 import { StudyItem } from '@/types/studyRoom';
 import { HomeRankingStyle } from '../home-ranking/HomeRanking.style';
 import Loader from '@/components/loader/Loader';
+import { homefetchRooms } from '@/apis/studyRooms.api';
 
 interface HomeStudyRoomsProps {
   limit: number;
@@ -15,22 +16,14 @@ interface HomeStudyRoomsProps {
 
 const HomeStudyRooms = ({ limit, isJWT }: HomeStudyRoomsProps) => {
   const [rooms, setRooms] = useState<StudyItem[]>([]);
-  // reactquery 쓰기 loading, error + 로딩 중 빼기
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const url = `${import.meta.env.VITE_REACT_APP_API_URL}/rooms?limit=${limit}`;
-
   useEffect(() => {
-    const fetchRooms = async () => {
+    const getRooms = async () => {
       try {
-        // fetch -> axios
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('네트워크 응답이 좋지 않습니다.');
-        }
-        const data = await response.json();
+        const data = await homefetchRooms(limit);
         setRooms(data);
       } catch (err) {
         if (err instanceof Error) {
@@ -43,8 +36,8 @@ const HomeStudyRooms = ({ limit, isJWT }: HomeStudyRoomsProps) => {
       }
     };
 
-    fetchRooms();
-  }, [url]);
+    getRooms();
+  }, [limit]);
 
   const handleItemClick = (id: string) => {
     if (isJWT) {
