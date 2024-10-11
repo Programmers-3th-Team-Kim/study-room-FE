@@ -33,7 +33,7 @@ export const BoardWrapper = styled.div.withConfig({
   justify-content: space-evenly;
   width: 80%;
   height: 80%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-radius: 0.8rem;
   background-color: ${(props) => props.bgColor};
   box-shadow: 2px 2px 4px 1px rgb(0 0 0 / 20%);
@@ -45,25 +45,22 @@ export const Title = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  /* display: flex;
-  flex-direction: column; */
   display: grid;
   grid-template-columns: 2fr 4fr 4fr;
   grid-template-rows: 1fr repeat(10, 1fr) 1fr;
+  font-size: max(0.5rem, 0.8vw);
 
-  /* align-items: center; */
   width: 90%;
   height: 90%;
-  background-color: white;
   border-radius: 0.8rem;
-  border: 2px dotted ${({ theme }) => theme.color.bgGray};
+  background-color: white;
+  border: 2px solid ${({ theme }) => theme.color.bgGray};
 
   .header {
-    /* font-size : 1rem; */
     font-weight: 600;
   }
 
-  .myRank {
+  /* .myRank {
     grid-column: 1/2;
     grid-row: 12/13;
   }
@@ -76,7 +73,8 @@ export const ContentWrapper = styled.div`
   .myStudyTime {
     grid-column: 3/4;
     grid-row: 12/13;
-  }
+  } */
+  gap: 0;
 `;
 
 export const GridItem = styled.div.withConfig({
@@ -85,7 +83,6 @@ export const GridItem = styled.div.withConfig({
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: max(0.5rem, 0.8vw);
 
   &:nth-child(3n + 2):nth-child(n + 4) {
     border-left: 1px solid ${({ theme }) => theme.color.bgGray};
@@ -109,6 +106,19 @@ export const GridItem = styled.div.withConfig({
   &:nth-last-child(2),
   &:nth-last-child(3) {
     border-top: 1px solid black;
+  }
+
+  &:nth-child(1) {
+    border-radius: 0.8rem 0 0 0;
+  }
+  &:nth-child(3) {
+    border-radius: 0 0.8rem 0 0;
+  }
+  &:nth-last-child(1) {
+    border-radius: 0 0 0.8rem 0;
+  }
+  &:nth-last-child(3) {
+    border-radius: 0 0 0 0.8rem;
   }
 
   ${(props) =>

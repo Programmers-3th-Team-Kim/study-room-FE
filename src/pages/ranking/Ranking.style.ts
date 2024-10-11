@@ -17,5 +17,5 @@ export const Notice = styled.div`
   justify-content: center;
   font-size: max(1rem, 1.2vw);
   color: ${({ theme }) => theme.color.labelGray};
-  /* padding-bottom: 20px; */
+  padding-bottom: 20px;
 `;
