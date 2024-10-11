@@ -4,20 +4,24 @@ export const StatContainer = styled.div`
   border: 1px solid gray;
   border-radius: 12px;
   padding: 24px;
-  margin: 18px;
+  margin: 20px;
+  height: 100%;
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 `;
 
 export const AvgWrapper = styled.div`
   display: flex;
   gap: 18px;
   justify-content: space-around;
-  margin: 24px;
 `;
 
 export const Avg = styled.div`
   border: 1px solid #eee;
   border-radius: 12px;
-  padding: 24px;
+  padding: 20px 34px;
   display: flex;
   gap: 14px;
 `;
@@ -42,37 +46,30 @@ export const AvgSub = styled.h4`
 `;
 
 export const LegendContainer = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-  list-style-type: none;
-  padding-top: 12px;
-  max-width: 240px;
-  margin-right: 0;
-`;
-
-export const LegendItemWrapper = styled.div`
   display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 10px;
+  margin-left: auto;
+  gap: 8px;
 `;
 
 export const LegendItem = styled.li`
   display: flex;
   align-items: center;
-  gap: 8px;
   font-size: 12px;
+  gap: 6px;
 `;
 
 export const Line = styled.span<{ color?: string; dashed?: boolean }>`
   display: inline-block;
   width: 12px;
   height: 2px;
-  margin-right: 10px;
   background-color: ${({ color, dashed }) =>
     dashed ? 'transparent' : color || 'black'};
   border-bottom: ${({ dashed, color }) =>
     dashed ? `1px dashed ${color}` : 'none'};
+`;
+
+export const ArrowGraphContainer = styled.div`
+  display: flex;
+  align-items: end;
+  width: 100%;
 `;
