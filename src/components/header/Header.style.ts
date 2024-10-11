@@ -73,6 +73,7 @@ export const DropDownWrapper = styled.div<{ $isOpen: boolean }>`
     opacity 0.3s ease,
     transform 0.3s ease;
   z-index: 100;
+  pointer-events: ${({ $isOpen }) => ($isOpen ? 'auto' : 'none')};
 `;
 
 export const UserInfo = styled.div`
