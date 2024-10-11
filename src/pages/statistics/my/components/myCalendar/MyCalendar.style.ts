@@ -65,11 +65,14 @@ export const Month = styled.span`
 export const ArrowButton = styled.button`
   background: none;
   border: none;
+  cursor: pointer;
 `;
 
 export const Header = styled.div`
   height: 36px;
   align-content: center;
+  font-weight: bold;
+  text-align: center;
 `;
 
 export const Legend = styled.div`
@@ -80,13 +83,13 @@ export const Legend = styled.div`
   justify-content: center;
 `;
 
-export const LegendItem = styled.span<{ bgcolor: string }>`
+export const LegendItem = styled.span<{ $bgcolor: string }>`
   &::before {
     content: '';
     display: inline-block;
     width: 10px;
     height: 10px;
-    background-color: ${(props) => props.bgcolor};
+    background-color: ${(props) => props.$bgcolor};
     margin-right: 4px;
     vertical-align: middle;
   }

@@ -1,5 +1,23 @@
 import axiosInstance from './axiosInstance.api';
 
+export const fetchCalendarData = async (params: {
+  year: number;
+  month: string;
+}) => {
+  try {
+    const response = await axiosInstance.get('/statistics/my/calendar', {
+      params,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('캘린더 데이터를 가져오는 중 오류가 발생했습니다.', error);
+    throw error;
+  }
+};
+
+    throw error;
+  }
+};
 export const fetchAllAverage = async () => {
   try {
     const response = await axiosInstance.get('/statistics/all/average');
