@@ -25,11 +25,11 @@ const getBackgroundColor = (time: number) => {
 const Legend = () => {
   return (
     <S.Legend>
-      <S.LegendItem bgcolor="#D6EFD8">1분 이상</S.LegendItem>
-      <S.LegendItem bgcolor="#AAD3AB">2시간 이상</S.LegendItem>
-      <S.LegendItem bgcolor="#80AF81">4시간 이상</S.LegendItem>
-      <S.LegendItem bgcolor="#64A562">6시간 이상</S.LegendItem>
-      <S.LegendItem bgcolor="#2A7029">8시간 이상</S.LegendItem>
+      <S.LegendItem $bgcolor="#D6EFD8">1분 이상</S.LegendItem>
+      <S.LegendItem $bgcolor="#AAD3AB">2시간 이상</S.LegendItem>
+      <S.LegendItem $bgcolor="#80AF81">4시간 이상</S.LegendItem>
+      <S.LegendItem $bgcolor="#64A562">6시간 이상</S.LegendItem>
+      <S.LegendItem $bgcolor="#2A7029">8시간 이상</S.LegendItem>
     </S.Legend>
   );
 };
