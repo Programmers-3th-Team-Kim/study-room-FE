@@ -65,7 +65,7 @@ export default function RankingBoard({
             {userInfo ? (
               <>
                 <S.UserInfoGrid>
-                  {userInfo.totalTime !== '00:00:00' ? userInfo.rank : ''}
+                  {userInfo.totalTime !== '00:00:00' ? userInfo.rank : '-'}
                 </S.UserInfoGrid>
                 <S.UserInfoGrid>{userInfo.nickname}</S.UserInfoGrid>
                 <S.UserInfoGrid>{userInfo.totalTime}</S.UserInfoGrid>
