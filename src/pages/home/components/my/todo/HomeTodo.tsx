@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import * as S from './HomeTodo.style';
 import { getTodos, patchCheckBox } from '@/apis/planners.api';
 import dayjs from 'dayjs';
+import Loader from '@/components/loader/Loader';
 
 interface Todo {
   _id: string;
@@ -46,11 +47,12 @@ function HomeTodo() {
     }
   };
 
+  // 로딩 컴포넌트 사용
   return (
     <S.HomeTodoStyle>
       <S.Title>오늘의 할 일</S.Title>
       {loading ? (
-        <p>로딩 중...</p>
+        <Loader />
       ) : error ? (
         <p>{error}</p>
       ) : (

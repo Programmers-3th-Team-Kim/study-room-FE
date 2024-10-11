@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 export const HomeStudyRoomsStyle = styled.div`
   display: flex;
@@ -37,28 +37,6 @@ export const StudyRoomWrap = styled.div`
 export const ButtonWrap = styled.div`
   display: flex;
   gap: 20px;
-`;
-
-const spin = keyframes`
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-`;
-
-export const Loading = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-
-  .spinner {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #599bfc;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: ${spin} 1s linear infinite;
-  }
 `;
 
 export const Text = styled.div`

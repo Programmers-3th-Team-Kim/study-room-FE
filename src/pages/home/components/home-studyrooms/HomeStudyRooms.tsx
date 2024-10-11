@@ -6,6 +6,7 @@ import ToStudyRooms from './button/ToStudyRooms';
 import ToPrivateButton from './button/ToPrivateButton';
 import { StudyItem } from '@/types/studyRoom';
 import { HomeRankingStyle } from '../home-ranking/HomeRanking.style';
+import Loader from '@/components/loader/Loader';
 
 interface HomeStudyRoomsProps {
   limit: number;
@@ -14,6 +15,7 @@ interface HomeStudyRoomsProps {
 
 const HomeStudyRooms = ({ limit, isJWT }: HomeStudyRoomsProps) => {
   const [rooms, setRooms] = useState<StudyItem[]>([]);
+  // reactquery 쓰기 loading, error + 로딩 중 빼기
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const HomeStudyRooms = ({ limit, isJWT }: HomeStudyRoomsProps) => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
+        // fetch -> axios
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error('네트워크 응답이 좋지 않습니다.');
@@ -44,7 +47,6 @@ const HomeStudyRooms = ({ limit, isJWT }: HomeStudyRoomsProps) => {
   }, [url]);
 
   const handleItemClick = (id: string) => {
-    // navigate(`/study-room/${id}`);
     if (isJWT) {
       navigate(`/study-room/${id}`);
     } else {
@@ -55,10 +57,7 @@ const HomeStudyRooms = ({ limit, isJWT }: HomeStudyRoomsProps) => {
   if (loading) {
     return (
       <HomeRankingStyle>
-        <S.Loading>
-          <div className="spinner" />
-          <S.Text>로딩 중...</S.Text>
-        </S.Loading>
+        <Loader />
       </HomeRankingStyle>
     );
   }

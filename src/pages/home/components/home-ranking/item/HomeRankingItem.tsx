@@ -1,9 +1,9 @@
-import { RankingResponseJWT } from '@/types/ranking';
+import { RankingWithJWTResponse } from '@/types/ranking';
 import * as S from './HomeRankingItem.style';
 import { useAuthStore } from '@/stores/auth.store';
 
 interface RankingItemProps {
-  data: RankingResponseJWT;
+  data: RankingWithJWTResponse;
   isJWT?: boolean;
 }
 
@@ -73,9 +73,7 @@ function Item({ data, isJWT }: RankingItemProps) {
       />
     );
   } else if (isJWT) {
-    myListItems.push(
-      <S.NoUserMessage key={'prev'}>불러올 데이터가 없습니다.</S.NoUserMessage>
-    );
+    myListItems.push(<S.NoUserMessage key={'prev'}></S.NoUserMessage>);
   }
 
   // userInfo는 항상 보여줌
@@ -101,9 +99,7 @@ function Item({ data, isJWT }: RankingItemProps) {
       />
     );
   } else if (isJWT) {
-    myListItems.push(
-      <S.NoUserMessage key={'next'}>불러올 데이터가 없습니다.</S.NoUserMessage>
-    );
+    myListItems.push(<S.NoUserMessage key={'next'}></S.NoUserMessage>);
   }
 
   const top10 = data?.dayList?.top10 || [];
@@ -146,9 +142,7 @@ function Item({ data, isJWT }: RankingItemProps) {
             top10.length < (isJWT ? 3 : 10) &&
             Array.from({ length: (isJWT ? 3 : 10) - top10.length }).map(
               (_, index) => (
-                <S.NoUserMessage key={`empty-${index}`}>
-                  불러올 데이터가 없습니다.
-                </S.NoUserMessage>
+                <S.NoUserMessage key={`empty-${index}`}></S.NoUserMessage>
               )
             )}
         </S.DayList>
