@@ -1,15 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-export const StudyGridStyle = styled.div`
+export const StudyGridItem = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 226px);
-  grid-auto-rows: 240px;
-  gap: 25px;
-  overflow-y: auto;
+  gap: 30px;
+  overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 520px;
   padding-right: 20px;
   box-sizing: border-box;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -19,19 +17,51 @@ export const StudyGridStyle = styled.div`
     background: #d9d9d9;
     border-radius: ${({ theme }) => theme.borderRadius.large};
   }
+
+  &:has(::-webkit-scrollbar) {
+    padding-right: 25px;
+  }
 `;
 
-export const ScrollContainer = styled.div`
-  width: 100%;
+export const NoData = styled.div`
   display: flex;
+  width: 100%;
+  height: 100%;
+  padding-right: 20px;
   justify-content: center;
   align-items: center;
+  color: ${({ theme }) => theme.color.plannerGray};
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 600;
+  overflow: hidden;
 `;
 
-export const LoadingIndicator = styled.div`
-  grid-column: span 4;
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+export const Loader = styled.div`
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: ${spin} 1s linear infinite;
+  margin: auto;
+`;
+
+export const ErrorMessage = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding-right: 20px;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.color.btnWarn};
+  font-size: 2rem;
   text-align: center;
-  padding: 20px;
-  font-size: 16px;
-  color: #666;
+  font-weight: 600;
+  overflow: hidden;
 `;

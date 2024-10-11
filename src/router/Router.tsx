@@ -9,6 +9,7 @@ import Planner from '@/pages/planner/Planner';
 import PrivateStudyRoom from '@/pages/privateStudyRoom/PrivateStudyRoom';
 import AllStatisticsPage from '@/pages/statistics/all/AllStatisticsPage';
 import MyStatisticsPage from '@/pages/statistics/my/MyStatisticsPage';
+import Ranking from '@/pages/ranking/Ranking';
 
 export default function Router() {
   return (
@@ -19,9 +20,10 @@ export default function Router() {
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/planner" element={<Planner />} />
       <Route path="/study-rooms" element={<StudyRooms />} />
-      <Route path="/study-room" element={<PrivateStudyRoom />} />
       <Route path="/statistics/all" element={<AllStatisticsPage />} />
       <Route path="/statistics/my" element={<MyStatisticsPage />} />
+      <Route path="/ranking" element={<Ranking />} />
+      <Route path="/study-room/:id" element={<PrivateStudyRoom />} />
     </Routes>
   );
 }

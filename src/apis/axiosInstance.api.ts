@@ -14,6 +14,19 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+    if (originalRequest.url === API_ROUTES.LOGIN) {
+      return Promise.reject(error);
+    }
+
+    const { accessToken } = useAuthStore.getState();
+
+    if (!accessToken) {
+      alert('로그인이 필요한 서비스입니다.');
+
+      window.location.href = `${import.meta.env.VITE_REACT_APP_URL}/login`;
+      return Promise.reject(error);
+    }
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 

@@ -1,5 +1,5 @@
 import { scrollMixin } from '@/styles/mixins';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { FaPlus } from 'react-icons/fa';
 
 const panelPadding = '3rem 0';
@@ -77,7 +77,7 @@ export const EachContentWrapper = styled.div`
   display: flex;
   position: relative;
   width: 100%;
-  min-height: 17%;
+  min-height: 20%;
   justify-content: center;
 `;
 
@@ -139,4 +139,5 @@ export const StudiedTime = styled.div`
   font-weight: 600;
   font-size: max(1rem, 1.3vw);
   margin: 1.5rem 0px;
+  height: 1em;
 `;
