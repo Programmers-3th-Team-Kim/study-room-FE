@@ -15,6 +15,22 @@ export const fetchCalendarData = async (params: {
   }
 };
 
+export const fetchDailyData = async (params: {
+  year: number;
+  month: string;
+  day: string;
+}) => {
+  try {
+    const response = await axiosInstance.get('/statistics/my/daily', {
+      params,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('일간 통계 데이터를 가져오는 중 오류가 발생했습니다.', error);
+    throw error;
+  }
+};
+
     throw error;
   }
 };
