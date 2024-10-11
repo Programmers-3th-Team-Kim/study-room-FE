@@ -3,7 +3,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useAuthStore } from '@/stores/auth.store';
 import { updateProfileFormData } from '@/types/updateProfile';
-import { updateProfile } from '@/apis/users.api';
+import { getUserProfile, updateProfile } from '@/apis/users.api';
 import { IoPersonCircle } from 'react-icons/io5';
 import { FaCamera } from 'react-icons/fa';
 import * as S from '../ProfilePage.style';
@@ -18,7 +18,7 @@ export default function MyProfile() {
     control,
   } = useForm({ mode: 'onChange' });
 
-  const { user } = useAuthStore();
+  const { user, setUser } = useAuthStore();
 
   const [preview, setPreview] = useState<string | null>(user?.imageUrl || null);
   const [nicknameDuplicateError, setNicknameDuplicateError] = useState<
@@ -50,6 +50,10 @@ export default function MyProfile() {
       introduction: data.introduction,
       imageUrl: preview || '',
     });
+
+    const updatedUser = await getUserProfile();
+    setUser(updatedUser);
+
     toast.success('프로필 수정 완료!');
   };
 
