@@ -46,8 +46,11 @@ export const ProfileImg = styled.img`
   border-radius: 50%;
   width: 32px;
   height: 32px;
-  cursor: pointer;
   border: 1px solid lightgray;
+`;
+
+export const ProfileImgWrapper = styled.div`
+  cursor: pointer;
 `;
 
 export const DropdownProfileImg = styled.img`
