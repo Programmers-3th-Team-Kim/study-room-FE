@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import * as S from '@/pages/statistics/all/AllStatisticsPage.style';
-import { fetchAllGraph } from '@/apis/statistics.api';
+import { fetchAllAverage, fetchAllGraph } from '@/apis/statistics.api';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const CustomLegend = () => (
@@ -39,6 +39,24 @@ export default function AllStatisticsPage() {
   const [allTotalAverage, setAllTotalAverage] = useState(0);
   const [myTotalAverage, setMyTotalAverage] = useState(0);
   const [offset, setOffset] = useState(0);
+  const [averageData, setAverageData] = useState({
+    all: {
+      yesterday: { hours: '', minutes: '' },
+      lastWeek: { hours: '', minutes: '' },
+      lastMonth: { hours: '', minutes: '' },
+    },
+    my: {
+      yesterday: { hours: '', minutes: '' },
+      lastWeek: { hours: '', minutes: '' },
+      lastMonth: { hours: '', minutes: '' },
+    },
+  });
+
+  const formatAverageTime = (hours: string, minutes: string) => {
+    const formattedHours = parseInt(hours, 10);
+    const formattedMinutes = parseInt(minutes, 10);
+    return `${formattedHours}시간 ${formattedMinutes}분`;
+  };
 
   const formatHoursAndMinutes = (totalMinutes: number) => {
     const hours = Math.floor(totalMinutes / 60);
@@ -76,6 +94,19 @@ export default function AllStatisticsPage() {
     }
   };
 
+  const loadAverageData = async () => {
+    try {
+      const data = await fetchAllAverage();
+      setAverageData(data);
+    } catch (error) {
+      console.error('Error fetching average data:', error);
+    }
+  };
+
+  useEffect(() => {
+    loadAverageData();
+  }, []);
+
   useEffect(() => {
     loadGraphData();
   }, [offset]);
@@ -96,16 +127,38 @@ export default function AllStatisticsPage() {
       <div>
         <S.AvgWrapper>
           <S.Avg>
-            <S.AvgTitle>전체 사용자는</S.AvgTitle>
+            <S.AvgTitle>
+              전체 <br />
+              사용자는
+            </S.AvgTitle>
             <div>
               <S.AvgLine>
-                전날 평균<S.AvgSpan>10시간</S.AvgSpan>
+                전날 평균
+                <S.AvgSpan>
+                  {formatAverageTime(
+                    averageData.all.yesterday.hours,
+                    averageData.all.yesterday.minutes
+                  )}
+                </S.AvgSpan>
               </S.AvgLine>
               <S.AvgLine>
-                저번 주 평균<S.AvgSpan>12시간</S.AvgSpan>
+                저번 주 평균
+                <S.AvgSpan>
+                  {formatAverageTime(
+                    averageData.all.lastWeek.hours,
+                    averageData.all.lastWeek.minutes
+                  )}
+                </S.AvgSpan>
               </S.AvgLine>
               <S.AvgLine>
-                저번 달 평균<S.AvgSpan>13시간</S.AvgSpan> 공부했어요!
+                저번 달 평균
+                <S.AvgSpan>
+                  {formatAverageTime(
+                    averageData.all.lastMonth.hours,
+                    averageData.all.lastMonth.minutes
+                  )}
+                </S.AvgSpan>
+                공부했어요!
               </S.AvgLine>
             </div>
           </S.Avg>
@@ -113,13 +166,32 @@ export default function AllStatisticsPage() {
             <S.AvgTitle>닉네임님은</S.AvgTitle>
             <div>
               <S.AvgLine>
-                전날 평균 <S.AvgSpan>4시간</S.AvgSpan>
+                전날 평균
+                <S.AvgSpan>
+                  {formatAverageTime(
+                    averageData.my.yesterday.hours,
+                    averageData.my.yesterday.minutes
+                  )}
+                </S.AvgSpan>
               </S.AvgLine>
               <S.AvgLine>
-                저번 주 평균 <S.AvgSpan>8시간</S.AvgSpan>
+                저번 주 평균
+                <S.AvgSpan>
+                  {formatAverageTime(
+                    averageData.my.lastWeek.hours,
+                    averageData.my.lastWeek.minutes
+                  )}
+                </S.AvgSpan>
               </S.AvgLine>
               <S.AvgLine>
-                저번 달 평균 <S.AvgSpan>10시간</S.AvgSpan> 공부했어요!
+                저번 달 평균
+                <S.AvgSpan>
+                  {formatAverageTime(
+                    averageData.my.lastMonth.hours,
+                    averageData.my.lastMonth.minutes
+                  )}
+                </S.AvgSpan>
+                공부했어요!
               </S.AvgLine>
             </div>
           </S.Avg>

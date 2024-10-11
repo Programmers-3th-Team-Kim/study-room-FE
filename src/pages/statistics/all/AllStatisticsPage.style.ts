@@ -24,6 +24,7 @@ export const Avg = styled.div`
   padding: 20px 34px;
   display: flex;
   gap: 14px;
+  width: 450px;
 `;
 
 export const AvgTitle = styled.h3`
