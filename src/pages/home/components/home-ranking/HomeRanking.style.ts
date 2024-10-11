@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 export const HomeRankingStyle = styled.div`
   display: flex;
@@ -10,28 +10,6 @@ export const HomeRankingStyle = styled.div`
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   justify-content: space-between;
   flex-direction: row;
-`;
-
-const spin = keyframes`
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-`;
-
-export const Loading = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-
-  .spinner {
-    border: 6px solid #f3f3f3;
-    border-top: 6px solid #599bfc;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: ${spin} 1s linear infinite;
-  }
 `;
 
 export const Text = styled.div`

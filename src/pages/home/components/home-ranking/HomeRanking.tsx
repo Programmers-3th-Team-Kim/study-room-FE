@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
-import { RankingResponseJWT } from '@/types/ranking';
-import axios from 'axios';
-import axiosInstance from '@/apis/axiosInstance.api';
+import { RankingWithJWTResponse } from '@/types/ranking';
+import { getRankings, getRankingsWithJWT } from '@/apis/ranking.api'; // 함수 임포트
 import * as S from './HomeRanking.style';
 import Item from './item/HomeRankingItem';
+import Loader from '@/components/loader/Loader';
 
 const HomeRanking = ({ isJWT }: { isJWT: boolean }) => {
-  const [data, setData] = useState<RankingResponseJWT | null>(null);
+  const [data, setData] = useState<RankingWithJWTResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   // JWT 여부에 따라 다른 API 호출
   const fetchRankingData = async () => {
     try {
-      const res = isJWT
-        ? await axiosInstance.get('/rankings/jwt')
-        : await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/rankings`); // JWT가 없을 때
-
-      setData(res.data);
+      const res = isJWT ? await getRankingsWithJWT() : await getRankings(); // 조건에 따라 함수 호출
+      setData(res);
     } catch (error) {
       console.error('랭킹 데이터를 불러오는 중 오류 발생:', error);
       setError('랭킹 데이터를 불러오는 중 오류가 발생했습니다.');
@@ -28,14 +25,12 @@ const HomeRanking = ({ isJWT }: { isJWT: boolean }) => {
 
   useEffect(() => {
     fetchRankingData();
-  });
+  }); // 의존성 배열 추가
 
   if (loading) {
     return (
       <S.HomeRankingStyle>
-        <S.Loading>
-          <div className="spinner" />
-        </S.Loading>
+        <Loader />
       </S.HomeRankingStyle>
     );
   }
