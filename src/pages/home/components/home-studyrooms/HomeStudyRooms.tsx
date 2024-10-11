@@ -44,6 +44,7 @@ const HomeStudyRooms = ({ limit, isJWT }: HomeStudyRoomsProps) => {
   }, [url]);
 
   const handleItemClick = (id: string) => {
+    // navigate(`/study-room/${id}`);
     if (isJWT) {
       navigate(`/study-room/${id}`);
     } else {
