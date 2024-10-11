@@ -4,6 +4,7 @@ export const StatContainer = styled.div`
   display: flex;
   margin: 24px;
   gap: 32px;
+  width: 900px;
 `;
 
 export const StatWrapper = styled.div`
@@ -36,4 +37,16 @@ export const ChartWrapper = styled.div`
   border-radius: 12px;
   padding: 18px;
   min-width: 350px;
+`;
+
+export const ChartTitle = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  align-items: center;
+  display: flex;
+  gap: 12px;
+`;
+
+export const ArrowButton = styled.div`
+  cursor: pointer;
 `;

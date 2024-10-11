@@ -7,14 +7,6 @@ export const ChartWrapper = styled.div`
   gap: 12px;
 `;
 
-export const ChartTitle = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-  align-items: center;
-  display: flex;
-  gap: 12px;
-`;
-
 export const ChartValueContainer = styled.div`
   display: flex;
   gap: 18px;

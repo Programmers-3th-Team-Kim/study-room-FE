@@ -55,7 +55,6 @@ export default function MyPieChart() {
 
   return (
     <S.ChartWrapper>
-      <S.Title>할 일 통계</S.Title>
       <PieChart width={250} height={250}>
         <Pie
           data={dailyData.planner}
