@@ -1,9 +1,9 @@
 export type RankingType = 'day' | 'week' | 'month';
 
 export interface RankingList {
-  rank?: number;
-  nickname?: string;
-  totalTime?: string;
+  rank: number;
+  nickname: string;
+  totalTime: string;
 }
 
 export interface RankingResponse {
@@ -28,7 +28,7 @@ export interface RankingResponseJWT {
   monthList: {
     top10: RankingList[];
   };
-  userInfo?: RankingList;
-  prevUserInfo?: RankingList;
-  nextUserInfo?: RankingList;
+  userInfo: RankingList;
+  prevUserInfo: RankingList;
+  nextUserInfo: RankingList;
 }

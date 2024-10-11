@@ -35,7 +35,6 @@ const HomeRanking = ({ isJWT }: { isJWT: boolean }) => {
       <S.HomeRankingStyle>
         <S.Loading>
           <div className="spinner" />
-          <S.Text>로딩 중...</S.Text>
         </S.Loading>
       </S.HomeRankingStyle>
     );

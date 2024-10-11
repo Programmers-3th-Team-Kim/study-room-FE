@@ -25,8 +25,8 @@ export const Loading = styled.div`
   width: 100%;
 
   .spinner {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #599bfc;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #599bfc;
     border-radius: 50%;
     width: 50px;
     height: 50px;
