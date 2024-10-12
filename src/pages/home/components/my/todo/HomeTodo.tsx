@@ -47,7 +47,6 @@ function HomeTodo() {
     }
   };
 
-  // 로딩 컴포넌트 사용
   return (
     <S.HomeTodoStyle>
       <S.Title>오늘의 할 일</S.Title>
