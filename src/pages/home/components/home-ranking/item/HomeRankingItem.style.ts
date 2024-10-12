@@ -55,7 +55,7 @@ export const ItemWrap = styled.div`
   width: 70%;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
 `;
 
 export const Rank = styled.div.withConfig({
