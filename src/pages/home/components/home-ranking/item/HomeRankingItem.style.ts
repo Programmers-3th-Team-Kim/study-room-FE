@@ -22,21 +22,14 @@ export const Title = styled.div`
   font-weight: 600;
 `;
 
-export const DayList = styled.div`
-  display: flex;
+export const List = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['isTop10'].includes(prop),
+})<{ isTop10?: boolean }>`
+  display: grid;
+  grid-template-rows: ${({ isTop10 }) =>
+    isTop10 ? 'repeat(10, 1fr)' : 'repeat(3, 1fr)'};
   width: 100%;
   height: 100%;
-  flex-direction: column;
-  border: 1px solid #e4e4e4;
-  border-radius: 8px;
-  background-color: white;
-`;
-
-export const MyList = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
   border: 1px solid #e4e4e4;
   border-radius: 8px;
   background-color: white;

@@ -59,47 +59,44 @@ const RankDisplay = ({
   );
 };
 
-function Item({ data, isJWT }: RankingItemProps) {
+function HomeRankingItem({ data, isJWT }: RankingItemProps) {
+  const {
+    userInfo,
+    prevPrevUserInfo,
+    prevUserInfo,
+    nextUserInfo,
+    nextNextUserInfo,
+  } = data;
+
   const myListItems = [];
 
-  // prevUserInfo가 존재할 경우 추가
-  if (isJWT && data.prevUserInfo && Object.keys(data.prevUserInfo).length > 0) {
-    myListItems.push(
-      <RankDisplay
-        key={'prev'}
-        rank={data.prevUserInfo.rank}
-        nickname={data.prevUserInfo.nickname}
-        totalTime={data.prevUserInfo.totalTime}
-      />
-    );
-  } else if (isJWT) {
-    myListItems.push(<S.NoUserMessage key={'prev'}></S.NoUserMessage>);
-  }
-
-  // userInfo는 항상 보여줌
-  if (data.userInfo) {
-    myListItems.push(
-      <RankDisplay
-        key={'current'}
-        rank={data.userInfo.rank}
-        nickname={data.userInfo.nickname}
-        totalTime={data.userInfo.totalTime}
-      />
-    );
-  }
-
-  // nextUserInfo가 존재할 경우 추가
-  if (isJWT && data.nextUserInfo && Object.keys(data.nextUserInfo).length > 0) {
-    myListItems.push(
-      <RankDisplay
-        key={'next'}
-        rank={data.nextUserInfo.rank}
-        nickname={data.nextUserInfo.nickname}
-        totalTime={data.nextUserInfo.totalTime}
-      />
-    );
-  } else if (isJWT) {
-    myListItems.push(<S.NoUserMessage key={'next'}></S.NoUserMessage>);
+  if (isJWT) {
+    // userInfo.rank에 따라 myListItems에 추가
+    if (userInfo.rank === 1) {
+      myListItems.push(userInfo);
+      if (nextUserInfo && Object.keys(nextUserInfo).length > 0)
+        myListItems.push(nextUserInfo);
+      if (nextNextUserInfo && Object.keys(nextNextUserInfo).length > 0)
+        myListItems.push(nextNextUserInfo);
+    }
+    // prevPrevUserInfo, prevUserInfo 있지만 nextUserInfo nextNextUserInfo는 없는 경우
+    else if (
+      Object.keys(prevPrevUserInfo).length > 0 &&
+      Object.keys(prevUserInfo).length > 0 &&
+      Object.keys(nextUserInfo).length === 0 &&
+      Object.keys(nextNextUserInfo).length === 0
+    ) {
+      myListItems.push(prevPrevUserInfo);
+      myListItems.push(prevUserInfo);
+      myListItems.push(userInfo);
+    }
+    // nextUserInfo가 있을 경우
+    else if (prevUserInfo) {
+      myListItems.push(prevUserInfo);
+      myListItems.push(userInfo);
+      if (nextUserInfo && Object.keys(nextUserInfo).length > 0)
+        myListItems.push(nextUserInfo);
+    }
   }
 
   const top10 = data?.dayList?.top10 || [];
@@ -108,7 +105,7 @@ function Item({ data, isJWT }: RankingItemProps) {
     <S.RankingItemStyle>
       <S.Wrap>
         <S.Title>{isJWT ? 'Top 3' : 'Top 10'}</S.Title>
-        <S.DayList>
+        <S.List isTop10={!isJWT}>
           {isJWT ? (
             top10.length > 0 ? (
               top10
@@ -138,23 +135,26 @@ function Item({ data, isJWT }: RankingItemProps) {
           ) : (
             <S.NoUserMessage>오늘의 랭킹이 없습니다.</S.NoUserMessage>
           )}
-          {top10.length > 0 &&
-            top10.length < (isJWT ? 3 : 10) &&
-            Array.from({ length: (isJWT ? 3 : 10) - top10.length }).map(
-              (_, index) => (
-                <S.NoUserMessage key={`empty-${index}`}></S.NoUserMessage>
-              )
-            )}
-        </S.DayList>
+        </S.List>
       </S.Wrap>
       {isJWT && (
         <S.Wrap>
           <S.Title>내 순위</S.Title>
-          <S.MyList>{myListItems}</S.MyList>
+          <S.List>
+            {myListItems.map((item, index) => (
+              <RankDisplay
+                key={index}
+                rank={item.rank}
+                nickname={item.nickname}
+                totalTime={item.totalTime}
+                isDayList={false}
+              />
+            ))}
+          </S.List>
         </S.Wrap>
       )}
     </S.RankingItemStyle>
   );
 }
 
-export default Item;
+export default HomeRankingItem;

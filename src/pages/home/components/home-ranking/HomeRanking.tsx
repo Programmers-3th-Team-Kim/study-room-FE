@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { RankingWithJWTResponse } from '@/types/ranking';
 import { getRankings, getRankingsWithJWT } from '@/apis/ranking.api'; // 함수 임포트
 import * as S from './HomeRanking.style';
-import Item from './item/HomeRankingItem';
 import Loader from '@/components/loader/Loader';
+import HomeRankingItem from './item/HomeRankingItem';
 
 const HomeRanking = ({ isJWT }: { isJWT: boolean }) => {
   const [data, setData] = useState<RankingWithJWTResponse | null>(null);
@@ -25,7 +25,7 @@ const HomeRanking = ({ isJWT }: { isJWT: boolean }) => {
 
   useEffect(() => {
     fetchRankingData();
-  }); // 의존성 배열 추가
+  });
 
   if (loading) {
     return (
@@ -41,7 +41,7 @@ const HomeRanking = ({ isJWT }: { isJWT: boolean }) => {
 
   return (
     <S.HomeRankingStyle>
-      {data && <Item data={data} isJWT={isJWT} />}
+      {data && <HomeRankingItem data={data} isJWT={isJWT} />}
     </S.HomeRankingStyle>
   );
 };
