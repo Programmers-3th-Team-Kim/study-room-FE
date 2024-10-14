@@ -13,7 +13,7 @@ interface MyData {
   myData: MyDataItem[];
 }
 
-const MyTinyBarChart = ({ myData }: MyData) => {
+export default function MyTinyBarChart({ myData }: MyData) {
   const formatXAxis = (date: string) => {
     const formattedDate = dayjs(date).format('MM.DD');
     const dayOfWeek = dayjs(date).format('(dd)');
@@ -33,7 +33,8 @@ const MyTinyBarChart = ({ myData }: MyData) => {
           dataKey="date"
           tickFormatter={formatXAxis}
           tickLine={false}
-          tick={{ dy: 5, fontSize: 12 }}
+          tickSize={5}
+          fontSize={10}
           interval={0}
         />
         <Bar dataKey="totalTime" fill="#8884d8">
@@ -47,6 +48,4 @@ const MyTinyBarChart = ({ myData }: MyData) => {
       </BarChart>
     </ResponsiveContainer>
   );
-};
-
-export default MyTinyBarChart;
+}
