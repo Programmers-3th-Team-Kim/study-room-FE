@@ -347,6 +347,7 @@ const MultiStudyRoomContent = () => {
               profileImage={myTimerInfo?.imageUrl}
               profileImageWidth="120px"
               profileImageHeight="120px"
+              isManager={user?.nickname === studyRoomInfo?.roomManager}
             />
             {usersTimerInfo
               ? usersTimerInfo.map((data) => (
@@ -358,6 +359,7 @@ const MultiStudyRoomContent = () => {
                     profileImage={data.imageUrl}
                     profileImageWidth="120px"
                     profileImageHeight="120px"
+                    isManager={data.nickname === studyRoomInfo?.roomManager}
                   />
                 ))
               : null}
