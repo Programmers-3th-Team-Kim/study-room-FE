@@ -61,7 +61,6 @@ const RSidebar = () => {
       socket.off('notice');
     };
   }, [socket]);
-
   const handleTabClick = (tab: Tabs) => {
     setSelectedTab(tab);
   };

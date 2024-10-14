@@ -18,14 +18,14 @@ const StudyRoomNotice = ({ allInfo }) => {
     <div style={{ position: 'relative' }}>
       {isNoticeOpen ? (
         <S.NoticeDivOpen>
-          <text>{notice}</text>
+          <p>{notice}</p>
           <S.OpenButton>
             <IoChevronUpOutline onClick={toggleDiv} />
           </S.OpenButton>
         </S.NoticeDivOpen>
       ) : (
         <S.NoticeDivClosed>
-          <text>{notice}</text>
+          <p>{notice}</p>
           <S.OpenButton>
             <IoChevronDownOutline onClick={toggleDiv} />
           </S.OpenButton>
