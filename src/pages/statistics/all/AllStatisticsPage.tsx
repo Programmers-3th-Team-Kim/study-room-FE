@@ -3,6 +3,7 @@ import * as S from '@/pages/statistics/all/AllStatisticsPage.style';
 import { fetchAllAverage } from '@/apis/statistics.api';
 import { formatAverageTime } from '@/utils/formatTime';
 import MyLineChart from './components/myLineChart/MyLineChart';
+import { useAuthStore } from '@/stores/auth.store';
 
 interface AverageSection {
   title: string;
@@ -47,6 +48,7 @@ const AverageSection = ({ title, average }: AverageSection) => (
 );
 
 export default function AllStatisticsPage() {
+  const { user } = useAuthStore();
   const [averageData, setAverageData] = useState({
     all: {
       yesterday: { hours: '', minutes: '' },
@@ -78,7 +80,10 @@ export default function AllStatisticsPage() {
       <div>
         <S.AvgWrapper>
           <AverageSection title="전체 사용자는" average={averageData.all} />
-          <AverageSection title="닉네임님은" average={averageData.my} />
+          <AverageSection
+            title={`${user?.nickname}님은`}
+            average={averageData.my}
+          />
         </S.AvgWrapper>
       </div>
       <MyLineChart />
