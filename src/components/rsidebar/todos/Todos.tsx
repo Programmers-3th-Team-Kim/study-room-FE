@@ -155,7 +155,7 @@ const Todos = () => {
       socket.off('responseCreatePlanner');
       socket.off('responseModifyPlanner');
     };
-  });
+  }, [socket, selectedDate]);
   // end
 
   return (
