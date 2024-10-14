@@ -65,7 +65,7 @@ interface Data {
 
 export default function MyBarChart({ data }: { data: Data }) {
   if (!data) {
-    return <div>No data available</div>;
+    return <div>데이터가 없습니다.</div>;
   }
 
   const chartData = [

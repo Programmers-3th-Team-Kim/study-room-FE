@@ -57,9 +57,17 @@ export default function MyStatisticsPage() {
   const renderChart = () => {
     switch (viewMode) {
       case '주간':
-        return <MyBarChart data={weeklyData} />;
+        return weeklyData ? (
+          <MyBarChart data={weeklyData} />
+        ) : (
+          <div>주간 통계 데이터가 없습니다.</div>
+        );
       case '월간':
-        return <MyBarChart data={monthlyData} />;
+        return monthlyData ? (
+          <MyBarChart data={monthlyData} />
+        ) : (
+          <div>월간 통계 데이터가 없습니다.</div>
+        );
       default:
         return <MyPieChart />;
     }
