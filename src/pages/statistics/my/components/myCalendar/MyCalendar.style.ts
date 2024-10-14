@@ -31,7 +31,9 @@ export const CalendarWrapper = styled.div`
     text-align: center;
   }
 `;
-export const DateHeaderButton = styled.button<{ backgroundColor: string }>`
+export const DateHeaderButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => !['backgroundColor'].includes(prop),
+})<{ backgroundColor: string }>`
   all: unset;
   border-radius: 50%;
   height: 36px;
