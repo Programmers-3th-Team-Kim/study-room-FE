@@ -3,11 +3,12 @@
     "target": "ESNext",
     "module": "ESNext",
 
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "strict": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
+    "skipLibCheck": true,
 
     "baseUrl": ".",
     "paths": {
