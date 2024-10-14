@@ -11,7 +11,7 @@ export default function MyStatisticsPage() {
   const [viewMode, setViewMode] = useState<'일간' | '주간' | '월간'>('일간');
   const [weeklyData, setWeeklyData] = useState(null);
   const [monthlyData, setMonthlyData] = useState(null);
-  const [weeklyOffset, setWeeklyOffset] = useState(0);
+  const [weeklyOffset, setWeeklyOffset] = useState(1);
   const [monthlyOffset, setMonthlyOffset] = useState(0);
 
   useEffect(() => {
@@ -47,10 +47,10 @@ export default function MyStatisticsPage() {
   };
 
   const handleNext = () => {
-    if (viewMode === '주간') {
-      setWeeklyOffset(Math.max(weeklyOffset - 1, 0));
-    } else if (viewMode === '월간') {
-      setMonthlyOffset(Math.max(monthlyOffset - 1, 0));
+    if (viewMode === '주간' && weeklyOffset > 0) {
+      setWeeklyOffset(weeklyOffset - 1);
+    } else if (viewMode === '월간' && monthlyOffset > 0) {
+      setMonthlyOffset(monthlyOffset - 1);
     }
   };
 

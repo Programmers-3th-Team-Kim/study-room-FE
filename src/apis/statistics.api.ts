@@ -31,7 +31,7 @@ export const fetchDailyData = async (params: {
   }
 };
 
-export const fetchWeeklyData = async (offset = 0) => {
+export const fetchWeeklyData = async (offset = 1) => {
   try {
     const response = await axiosInstance.get('/statistics/my/weekly', {
       params: { offset },
