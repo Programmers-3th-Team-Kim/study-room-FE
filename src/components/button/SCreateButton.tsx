@@ -1,6 +1,6 @@
 import React from 'react';
-import { IconType } from 'react-icons';
 import * as S from './SCreateButton.style';
+import { IconType } from 'react-icons/lib';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
@@ -10,6 +10,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   borderRadius?: string;
   fontSize?: string;
   iconSize?: string;
+  backgroundColor?: string;
+  border?: string;
+  borderColor?: string;
+  color?: string;
 }
 
 function SCreateButton({
@@ -20,6 +24,10 @@ function SCreateButton({
   borderRadius,
   fontSize = '24px',
   iconSize = '16',
+  backgroundColor = '#599BFC',
+  border,
+  borderColor = 'transparent',
+  color = 'white',
   ...props
 }: ButtonProps) {
   return (
@@ -28,6 +36,10 @@ function SCreateButton({
       height={height}
       borderRadius={borderRadius}
       fontSize={fontSize}
+      backgroundColor={backgroundColor}
+      border={border}
+      borderColor={borderColor}
+      color={color}
       {...props}
     >
       {Icon && (

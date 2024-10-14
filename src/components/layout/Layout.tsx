@@ -16,12 +16,14 @@ export default function Layout({ children }: LayoutProps) {
     location.pathname === '/login' || location.pathname === '/signup';
 
   const studyRoomPagePath = location.pathname.startsWith('/study-room/');
+  const multiStudyRoomPagePath_temp =
+    location.pathname.startsWith('/multi-study-room/');
 
   const pageTitles: { [key: string]: string } = {
     '/': '홈',
     '/profile': '프로필',
     '/planner': '플래너',
-    '/study-rooms': '공부방',
+    '/study-rooms': '스터디룸',
     '/ranking': '랭킹',
   };
 
@@ -29,9 +31,13 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <LayoutStyle>
-      {!authPagePath && !studyRoomPagePath && <Header title={pageTitle} />}
+      {!authPagePath && !studyRoomPagePath && !multiStudyRoomPagePath_temp && (
+        <Header title={pageTitle} />
+      )}
       <MainContentArea>
-        {!authPagePath && !studyRoomPagePath && <Sidebar />}
+        {!authPagePath &&
+          !studyRoomPagePath &&
+          !multiStudyRoomPagePath_temp && <Sidebar />}
         {children}
         {/* {studyRoomPagePath && <RSidebar />} */}
       </MainContentArea>
