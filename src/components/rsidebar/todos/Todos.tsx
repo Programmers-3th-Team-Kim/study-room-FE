@@ -1,9 +1,7 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { getTodos, postTodo, putTodo } from '@/apis/planners.api';
 import { GetTodosRes, PutPostTodoReq } from '@/models/studyRoomTodos.model';
 import { formatDateTime, isWithinOneDay } from '../utils/dateFormat';
-import { AxiosError } from 'axios';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import CheckBox from '@/components/checkBox/CheckBox';
 import { MouseEvent, useState } from 'react';
@@ -142,6 +140,42 @@ export default function Todos() {
     postMutation.mutate({ data, date });
     setIsAddFormOpened(false);
   };
+
+  const createPlanner = (newTodo: ServerToClientPlanner) => {
+    addTodos(newTodo);
+  };
+
+  const updatePlanner = (updateTodo: ServerToClientPlanner) => {
+    updateTodos(updateTodo);
+  };
+
+  useEffect(() => {
+    if (!socket) {
+      return;
+    }
+    socket.emit('getPlanner', { date: selectedDate });
+
+    socket.on('responseGetPlanner', (data: ServerToClientPlanner[]) => {
+      console.log(data);
+      setTodos(data);
+    });
+
+    socket.on('responseCreatePlanner', (data: ServerToClientPlanner) => {
+      console.log(data);
+      createPlanner(data);
+    });
+
+    socket.on('responseModifyPlanner', (data: ServerToClientPlanner) => {
+      console.log(data);
+      updatePlanner(data);
+    });
+
+    return () => {
+      socket.off('responseGetPlanner');
+      socket.off('responseCreatePlanner');
+      socket.off('responseModifyPlanner');
+    };
+  }, [socket, selectedDate]);
 
   return (
     <S.Wrapper>
