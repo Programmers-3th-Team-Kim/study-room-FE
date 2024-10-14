@@ -17,7 +17,16 @@ const icons = [
 ];
 const labels = ['아침', '낮', '저녁', '밤'];
 
-const CustomYAxisTick = ({ x, y, payload }) => {
+interface CustomYAxisTickProps {
+  x: number;
+  y: number;
+  payload: {
+    value: string;
+    index: number;
+  };
+}
+
+const CustomYAxisTick = ({ x, y, payload }: CustomYAxisTickProps) => {
   return (
     <g transform={`translate(${x - 110},${y - 10})`}>
       <foreignObject width={120} height={40}>
@@ -40,7 +49,21 @@ const CustomYAxisTick = ({ x, y, payload }) => {
   );
 };
 
-export default function MyBarChart({ data }) {
+interface TimeStat {
+  time: string;
+  percentage: number;
+}
+
+interface Data {
+  totalTime: string;
+  restTime: string;
+  morning: TimeStat;
+  afternoon: TimeStat;
+  evening: TimeStat;
+  night: TimeStat;
+}
+
+export default function MyBarChart({ data }: { data: Data }) {
   if (!data) {
     return <div>No data available</div>;
   }
