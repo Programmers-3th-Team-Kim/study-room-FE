@@ -1,9 +1,9 @@
-import { RankingWithJWTResponse } from '@/types/ranking';
+import { RankingResponse, RankingWithJWTResponse } from '@/types/ranking';
 import * as S from './HomeRankingItem.style';
 import { useAuthStore } from '@/stores/auth.store';
 
 interface RankingItemProps {
-  data: RankingWithJWTResponse;
+  data: RankingWithJWTResponse | RankingResponse;
   isJWT?: boolean;
 }
 
@@ -60,17 +60,17 @@ const RankDisplay = ({
 };
 
 function HomeRankingItem({ data, isJWT }: RankingItemProps) {
-  const {
-    userInfo,
-    prevPrevUserInfo,
-    prevUserInfo,
-    nextUserInfo,
-    nextNextUserInfo,
-  } = data;
-
   const myListItems = [];
 
-  if (isJWT) {
+  if (isJWT && 'userInfo' in data) {
+    const {
+      userInfo,
+      prevPrevUserInfo,
+      prevUserInfo,
+      nextUserInfo,
+      nextNextUserInfo,
+    } = data;
+
     // userInfo.rank에 따라 myListItems에 추가
     if (userInfo.rank === 1) {
       myListItems.push(userInfo);
