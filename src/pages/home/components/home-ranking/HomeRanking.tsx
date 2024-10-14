@@ -1,12 +1,15 @@
-import { RankingWithJWTResponse } from '@/types/ranking';
-import { getRankings, getRankingsWithJWT } from '@/apis/ranking.api'; // 함수 임포트
+import { RankingResponse, RankingWithJWTResponse } from '@/types/ranking';
+import { getRankings, getRankingsWithJWT } from '@/apis/ranking.api';
 import * as S from './HomeRanking.style';
 import Loader from '@/components/loader/Loader';
 import HomeRankingItem from './item/HomeRankingItem';
 import { useQuery } from '@tanstack/react-query';
 
 const HomeRanking = ({ isJWT }: { isJWT: boolean }) => {
-  const { data, error, isLoading } = useQuery<RankingWithJWTResponse, Error>({
+  const { data, error, isLoading } = useQuery<
+    RankingWithJWTResponse | RankingResponse,
+    Error
+  >({
     queryKey: ['data', isJWT],
     queryFn: isJWT ? getRankingsWithJWT : getRankings,
   });
