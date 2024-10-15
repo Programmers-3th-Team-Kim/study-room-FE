@@ -61,7 +61,7 @@ export default function MyPieChart() {
           cx="50%"
           cy="50%"
           innerRadius={70}
-          outerRadius={100}
+          outerRadius={110}
           fill="#8884d8"
           dataKey="percentage"
           labelLine={false}
