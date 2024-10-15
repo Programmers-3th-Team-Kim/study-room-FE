@@ -5,6 +5,7 @@ export const ChartWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  min-height: 360px;
 `;
 
 export const Title = styled.h2`
@@ -38,4 +39,13 @@ export const ValueTitle = styled.h3`
 export const ValueText = styled.p`
   font-size: 16px;
   margin: auto;
+`;
+
+export const EmptyText = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+  color: #555555;
+  line-height: 1.5;
+  text-align: center;
+  margin-top: 100px;
 `;

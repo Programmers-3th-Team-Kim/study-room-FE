@@ -32,11 +32,18 @@ export default function MyPieChart({ selectedDate }: MyPieChartProps) {
   };
 
   useEffect(() => {
+    const dateToFetch = new Date();
+    const year = dateToFetch.getFullYear();
+    const month = dateToFetch.getMonth() + 1;
+    const day = dateToFetch.getDate();
+    loadDailyData(year, month, day);
+  }, []);
+
+  useEffect(() => {
     if (selectedDate) {
       const year = selectedDate.getFullYear();
       const month = selectedDate.getMonth() + 1;
       const day = selectedDate.getDate();
-
       loadDailyData(year, month, day);
     }
   }, [selectedDate]);
@@ -62,34 +69,45 @@ export default function MyPieChart({ selectedDate }: MyPieChartProps) {
 
   return (
     <S.ChartWrapper>
-      <PieChart width={250} height={250}>
-        <Pie
-          data={dailyData.planner}
-          cx="50%"
-          cy="50%"
-          innerRadius={70}
-          outerRadius={110}
-          fill="#8884d8"
-          dataKey="percentage"
-          labelLine={false}
-          label={renderLabel}
-        >
-          {dailyData.planner.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip />
-      </PieChart>
-      <S.ValueContainer>
-        <S.ValueWrapper>
-          <S.ValueTitle>최대 집중 시간</S.ValueTitle>
-          <S.ValueText>{dailyData.maxTime}</S.ValueText>
-        </S.ValueWrapper>
-        <S.ValueWrapper>
-          <S.ValueTitle>휴식 시간</S.ValueTitle>
-          <S.ValueText>{dailyData.restTime}</S.ValueText>
-        </S.ValueWrapper>
-      </S.ValueContainer>
+      {dailyData.totalTime === '00:00:00' ? (
+        <S.EmptyText>
+          할 일을 시작해보세요. <br />
+          아직 기록된 시간이 없습니다!
+        </S.EmptyText>
+      ) : (
+        <>
+          <PieChart width={250} height={250}>
+            <Pie
+              data={dailyData.planner}
+              cx="50%"
+              cy="50%"
+              innerRadius={70}
+              outerRadius={110}
+              fill="#8884d8"
+              dataKey="percentage"
+              labelLine={false}
+              label={renderLabel}
+            >
+              {dailyData.planner.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+          </PieChart>
+          <S.ValueContainer>
+            <S.ValueWrapper>
+              <S.ValueTitle>최대 집중 시간</S.ValueTitle>
+              <S.ValueText>{dailyData.maxTime}</S.ValueText>
+            </S.ValueWrapper>
+            <S.ValueWrapper>
+              <S.ValueTitle>휴식 시간</S.ValueTitle>
+              <S.ValueText>{dailyData.restTime}</S.ValueText>
+            </S.ValueWrapper>
+          </S.ValueContainer>
+        </>
+      )}
     </S.ChartWrapper>
   );
 }
