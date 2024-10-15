@@ -21,18 +21,22 @@ export const DateCellWrapper = styled.div`
 
 export const CalendarWrapper = styled.div`
   .rbc-row {
-    width: 500px;
+    width: 500px !important;
+    align-items: center !important;
   }
 
   .rbc-row-content {
-    display: flex;
-    justify-content: space-between;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 100% !important;
   }
 
   .rbc-date-cell {
     padding-right: 0 !important;
-    display: flex;
-    justify-content: center;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 `;
 
