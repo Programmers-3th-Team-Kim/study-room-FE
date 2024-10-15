@@ -60,11 +60,9 @@ const CustomDateHeader = ({
   const backgroundColor = getBackgroundColor(time);
 
   return (
-    <S.DateHeader>
-      <S.DateHeaderButton backgroundColor={backgroundColor}>
-        {dayjs(date).format('DD')}
-      </S.DateHeaderButton>
-    </S.DateHeader>
+    <S.DateHeaderButton backgroundColor={backgroundColor}>
+      {dayjs(date).format('DD')}
+    </S.DateHeaderButton>
   );
 };
 
@@ -123,14 +121,14 @@ export default function MyCalendar() {
   };
 
   return (
-    <div>
+    <S.CalendarContainer>
       <S.CalendarWrapper>
         <Calendar
           localizer={localizer}
           events={[]}
           startAccessor="start"
           endAccessor="end"
-          style={{ minWidth: 380, height: 350 }}
+          style={{ width: 500, height: 450 }}
           components={{
             dateCellWrapper: DateCellWrapper,
             toolbar: CustomToolbar,
@@ -145,6 +143,6 @@ export default function MyCalendar() {
         />
       </S.CalendarWrapper>
       <Legend />
-    </div>
+    </S.CalendarContainer>
   );
 }

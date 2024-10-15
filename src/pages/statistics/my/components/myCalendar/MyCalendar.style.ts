@@ -1,5 +1,32 @@
 import styled from 'styled-components';
 
+export const CalendarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const CalendarWrapper = styled.div`
+  .rbc-row-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .rbc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+  }
+
+  .rbc-date-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
 export const DateWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -9,39 +36,20 @@ export const DateWrapper = styled.div`
 `;
 
 export const DateCellWrapper = styled.div`
-  padding: 0;
-  margin: 0;
-`;
-
-export const DateHeader = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
-export const CalendarWrapper = styled.div`
-  .rbc-date-cell {
-    padding-right: 0 !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .rbc-month-row {
-    text-align: center;
-  }
-`;
 export const DateHeaderButton = styled.button<{ backgroundColor: string }>`
   all: unset;
   border-radius: 50%;
-  height: 36px;
-  width: 36px;
+  height: 40px;
+  width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-
   background-color: ${(props) => props.backgroundColor};
-
   cursor: pointer;
 `;
 
