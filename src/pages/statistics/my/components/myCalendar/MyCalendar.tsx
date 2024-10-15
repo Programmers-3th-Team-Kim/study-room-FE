@@ -47,30 +47,15 @@ interface StudyData {
   totalTime: number;
 }
 
-const CustomDateHeader = ({
-  date,
-  studyData,
-}: {
-  date: Date;
-  studyData: StudyData[];
-}) => {
-  const dateString = dayjs(date).format('YYYY-MM-DD');
-  const studyItem = studyData.find((item) => item.date === dateString);
-  const time = studyItem ? studyItem.totalTime : 0;
-  const backgroundColor = getBackgroundColor(time);
-
-  return (
-    <S.DateHeaderButton backgroundColor={backgroundColor}>
-      {dayjs(date).format('DD')}
-    </S.DateHeaderButton>
-  );
-};
-
 const DateCellWrapper = () => {
   return <S.DateCellWrapper />;
 };
 
-export default function MyCalendar() {
+export default function MyCalendar({
+  onDateClick,
+}: {
+  onDateClick: (date: Date) => void;
+}) {
   const [year, setYear] = useState(dayjs().year());
   const [month, setMonth] = useState(dayjs().month() + 1); // 0부터 시작하므로 +1
   const [calendarData, setCalendarData] = useState([]);
@@ -88,6 +73,30 @@ export default function MyCalendar() {
   useEffect(() => {
     loadCalendarData(year, month);
   }, [year, month]);
+
+  const CustomDateHeader = ({
+    date,
+    studyData,
+    onDateClick,
+  }: {
+    date: Date;
+    studyData: StudyData[];
+    onDateClick: (date: Date) => void;
+  }) => {
+    const dateString = dayjs(date).format('YYYY-MM-DD');
+    const studyItem = studyData.find((item) => item.date === dateString);
+    const time = studyItem ? studyItem.totalTime : 0;
+    const backgroundColor = getBackgroundColor(time);
+
+    return (
+      <S.DateHeaderButton
+        backgroundColor={backgroundColor}
+        onClick={() => onDateClick(date)}
+      >
+        {dayjs(date).format('DD')}
+      </S.DateHeaderButton>
+    );
+  };
 
   const CustomToolbar = (toolbar: ToolbarProps) => {
     const goToBack = () => {
@@ -135,7 +144,11 @@ export default function MyCalendar() {
             header: CustomHeader,
             month: {
               dateHeader: (props) => (
-                <CustomDateHeader {...props} studyData={calendarData} />
+                <CustomDateHeader
+                  {...props}
+                  studyData={calendarData}
+                  onDateClick={onDateClick}
+                />
               ),
             },
           }}

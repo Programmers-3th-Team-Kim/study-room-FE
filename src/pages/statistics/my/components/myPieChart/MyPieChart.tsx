@@ -5,7 +5,11 @@ import { useEffect, useState } from 'react';
 
 const COLORS = ['#00A9FF', '#89CFF3', '#A0E9FF', '#CDF5FD'];
 
-export default function MyPieChart() {
+interface MyPieChartProps {
+  selectedDate: Date | null;
+}
+
+export default function MyPieChart({ selectedDate }: MyPieChartProps) {
   const [dailyData, setDailyData] = useState({
     totalTime: '00:00:00',
     maxTime: '00:00:00',
@@ -28,11 +32,14 @@ export default function MyPieChart() {
   };
 
   useEffect(() => {
-    const year = 2024;
-    const month = 10;
-    const day = 11;
-    loadDailyData(year, month, day);
-  }, []);
+    if (selectedDate) {
+      const year = selectedDate.getFullYear();
+      const month = selectedDate.getMonth() + 1;
+      const day = selectedDate.getDate();
+
+      loadDailyData(year, month, day);
+    }
+  }, [selectedDate]);
 
   const renderLabel = () => {
     return (

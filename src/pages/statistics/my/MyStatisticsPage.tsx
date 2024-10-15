@@ -17,6 +17,8 @@ export default function MyStatisticsPage() {
   const [weeklyOffset, setWeeklyOffset] = useState(1);
   const [monthlyOffset, setMonthlyOffset] = useState(0);
 
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null); // Add state for selected date
+
   useEffect(() => {
     const fetchData = async () => {
       if (viewMode === '주간') {
@@ -57,6 +59,12 @@ export default function MyStatisticsPage() {
     }
   };
 
+  const handleDateClick = (date: Date) => {
+    const formattedDate = dayjs(date).format('YYYY-MM-DD');
+    console.log(formattedDate);
+    setSelectedDate(date);
+  };
+
   const renderChart = () => {
     switch (viewMode) {
       case '주간':
@@ -71,8 +79,9 @@ export default function MyStatisticsPage() {
         ) : (
           <div>월간 통계 데이터가 없습니다.</div>
         );
+      case '일간':
       default:
-        return <MyPieChart />;
+        return <MyPieChart selectedDate={selectedDate} />; // Pass selectedDate to PieChart
     }
   };
 
@@ -95,7 +104,8 @@ export default function MyStatisticsPage() {
 
   return (
     <S.StatContainer>
-      <MyCalendar />
+      <MyCalendar onDateClick={handleDateClick} />{' '}
+      {/* Pass handleDateClick to the calendar */}
       <S.StatWrapper>
         <S.ButtonWrapper>
           <S.Button
