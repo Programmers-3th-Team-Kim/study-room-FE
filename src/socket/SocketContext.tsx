@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/stores/auth.store';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { Socket } from 'socket.io-client';
+import { Socket, io } from 'socket.io-client';
 
 const SocketContext = createContext<typeof Socket | null>(null);
 

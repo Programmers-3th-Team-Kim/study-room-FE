@@ -9,6 +9,7 @@ import Planner from '@/pages/planner/Planner';
 import PrivateStudyRoom from '@/pages/privateStudyRoom/PrivateStudyRoom';
 import AllStatisticsPage from '@/pages/statistics/all/AllStatisticsPage';
 import MyStatisticsPage from '@/pages/statistics/my/MyStatisticsPage';
+import MultiStudyRoom from '@/pages/multiStudyRoom/MultiStudyRoom';
 import Ranking from '@/pages/ranking/Ranking';
 
 export default function Router() {
@@ -24,6 +25,7 @@ export default function Router() {
       <Route path="/statistics/my" element={<MyStatisticsPage />} />
       <Route path="/ranking" element={<Ranking />} />
       <Route path="/study-room/:id" element={<PrivateStudyRoom />} />
+      <Route path="/multi-study-room/:id" element={<MultiStudyRoom />} />
     </Routes>
   );
 }

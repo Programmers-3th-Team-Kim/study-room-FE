@@ -7,6 +7,7 @@ import Modal from '@/components/modal/Modal';
 import PasswordInput from '../form/PasswordInput';
 import * as S from './StudyGrid.style';
 import { checkStudyRoomPassword, fetchRooms } from '@/apis/studyRooms.api';
+import Loader from '@/components/loader/Loader';
 
 interface ResData {
   rooms: Room[];
@@ -92,7 +93,11 @@ function StudyGrid({
 
   const handleRoomClick = (room: Room) => {
     if (room.isPublic) {
-      navigate(`/study-room/${room._id}`);
+      if (room.maxNum === 1) {
+        navigate(`/study-room/${room._id}`);
+      } else if (room.maxNum > 1) {
+        navigate(`/multi-study-room/${room._id}`);
+      }
     } else {
       setSelectedRoom(room);
       setShowPasswordModal(true);
@@ -123,7 +128,7 @@ function StudyGrid({
   return (
     <>
       {isLoading ? (
-        <S.Loader>로딩 중...</S.Loader>
+        <Loader />
       ) : error ? (
         <S.ErrorMessage>{`방 목록을 불러오는 데 실패했습니다: ${error.message}`}</S.ErrorMessage>
       ) : data?.pages[0].rooms.length === 0 ? (
