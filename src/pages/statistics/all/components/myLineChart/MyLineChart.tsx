@@ -8,12 +8,12 @@ import {
   ReferenceLine,
 } from 'recharts';
 import { useEffect, useState } from 'react';
-
-import { fetchAllGraph } from '@/apis/statistics.api';
 import dayjs from 'dayjs';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { fetchAllGraph } from '@/apis/statistics.api';
 import * as S from '@/pages/statistics/all/components/myLineChart/MyLineChart.style';
 import { formatHours, formatHoursAndMinutes } from '@/utils/formatTime';
+import { useAuthStore } from '@/stores/auth.store';
 
 const CustomLegend = () => (
   <S.LegendContainer>
@@ -41,6 +41,10 @@ export default function MyLineChart() {
   const [allTotalAverage, setAllTotalAverage] = useState(0);
   const [myTotalAverage, setMyTotalAverage] = useState(0);
   const [offset, setOffset] = useState(0);
+  const { user } = useAuthStore();
+  const userNicknameKey = user?.nickname
+    ? user.nickname.replace(/\s+/g, '_')
+    : 'anonymous';
 
   useEffect(() => {
     loadGraphData();
@@ -48,7 +52,6 @@ export default function MyLineChart() {
 
   const handlePrev = () => {
     setOffset(offset + 1);
-    console.log(formatHours(allTotalAverage));
   };
 
   const handleNext = () => {
@@ -70,7 +73,7 @@ export default function MyLineChart() {
         ) => ({
           date: dayjs(item.date).format('MM/DD'),
           전체사용자: item.totalTime,
-          Nickname: data.my.dailyAverage[index]?.totalTime,
+          [userNicknameKey]: data.my.dailyAverage[index]?.totalTime,
         })
       );
       setGraphData(formattedData);
@@ -78,7 +81,7 @@ export default function MyLineChart() {
       setAllTotalAverage(data.all.totalAverage);
       setMyTotalAverage(data.my.totalAverage);
     } catch (error) {
-      console.error('Error fetching graph data:', error);
+      console.error('그래프 데이터 가져오는 중 오류', error);
     }
   };
 
@@ -117,7 +120,7 @@ export default function MyLineChart() {
             />
             <Line
               type="monotone"
-              dataKey="Nickname"
+              dataKey={userNicknameKey}
               stroke="#59ECFC"
               strokeWidth={2}
               dot={{ r: 5 }}
