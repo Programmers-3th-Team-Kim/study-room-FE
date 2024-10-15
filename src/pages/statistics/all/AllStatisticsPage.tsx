@@ -41,7 +41,6 @@ const AverageSection = ({ title, average }: AverageSection) => (
             average.lastMonth.minutes
           )}
         </S.AvgSpan>
-        공부했어요!
       </S.AvgLine>
     </div>
   </S.Avg>
@@ -67,7 +66,7 @@ export default function AllStatisticsPage() {
       const data = await fetchAllAverage();
       setAverageData(data);
     } catch (error) {
-      console.error('Error fetching average data:', error);
+      console.error('평균 데이터 가져오는 중 오류', error);
     }
   };
 
@@ -79,9 +78,9 @@ export default function AllStatisticsPage() {
     <S.StatContainer>
       <div>
         <S.AvgWrapper>
-          <AverageSection title="전체 사용자는" average={averageData.all} />
+          <AverageSection title="전체 사용자" average={averageData.all} />
           <AverageSection
-            title={`${user?.nickname}님은`}
+            title={`${user?.nickname}`}
             average={averageData.my}
           />
         </S.AvgWrapper>

@@ -34,10 +34,10 @@ export default function MyTinyBarChart({ myData }: MyData) {
           tickFormatter={formatXAxis}
           tickLine={false}
           tickSize={5}
-          fontSize={10}
+          fontSize={12}
           interval={0}
         />
-        <Bar dataKey="totalTime" fill="#8884d8">
+        <Bar dataKey="totalTime" fill="#599BFC">
           <LabelList
             dataKey="totalTime"
             position="top"

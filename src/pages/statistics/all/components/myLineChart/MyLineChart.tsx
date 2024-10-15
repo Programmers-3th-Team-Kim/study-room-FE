@@ -18,19 +18,19 @@ import { useAuthStore } from '@/stores/auth.store';
 const CustomLegend = () => (
   <S.LegendContainer>
     <S.LegendItem>
-      <S.Line color="#59ECFC" />
+      <S.Line color="#599bfc" />
       나의 공부 시간
     </S.LegendItem>
     <S.LegendItem>
-      <S.Line color="#59ECFC" $dashed />
+      <S.Line color="#599bfc" $dashed />
       나의 평균 공부 시간
     </S.LegendItem>
     <S.LegendItem>
-      <S.Line color="#6859FC" />
+      <S.Line color="#2cc194" />
       전체 사용자 공부 시간
     </S.LegendItem>
     <S.LegendItem>
-      <S.Line color="#6859FC" $dashed />
+      <S.Line color="#2cc194" $dashed />
       전체 사용자 평균 공부 시간
     </S.LegendItem>
   </S.LegendContainer>
@@ -99,21 +99,21 @@ export default function MyLineChart() {
             <ReferenceLine
               y={allTotalAverage}
               format={formatHours(allTotalAverage)}
-              stroke="#6859FC"
+              stroke="#2cc194"
               strokeWidth={2}
               strokeDasharray="5 5"
             />
             <ReferenceLine
               y={myTotalAverage}
               format={formatHours(myTotalAverage)}
-              stroke="#59ECFC"
+              stroke="##599bfc"
               strokeWidth={2}
               strokeDasharray="5 5"
             />
             <Line
               type="monotone"
               dataKey="전체사용자"
-              stroke="#6859FC"
+              stroke="#2cc194"
               strokeWidth={2}
               dot={{ r: 5 }}
               activeDot={{ r: 8 }}
@@ -121,7 +121,7 @@ export default function MyLineChart() {
             <Line
               type="monotone"
               dataKey={userNicknameKey}
-              stroke="#59ECFC"
+              stroke="#599bfc"
               strokeWidth={2}
               dot={{ r: 5 }}
               activeDot={{ r: 8 }}

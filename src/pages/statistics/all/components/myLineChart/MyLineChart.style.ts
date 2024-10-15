@@ -15,7 +15,7 @@ export const LegendItem = styled.li`
 
 export const Line = styled.span<{ color?: string; $dashed?: boolean }>`
   display: inline-block;
-  width: 12px;
+  width: 14px;
   height: 2px;
   background-color: ${({ color, $dashed }) =>
     $dashed ? 'transparent' : color || 'black'};
