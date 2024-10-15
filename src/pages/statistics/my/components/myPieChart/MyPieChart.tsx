@@ -67,6 +67,26 @@ export default function MyPieChart({ selectedDate }: MyPieChartProps) {
     );
   };
 
+  interface CustomTooltip {
+    active: boolean;
+    payload: Array<{ payload: { todo: string }; value: number }>;
+  }
+
+  const CustomTooltip = ({ active, payload }: CustomTooltip) => {
+    if (active && payload && payload.length) {
+      const todo = payload[0].payload.todo;
+
+      return (
+        <S.TooltipContainer>
+          <S.TaskText>{`${todo}`}</S.TaskText>
+          <S.TimeText>{`${payload[0].value} %`}</S.TimeText>
+        </S.TooltipContainer>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <S.ChartWrapper>
       {dailyData.totalTime === '00:00:00' ? (
@@ -95,6 +115,7 @@ export default function MyPieChart({ selectedDate }: MyPieChartProps) {
                 />
               ))}
             </Pie>
+            <Tooltip content={<CustomTooltip active={false} payload={[]} />} />
           </PieChart>
           <S.ValueContainer>
             <S.ValueWrapper>

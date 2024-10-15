@@ -49,3 +49,26 @@ export const EmptyText = styled.p`
   text-align: center;
   margin-top: 100px;
 `;
+
+export const TooltipContainer = styled.div`
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d3d3d3;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 200px;
+  text-align: center;
+`;
+
+export const TaskText = styled.p`
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+`;
+
+export const TimeText = styled.p`
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0 0 0;
+`;
