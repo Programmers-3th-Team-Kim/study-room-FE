@@ -13,14 +13,14 @@ export const LegendItem = styled.li`
   gap: 6px;
 `;
 
-export const Line = styled.span<{ $color?: string; $dashed?: boolean }>`
+export const Line = styled.span<{ color?: string; $dashed?: boolean }>`
   display: inline-block;
   width: 12px;
   height: 2px;
-  background-color: ${({ $color, $dashed }) =>
-    $dashed ? 'transparent' : $color || 'black'};
-  border-bottom: ${({ $dashed, $color }) =>
-    $dashed ? `1px dashed ${$color}` : 'none'};
+  background-color: ${({ color, $dashed }) =>
+    $dashed ? 'transparent' : color || 'black'};
+  border-bottom: ${({ $dashed, color }) =>
+    $dashed ? `1px dashed ${color}` : 'none'};
 `;
 
 export const ArrowGraphContainer = styled.div`
