@@ -9,6 +9,9 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 export default function MyStatisticsPage() {
   const [viewMode, setViewMode] = useState<'일간' | '주간' | '월간'>('일간');
+  const [activeButton, setActiveButton] = useState<'일간' | '주간' | '월간'>(
+    '일간'
+  );
   const [weeklyData, setWeeklyData] = useState(null);
   const [monthlyData, setMonthlyData] = useState(null);
   const [weeklyOffset, setWeeklyOffset] = useState(1);
@@ -85,14 +88,34 @@ export default function MyStatisticsPage() {
     }
   };
 
+  const handleButton = (mode: '일간' | '주간' | '월간') => {
+    setViewMode(mode);
+    setActiveButton(mode);
+  };
+
   return (
     <S.StatContainer>
       <MyCalendar />
       <S.StatWrapper>
         <S.ButtonWrapper>
-          <S.Button onClick={() => setViewMode('일간')}>일간</S.Button>
-          <S.Button onClick={() => setViewMode('주간')}>주간</S.Button>
-          <S.Button onClick={() => setViewMode('월간')}>월간</S.Button>
+          <S.Button
+            onClick={() => handleButton('일간')}
+            isActive={activeButton === '일간'}
+          >
+            일간
+          </S.Button>
+          <S.Button
+            onClick={() => handleButton('주간')}
+            isActive={activeButton === '주간'}
+          >
+            주간
+          </S.Button>
+          <S.Button
+            onClick={() => handleButton('월간')}
+            isActive={activeButton === '월간'}
+          >
+            월간
+          </S.Button>
         </S.ButtonWrapper>
         <S.ChartWrapper>
           <S.ChartTitle>
