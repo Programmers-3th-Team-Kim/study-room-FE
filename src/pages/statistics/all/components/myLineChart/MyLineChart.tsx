@@ -22,7 +22,7 @@ const CustomLegend = () => (
       나의 공부 시간
     </S.LegendItem>
     <S.LegendItem>
-      <S.Line color="#59ECFC" dashed />
+      <S.Line color="#59ECFC" $dashed />
       나의 평균 공부 시간
     </S.LegendItem>
     <S.LegendItem>
@@ -30,7 +30,7 @@ const CustomLegend = () => (
       전체 사용자 공부 시간
     </S.LegendItem>
     <S.LegendItem>
-      <S.Line color="#6859FC" dashed />
+      <S.Line color="#6859FC" $dashed />
       전체 사용자 평균 공부 시간
     </S.LegendItem>
   </S.LegendContainer>
