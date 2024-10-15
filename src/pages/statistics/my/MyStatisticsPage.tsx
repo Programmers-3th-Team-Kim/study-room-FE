@@ -60,8 +60,7 @@ export default function MyStatisticsPage() {
   };
 
   const handleDateClick = (date: Date) => {
-    const formattedDate = dayjs(date).format('YYYY-MM-DD');
-    console.log(formattedDate);
+    dayjs(date).format('YYYY-MM-DD');
     setSelectedDate(date);
   };
 
@@ -81,7 +80,7 @@ export default function MyStatisticsPage() {
         );
       case '일간':
       default:
-        return <MyPieChart selectedDate={selectedDate} />; // Pass selectedDate to PieChart
+        return <MyPieChart selectedDate={selectedDate} />;
     }
   };
 
