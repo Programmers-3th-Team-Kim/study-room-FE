@@ -6,27 +6,6 @@ export const CalendarContainer = styled.div`
   gap: 10px;
 `;
 
-export const CalendarWrapper = styled.div`
-  .rbc-row-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .rbc-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 500px;
-  }
-
-  .rbc-date-cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-
 export const DateWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,8 +16,24 @@ export const DateWrapper = styled.div`
 
 export const DateCellWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+`;
+
+export const CalendarWrapper = styled.div`
+  .rbc-row {
+    width: 500px;
+  }
+
+  .rbc-row-content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .rbc-date-cell {
+    padding-right: 0 !important;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const DateHeaderButton = styled.button<{ backgroundColor: string }>`
