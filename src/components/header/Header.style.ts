@@ -31,7 +31,7 @@ export const HeaderTitle = styled.h1`
 export const ImgTitleWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 100px;
+  gap: 40px;
 `;
 
 export const LogoImg = styled.img`
