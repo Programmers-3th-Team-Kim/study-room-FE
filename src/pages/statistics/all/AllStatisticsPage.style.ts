@@ -1,20 +1,19 @@
 import styled from 'styled-components';
 
 export const StatContainer = styled.div`
-  border: 1px solid gray;
   border-radius: 12px;
-  padding: 24px;
-  margin: 20px;
+  padding: 36px;
+  margin: 40px;
   height: 100%;
-  width: 900px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 24px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
 export const AvgWrapper = styled.div`
   display: flex;
-  gap: 18px;
   justify-content: space-around;
 `;
 
@@ -24,7 +23,7 @@ export const Avg = styled.div`
   padding: 20px 34px;
   display: flex;
   gap: 14px;
-  width: 450px;
+  width: 600px;
 `;
 
 export const AvgTitle = styled.h3`

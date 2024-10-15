@@ -4,7 +4,8 @@ export const ChartWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  width: 100%;
 `;
 
 export const ChartValueContainer = styled.div`
@@ -15,23 +16,26 @@ export const ChartValueContainer = styled.div`
 export const ChartValueWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   border: 1px solid lightgray;
   border-radius: 12px;
   padding: 16px;
+  min-width: 160px;
 `;
 
 export const ValueTitle = styled.h3`
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: auto;
 `;
 
 export const ValueText = styled.p`
   font-size: 16px;
-  font-weight: 500;
+  margin: auto;
 `;
 
 export const BarContainer = styled.div`
-  width: 300px;
+  width: 100%;
 `;
 
 export const IconContainer = styled.div`
@@ -44,10 +48,17 @@ export const IconContainer = styled.div`
 export const IconWrapper = styled.span`
   font-size: 20px;
   margin-right: 5px;
-  color: ${({ color }) => color || '#FFA500'}; /* 아이콘 색상 */
+  color: ${({ color }) => color};
 `;
 
-export const LabelText = styled.span`
+export const LabelWrapper = styled.span`
   font-size: 14px;
   font-weight: bold;
+`;
+
+export const TickWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  white-space: nowrap;
 `;

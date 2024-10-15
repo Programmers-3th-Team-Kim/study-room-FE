@@ -4,6 +4,7 @@ export const ChartWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 16px;
 `;
 
 export const Title = styled.h2`
@@ -25,14 +26,16 @@ export const ValueWrapper = styled.div`
   border: 1px solid lightgray;
   border-radius: 8px;
   padding: 16px;
+  min-width: 160px;
 `;
 
 export const ValueTitle = styled.h3`
   font-size: 18px;
-  font-weight: 500;
+  font-weight: bold;
+  margin: auto;
 `;
 
 export const ValueText = styled.p`
   font-size: 16px;
-  font-weight: 400;
+  margin: auto;
 `;
