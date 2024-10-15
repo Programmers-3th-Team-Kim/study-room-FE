@@ -104,25 +104,24 @@ export default function MyStatisticsPage() {
 
   return (
     <S.StatContainer>
-      <MyCalendar onDateClick={handleDateClick} />{' '}
-      {/* Pass handleDateClick to the calendar */}
+      <MyCalendar onDateClick={handleDateClick} />
       <S.StatWrapper>
         <S.ButtonWrapper>
           <S.Button
             onClick={() => handleButton('일간')}
-            isActive={activeButton === '일간'}
+            $isActive={activeButton === '일간'}
           >
             일간
           </S.Button>
           <S.Button
             onClick={() => handleButton('주간')}
-            isActive={activeButton === '주간'}
+            $isActive={activeButton === '주간'}
           >
             주간
           </S.Button>
           <S.Button
             onClick={() => handleButton('월간')}
-            isActive={activeButton === '월간'}
+            $isActive={activeButton === '월간'}
           >
             월간
           </S.Button>

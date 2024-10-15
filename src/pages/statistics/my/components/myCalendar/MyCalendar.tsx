@@ -90,7 +90,7 @@ export default function MyCalendar({
 
     return (
       <S.DateHeaderButton
-        backgroundColor={backgroundColor}
+        $backgroundColor={backgroundColor}
         onClick={() => onDateClick(date)}
       >
         {dayjs(date).format('DD')}

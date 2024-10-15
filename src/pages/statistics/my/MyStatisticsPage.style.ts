@@ -27,7 +27,7 @@ export const ButtonWrapper = styled.div`
   justify-content: end;
 `;
 
-export const Button = styled.button<{ isActive: boolean }>`
+export const Button = styled.button<{ $isActive: boolean }>`
   background: none;
   border: 1px solid lightgray;
   border-radius: 20px;
@@ -35,8 +35,8 @@ export const Button = styled.button<{ isActive: boolean }>`
   font-size: 16px;
   cursor: pointer;
 
-  ${({ isActive, theme }) =>
-    isActive &&
+  ${({ $isActive, theme }) =>
+    $isActive &&
     `
     outline: none;
     border-color: ${theme.color.mainStrong};

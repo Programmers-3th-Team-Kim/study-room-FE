@@ -36,7 +36,7 @@ export const CalendarWrapper = styled.div`
   }
 `;
 
-export const DateHeaderButton = styled.button<{ backgroundColor: string }>`
+export const DateHeaderButton = styled.button<{ $backgroundColor: string }>`
   all: unset;
   border-radius: 50%;
   height: 40px;
@@ -44,7 +44,7 @@ export const DateHeaderButton = styled.button<{ backgroundColor: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) => props.$backgroundColor};
   cursor: pointer;
 `;
 
