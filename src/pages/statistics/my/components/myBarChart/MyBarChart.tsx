@@ -15,6 +15,7 @@ const icons = [
   <TbSunset color="#5B71E3" />,
   <TbMoon color="#030086" />,
 ];
+
 const labels = ['아침', '낮', '저녁', '밤'];
 
 interface CustomYAxisTickProps {
@@ -25,29 +26,6 @@ interface CustomYAxisTickProps {
     index: number;
   };
 }
-
-const CustomYAxisTick = ({ x, y, payload }: CustomYAxisTickProps) => {
-  return (
-    <g transform={`translate(${x - 110},${y - 10})`}>
-      <foreignObject width={120} height={40}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <span style={{ fontSize: '14px', marginRight: '5px' }}>
-            {icons[payload.index]}
-          </span>
-          <span style={{ fontSize: '14px', fontWeight: 'bold' }}>
-            {labels[payload.index]}
-          </span>
-        </div>
-      </foreignObject>
-    </g>
-  );
-};
 
 interface TimeStat {
   time: string;
@@ -87,6 +65,19 @@ export default function MyBarChart({ data }: { data: Data }) {
     },
   ];
 
+  const CustomYAxisTick = ({ x, y, payload }: CustomYAxisTickProps) => {
+    return (
+      <g transform={`translate(${x - 120},${y - 10})`}>
+        <foreignObject width={130} height={40}>
+          <S.TickWrapper>
+            <S.IconWrapper>{icons[payload.index]}</S.IconWrapper>
+            <S.LabelWrapper>{labels[payload.index]}</S.LabelWrapper>
+          </S.TickWrapper>
+        </foreignObject>
+      </g>
+    );
+  };
+
   return (
     <S.ChartWrapper>
       <S.ChartValueContainer>
@@ -100,29 +91,41 @@ export default function MyBarChart({ data }: { data: Data }) {
         </S.ChartValueWrapper>
       </S.ChartValueContainer>
       <S.BarContainer>
-        <ResponsiveContainer width={280} height={240}>
-          <BarChart data={chartData} layout="vertical" barSize={20}>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart
+            data={chartData}
+            layout="vertical"
+            barSize={28}
+            margin={{ top: 20, right: 40, left: 20 }}
+          >
             <XAxis type="number" axisLine={false} tick={false} />
             <YAxis
               type="category"
               axisLine={false}
               tickLine={false}
               tick={CustomYAxisTick}
+              width={140}
+              tickMargin={10}
             />
-
             <Bar dataKey="percentage" fill="#333" background={{ fill: '#eee' }}>
               <LabelList
                 dataKey="time"
                 position="left"
-                style={{ fontSize: '14px', fill: '#333', fontWeight: 'bold' }}
+                style={{
+                  fill: '#333',
+                  fontWeight: 'bold',
+                }}
+                dx={-5}
               />
               <LabelList
                 dataKey="percentage"
                 position="right"
-                style={{ fill: '#333', fontWeight: 'bold' }}
+                style={{
+                  fill: '#333',
+                  fontWeight: 'bold',
+                }}
               />
             </Bar>
-            <span>{data[0]?.percentage}</span>
           </BarChart>
         </ResponsiveContainer>
       </S.BarContainer>
