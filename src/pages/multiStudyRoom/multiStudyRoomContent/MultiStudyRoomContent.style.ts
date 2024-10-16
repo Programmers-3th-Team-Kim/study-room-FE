@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const MultiStudyRoomContentStyle = styled.div`
+  display: flex;
   width: 100%;
   height: 100vh;
-  display: flex;
   align-items: center;
   justify-content: center;
 `;
@@ -21,17 +21,17 @@ export const StudyRoomWrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 100vh;
-  margin: 60px 0;
+  height: 100%;
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 30px;
 `;
 
 export const UserProfileContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  height: 50vh;
-  max-width: 70vw;
-  max-height: 60vh;
+  gap: 30px;
+  height: 70%;
   overflow-y: auto;
   overflow-x: hidden;
 `;
@@ -46,10 +46,4 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 564px;
-`;
-
-export const RSideBarStyle = styled.div`
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%); /* 수직 중앙 정렬 */
 `;

@@ -2,17 +2,19 @@ import styled from 'styled-components';
 
 export const StudyRoomNoticeStyle = styled.div`
   display: flex;
-  width: 100%;
+  position: absolute;
+  box-sizing: border-box;
   background-color: #ffdada;
   padding: 24px;
-  box-sizing: border-box;
+  top: 80px;
+  z-index: 1000;
 `;
 
 export const NoticeDivOpen = styled.div`
   display: flex;
-  width: 100%;
   flex-direction: row;
   gap: 10px;
+  left: 0;
 `;
 
 export const NoticeDivClosed = styled.div`
@@ -28,6 +30,7 @@ export const OpenText = styled.div`
   height: auto;
   white-space: normal;
   font-size: 1.2rem;
+  line-height: 1.5;
 `;
 
 export const CloseText = styled.div`
