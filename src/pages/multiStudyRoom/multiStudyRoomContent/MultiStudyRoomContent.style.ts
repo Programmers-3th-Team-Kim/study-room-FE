@@ -1,3 +1,4 @@
+import { scrollMixin } from '@/styles/mixins';
 import styled from 'styled-components';
 
 export const MultiStudyRoomContentStyle = styled.div`
