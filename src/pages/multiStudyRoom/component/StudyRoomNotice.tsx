@@ -25,7 +25,6 @@ const StudyRoomNotice: React.FC<StudyRoomNoticeProps> = ({ allInfo }) => {
         </S.NoticeDivOpen>
       ) : (
         <S.NoticeDivClosed onClick={toggleDiv}>
-          {/* <S.CloseText>{notice?.slice(0, 60)}...</S.CloseText> */}
           <S.CloseText>{notice}</S.CloseText>
           <IoChevronDownOutline />
         </S.NoticeDivClosed>

@@ -20,6 +20,7 @@ export const NoticeDivClosed = styled.div`
   width: 100%;
   flex-direction: row;
   gap: 10px;
+  align-items: center;
 `;
 
 export const OpenText = styled.div`
@@ -36,4 +37,5 @@ export const CloseText = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 1.2rem;
+  flex: 1;
 `;
