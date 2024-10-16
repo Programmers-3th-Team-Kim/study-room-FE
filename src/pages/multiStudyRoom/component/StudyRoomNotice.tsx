@@ -1,11 +1,13 @@
 import * as S from './StudyRoomNotice.style';
 import { IoChevronDownOutline, IoChevronUpOutline } from 'react-icons/io5';
-
-// Props로 공부방 정보를 받을 예정
-
 import { useState } from 'react';
+import { StudyRoomInfo } from '@/models/studyRoom.model';
 
-const StudyRoomNotice = ({ allInfo }) => {
+interface StudyRoomNoticeProps {
+  allInfo: StudyRoomInfo | undefined;
+}
+
+const StudyRoomNotice: React.FC<StudyRoomNoticeProps> = ({ allInfo }) => {
   const notice = allInfo?.notice;
 
   const [isNoticeOpen, setIsNoticeOpen] = useState(false);
@@ -15,23 +17,20 @@ const StudyRoomNotice = ({ allInfo }) => {
   };
 
   return (
-    <div style={{ position: 'relative' }}>
+    <S.StudyRoomNoticeStyle>
       {isNoticeOpen ? (
-        <S.NoticeDivOpen>
-          <text>{notice}</text>
-          <S.OpenButton>
-            <IoChevronUpOutline onClick={toggleDiv} />
-          </S.OpenButton>
+        <S.NoticeDivOpen onClick={toggleDiv}>
+          <S.OpenText>{notice}</S.OpenText>
+          <IoChevronUpOutline />
         </S.NoticeDivOpen>
       ) : (
-        <S.NoticeDivClosed>
-          <text>{notice}</text>
-          <S.OpenButton>
-            <IoChevronDownOutline onClick={toggleDiv} />
-          </S.OpenButton>
+        <S.NoticeDivClosed onClick={toggleDiv}>
+          {/* <S.CloseText>{notice?.slice(0, 60)}...</S.CloseText> */}
+          <S.CloseText>{notice}</S.CloseText>
+          <IoChevronDownOutline />
         </S.NoticeDivClosed>
       )}
-    </div>
+    </S.StudyRoomNoticeStyle>
   );
 };
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const MultiStudyRoomStyle = styled.div`
-  width: 100vw;
+export const MultiStudyRoomContentStyle = styled.div`
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -13,7 +13,7 @@ export const MainContentArea = styled.div`
   flex-direction: column;
   align-items: center;
   flex: 1;
-  height: 100vh;
+  height: 100%;
 `;
 
 export const StudyRoomWrap = styled.div`
