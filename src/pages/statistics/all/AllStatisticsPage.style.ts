@@ -5,6 +5,7 @@ export const StatContainer = styled.div`
   padding: 36px;
   margin: 40px;
   height: 100%;
+  width: 100%;
   flex-shrink: 1;
   display: flex;
   flex-direction: column;
@@ -15,6 +16,7 @@ export const StatContainer = styled.div`
 export const AvgWrapper = styled.div`
   display: flex;
   gap: 24px;
+  width: 100%;
 `;
 
 export const Avg = styled.div`
