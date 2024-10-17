@@ -28,3 +28,14 @@ export const ArrowGraphContainer = styled.div`
   align-items: center;
   width: 100%;
 `;
+
+export const ArrowButton = styled.button`
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  background-color: #f0f6ff;
+`;
