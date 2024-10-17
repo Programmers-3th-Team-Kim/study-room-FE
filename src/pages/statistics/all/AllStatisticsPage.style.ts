@@ -5,7 +5,7 @@ export const StatContainer = styled.div`
   padding: 36px;
   margin: 40px;
   height: 100%;
-  width: 100%;
+  flex-shrink: 1;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -14,7 +14,7 @@ export const StatContainer = styled.div`
 
 export const AvgWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  gap: 24px;
 `;
 
 export const Avg = styled.div`
@@ -23,13 +23,12 @@ export const Avg = styled.div`
   padding: 20px 34px;
   display: flex;
   gap: 14px;
-  width: 600px;
+  width: 100%;
 `;
 
 export const AvgTitle = styled.h3`
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 8px;
 `;
 
 export const AvgLine = styled.div`
@@ -38,7 +37,7 @@ export const AvgLine = styled.div`
 
 export const AvgSpan = styled.span`
   font-weight: bold;
-  margin-left: 4px;
+  margin-left: 18px;
 `;
 
 export const AvgSub = styled.h4`
