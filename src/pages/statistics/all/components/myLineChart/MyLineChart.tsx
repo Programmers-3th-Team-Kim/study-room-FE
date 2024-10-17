@@ -88,7 +88,7 @@ export default function MyLineChart() {
   return (
     <>
       <S.ArrowGraphContainer>
-        <IoIosArrowBack onClick={handlePrev} />
+        <IoIosArrowBack onClick={handlePrev} size={18} />
         <ResponsiveContainer width="100%" height={400}>
           <LineChart data={graphData}>
             <XAxis dataKey="date" />

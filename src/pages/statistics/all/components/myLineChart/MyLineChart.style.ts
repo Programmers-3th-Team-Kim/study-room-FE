@@ -25,6 +25,6 @@ export const Line = styled.span<{ color?: string; $dashed?: boolean }>`
 
 export const ArrowGraphContainer = styled.div`
   display: flex;
-  align-items: end;
+  align-items: center;
   width: 100%;
 `;
