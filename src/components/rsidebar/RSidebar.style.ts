@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const RSidebarStyle = styled.div`
   min-width: 350px;
@@ -49,6 +49,7 @@ export const Tab = styled.div.withConfig({
   width: 30%;
   border-radius: 8px;
   padding: min(1vh, 1rem);
+  position: relative;
 
   &:hover {
     cursor: pointer;
@@ -57,4 +58,25 @@ export const Tab = styled.div.withConfig({
   ${(props) =>
     props.isSelected &&
     `font-weight:600; color : ${props.theme.color.mainStrong} ;`}
+`;
+
+const blink = keyframes`
+0%, 10% {
+  opacity: 0;
+}
+20%, 90% {
+  opacity : 1;
+}
+100% {
+  opacity: 0;
+}
+`;
+export const newChatAlert = styled.div`
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  right: 10px;
+  background-color: red;
+  animation: ${blink} 3s infinite;
 `;

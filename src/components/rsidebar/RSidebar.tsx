@@ -12,6 +12,7 @@ type Tabs = '할 일' | '채팅';
 const RSidebar = () => {
   const socket = useSocket();
   const setChatArray = useChatStore.getState().setChatArray;
+  const [hasNewChat, setHasNewChat] = useState(false);
 
   const [currentDateTime, setCurrentDateTime] =
     useState<string>(formatDateTime());
@@ -25,6 +26,10 @@ const RSidebar = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    setHasNewChat(false);
+  }, [selectedTab]);
+
   // socket
   useEffect(() => {
     if (!socket) {
@@ -33,6 +38,7 @@ const RSidebar = () => {
 
     const handleReceiveChat = throttle((data) => {
       setChatArray(data);
+      setHasNewChat(true);
       // console.log(data);
     }, 300);
 
@@ -56,7 +62,7 @@ const RSidebar = () => {
     socket.on('receiveChat', handleReceiveChat);
 
     return () => {
-      socket.off('recieveChat');
+      socket.off('receiveChat');
       socket.off('responseChat');
       socket.off('notice');
     };
@@ -80,12 +86,15 @@ const RSidebar = () => {
               isSelected = true;
             }
 
+            const isNeedAlert =
+              selectedTab !== '채팅' && tab === '채팅' && hasNewChat;
             return (
               <S.Tab
                 key={index}
                 isSelected={isSelected}
                 onClick={() => handleTabClick(tab as Tabs)}
               >
+                {isNeedAlert && <S.newChatAlert />}
                 {tab}
               </S.Tab>
             );
