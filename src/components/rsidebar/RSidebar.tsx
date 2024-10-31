@@ -21,6 +21,16 @@ const RSidebar = () => {
   const [selectedTab, setSelectedTab] = useState<Tabs>('할 일');
 
   const [isNtfAllowed, setIsNtfAllowed] = useState(true);
+  const [windowVisibility, setWindowVisibility] = useState(
+    document.visibilityState === 'visible'
+  );
+
+  const showNotification = (nickname: string, message: string) => {
+    new Notification(nickname, {
+      body: message,
+      icon: '/favicon.png',
+    });
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,25 +46,35 @@ const RSidebar = () => {
     setHasNewChat(false);
   }, [selectedTab]);
 
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setWindowVisibility(document.visibilityState === 'visible');
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
   // socket
   useEffect(() => {
     if (!socket) {
       return;
     }
-    const showNotification = (nickname: string, message: string) => {
-      console.log(`isNtf : ${isNtfAllowed}`);
-      if (isNtfAllowed && Notification.permission === 'granted') {
-        new Notification(nickname, {
-          body: message,
-          icon: '/favicon.png',
-        });
-      }
-    };
+
+    const commonCase = isNtfAllowed && Notification.permission === 'granted';
+    const case1 = !windowVisibility;
+    const case2 = selectedTab === '할 일';
 
     const handleReceiveChat = throttle((data: ChatRes) => {
       setChatArray(data);
       setHasNewChat(true);
-      showNotification(data.nickname, data.message);
+      if (commonCase && (case1 || case2)) {
+        showNotification(data.nickname, data.message);
+      }
+
       // console.log(data);
     }, 300);
 
@@ -82,7 +102,7 @@ const RSidebar = () => {
       socket.off('responseChat');
       socket.off('notice');
     };
-  }, [socket, isNtfAllowed]);
+  }, [socket, isNtfAllowed, selectedTab, windowVisibility]);
 
   const handleTabClick = (tab: Tabs) => {
     setSelectedTab(tab);
