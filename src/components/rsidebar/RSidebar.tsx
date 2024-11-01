@@ -6,6 +6,7 @@ import { formatDateTime } from './utils/dateFormat';
 import { useSocket } from '@/socket/SocketContext';
 import useChatStore from '@/stores/chat.store';
 import { ChatRes } from '@/models/chat.model';
+import { showNotification } from './utils/notification';
 import * as S from './RSidebar.style';
 
 type Tabs = '할 일' | '채팅';
@@ -24,13 +25,6 @@ const RSidebar = () => {
   const [windowVisibility, setWindowVisibility] = useState(
     document.visibilityState === 'visible'
   );
-
-  const showNotification = (nickname: string, message: string) => {
-    new Notification(nickname, {
-      body: message,
-      icon: '/favicon.png',
-    });
-  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -66,12 +60,11 @@ const RSidebar = () => {
 
     const commonCase = isNtfAllowed && Notification.permission === 'granted';
     const case1 = !windowVisibility;
-    const case2 = selectedTab === '할 일';
 
     const handleReceiveChat = throttle((data: ChatRes) => {
       setChatArray(data);
       setHasNewChat(true);
-      if (commonCase && (case1 || case2)) {
+      if (commonCase && case1) {
         showNotification(data.nickname, data.message);
       }
 
