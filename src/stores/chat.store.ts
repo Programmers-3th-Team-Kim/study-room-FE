@@ -18,7 +18,7 @@ const useChatStore = create<chatRoomState>()(
         })),
       initChatArray: () => set({ chatArray: [] }),
     }),
-    { name: 'StudyRoom Store' }
+    { name: 'Chat Store' }
   )
 );
 

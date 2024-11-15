@@ -6,7 +6,9 @@ interface StudyRoomState {
   selectedTodo: ServerToClientPlanner | null;
   todos: ServerToClientPlanner[];
   settingModal: boolean;
+  isChatEnabled: boolean;
 
+  setChatEnabled: (enabled: boolean) => void;
   setSelectedTodo: (todo: ServerToClientPlanner | null) => void;
   setTodos: (todos: ServerToClientPlanner[]) => void;
   addTodos: (newTodo: ServerToClientPlanner) => void;
@@ -21,7 +23,9 @@ const useStudyRoomStore = create<StudyRoomState>()(
       selectedTodo: null,
       todos: [],
       settingModal: false,
+      isChatEnabled: false,
 
+      setChatEnabled: (enabled: boolean) => set({ isChatEnabled: enabled }),
       setSelectedTodo: (todo: ServerToClientPlanner | null) =>
         set({ selectedTodo: todo }),
       setTodos: (todos: ServerToClientPlanner[]) => set({ todos: todos }),

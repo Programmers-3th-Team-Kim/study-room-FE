@@ -19,6 +19,7 @@ import { ServerToClientPlanner } from '@/models/studyRoomTodos.model';
 import UpdateStudyRoomForm from '@/pages/multiStudyRoom/component/updateStudyRoomForm/UpdateStudyRoomForm';
 import Modal from '@/components/modal/Modal';
 import { IoSettingsOutline } from 'react-icons/io5';
+import { RoomAndMyInfoDto } from '@/types/createStudyRoom';
 
 const PrivateStudyRoomContent = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const PrivateStudyRoomContent = () => {
   const selectedTodo = useStudyRoomStore((state) => state.selectedTodo);
   const previousTodo = useRef<ServerToClientPlanner | null>(null);
   // const todos = useStudyRoomStore((state) => state.todos);
-  const setSelectedTodo = useStudyRoomStore((state) => state.setSelectedTodo);
+  const { setSelectedTodo, setChatEnabled } = useStudyRoomStore();
   const updateTodos = useStudyRoomStore((state) => state.updateTodos);
 
   const initInfo = {
@@ -226,10 +227,11 @@ const PrivateStudyRoomContent = () => {
 
     socket.connect();
 
-    socket.on('getRoomAndMyInfo', (data) => {
+    socket.on('getRoomAndMyInfo', (data: RoomAndMyInfoDto) => {
       // 첫 소켓 접속 시
       console.log(data);
       setStudyRoomInfo(data); // 스터디 방 정보 저장
+      setChatEnabled(data.isChat);
       const userData = {
         nickname: user?.nickname ? user.nickname : '',
         imageUrl: user?.imageUrl ? user.imageUrl : '',
@@ -251,6 +253,7 @@ const PrivateStudyRoomContent = () => {
         };
         return newData;
       });
+      setChatEnabled(data.isChat);
     });
 
     return () => {

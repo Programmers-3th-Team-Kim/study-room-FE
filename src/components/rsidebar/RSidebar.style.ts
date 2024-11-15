@@ -80,8 +80,8 @@ export const TabsWrapper = styled.div`
 `;
 
 export const Tab = styled.div.withConfig({
-  shouldForwardProp: (prop) => !['isSelected'].includes(prop),
-})<{ isSelected?: boolean }>`
+  shouldForwardProp: (prop) => !['isSelected', 'isBlocked'].includes(prop),
+})<{ isSelected?: boolean; isBlocked: boolean }>`
   font-size: min(3vh, 3rem);
 
   color: ${(props) => (props.isSelected ? 'black' : '#7c7c7c')};
@@ -98,6 +98,9 @@ export const Tab = styled.div.withConfig({
   ${(props) =>
     props.isSelected &&
     `font-weight:600; color : ${props.theme.color.mainStrong} ;`}
+
+  ${(props) =>
+    props.isBlocked && '&:hover{cursor : not-allowed} filter : opacity(30%)'}
 `;
 
 const blink = keyframes`
@@ -111,7 +114,7 @@ const blink = keyframes`
   opacity: 0;
 }
 `;
-export const newChatAlert = styled.div`
+export const NewChatAlert = styled.div`
   position: absolute;
   width: 10px;
   height: 10px;

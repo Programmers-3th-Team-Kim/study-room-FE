@@ -8,6 +8,8 @@ import useChatStore from '@/stores/chat.store';
 import { ChatRes } from '@/models/chat.model';
 import { showNotification } from './utils/notification';
 import * as S from './RSidebar.style';
+import useStudyRoomStore from '@/stores/studyRoom.store';
+import { Tooltip } from 'react-tooltip';
 
 type Tabs = '할 일' | '채팅';
 
@@ -15,6 +17,7 @@ const RSidebar = () => {
   const socket = useSocket();
   const setChatArray = useChatStore.getState().setChatArray;
   const [hasNewChat, setHasNewChat] = useState(false);
+  const { isChatEnabled } = useStudyRoomStore();
 
   const [currentDateTime, setCurrentDateTime] =
     useState<string>(formatDateTime());
@@ -140,15 +143,31 @@ const RSidebar = () => {
 
             const isNeedAlert =
               selectedTab !== '채팅' && tab === '채팅' && hasNewChat;
+
+            const isBlocked = !isChatEnabled && tab === '채팅';
+
             return (
-              <S.Tab
-                key={index}
-                isSelected={isSelected}
-                onClick={() => handleTabClick(tab as Tabs)}
-              >
-                {isNeedAlert && <S.newChatAlert />}
-                {tab}
-              </S.Tab>
+              <>
+                <S.Tab
+                  key={index}
+                  isSelected={isSelected}
+                  isBlocked={isBlocked}
+                  onClick={() => {
+                    if (!isBlocked) {
+                      handleTabClick(tab as Tabs);
+                    }
+                  }}
+                  data-tooltip-id="chatTab-tooltip"
+                  data-tooltip-place="top"
+                  data-tooltip-content={
+                    isBlocked ? '방 설정에 의해 비활성화된 기능입니다.' : ''
+                  }
+                >
+                  {isNeedAlert && <S.NewChatAlert />}
+                  {tab}
+                </S.Tab>
+                <Tooltip id="chatTab-tooltip" place="top" />
+              </>
             );
           })}
         </S.TabsWrapper>
