@@ -25,6 +25,7 @@ import StudyRoomNotice from '../component/StudyRoomNotice';
 import { IoSettingsOutline } from 'react-icons/io5';
 import Modal from '@/components/modal/Modal';
 import UpdateStudyRoomForm from '../component/updateStudyRoomForm/UpdateStudyRoomForm';
+import { RoomAndMyInfoDto } from '@/types/createStudyRoom';
 
 const MultiStudyRoomContent = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const MultiStudyRoomContent = () => {
   const user = useAuthStore((state) => state.user);
   const selectedTodo = useStudyRoomStore((state) => state.selectedTodo);
   const previousTodo = useRef<ServerToClientPlanner | null>(null);
-  const setSelectedTodo = useStudyRoomStore((state) => state.setSelectedTodo);
+  const { setSelectedTodo, setChatEnabled } = useStudyRoomStore();
   const updateTodos = useStudyRoomStore((state) => state.updateTodos);
 
   const initInfo = {
@@ -276,10 +277,11 @@ const MultiStudyRoomContent = () => {
 
     socket.connect();
 
-    socket.on('getRoomAndMyInfo', (data) => {
+    socket.on('getRoomAndMyInfo', (data: RoomAndMyInfoDto) => {
       // 첫 소켓 접속 시
       console.log(data);
       setStudyRoomInfo(data); // 스터디 방 정보 저장
+      setChatEnabled(data.isChat);
       const userData = {
         nickname: user?.nickname ? user.nickname : '',
         imageUrl: user?.imageUrl ? user.imageUrl : '',
@@ -301,6 +303,7 @@ const MultiStudyRoomContent = () => {
         };
         return newData;
       });
+      setChatEnabled(data.isChat);
     });
 
     return () => {
